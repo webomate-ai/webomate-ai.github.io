@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>詹氏書局 | 典藏藝術與台灣史的懷舊空間</title>
+    <meta name="description" content="位於台北大安區的詹氏書局，提供一個充滿故事感、溫暖且沉靜的懷舊空間。專營典藏藝術與台灣史古籍，歡迎分享閱讀與舊書捐贈。">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            brown: '#5D4037', // 沉穩棕色
+                            lightBrown: '#8D6E63',
+                            cream: '#FAF9F6', // 米白
+                            green: '#2E4F4F', // 墨綠
+                            red: '#8B0000',   // 暗紅色
+                        }
+                    },
+                    fontFamily: {
+                        serif:['"Noto Serif TC"', 'serif'],
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2000&auto=format&fit=crop')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Serif TC', serif;
+            background-color: #FAF9F6; /* brand.cream */
+            color: #333;
+        }
+        
+        /* Glassmorphism Navbar */
+        .glass-nav {
+            background: rgba(250, 249, 246, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(93, 64, 55, 0.1);
+        }
+
+        /* Scroll Reveal Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Typewriter Cursor */
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            background-color: #FAF9F6;
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Custom Selection */
+        ::selection {
+            background-color: #8B0000;
+            color: #FAF9F6;
+        }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <img src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260319083045_0.png" alt="詹氏書局 Logo" class="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" onerror="this.src='https://placehold.co/100x100/5D4037/FAF9F6?text=Zhan';">
+                    <span class="text-2xl font-bold text-brand-brown tracking-widest group-hover:text-brand-green transition-colors">詹氏書局</span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-700 hover:text-brand-red font-medium transition-colors">關於我們</a>
+                    <a href="#features" class="text-gray-700 hover:text-brand-red font-medium transition-colors">典藏與分享</a>
+                    <a href="#contact" class="text-gray-700 hover:text-brand-red font-medium transition-colors">聯絡資訊</a>
+                    <a href="https://archbook.com.tw/" target="_blank" rel="noopener noreferrer" class="px-5 py-2 border border-brand-brown text-brand-brown rounded-sm hover:bg-brand-brown hover:text-brand-cream transition-all duration-300 flex items-center gap-2">
+                        <i data-lucide="external-link" class="w-4 h-4"></i> 舊版網站
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-brand-brown hover:text-brand-red focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-cream border-t border-brand-brown/10 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-4 space-y-1">
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-red hover:bg-brand-brown/5 rounded-md">關於我們</a>
+                <a href="#features" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-red hover:bg-brand-brown/5 rounded-md">典藏與分享</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-red hover:bg-brand-brown/5 rounded-md">聯絡資訊</a>
+                <a href="https://archbook.com.tw/" target="_blank" class="block px-3 py-2 text-base font-medium text-brand-brown hover:text-brand-red hover:bg-brand-brown/5 rounded-md flex items-center gap-2">
+                    <i data-lucide="external-link" class="w-4 h-4"></i> 舊版網站
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-hero-pattern bg-cover bg-center bg-no-repeat transform scale-105 animate-[pulse_20s_ease-in-out_infinite_alternate]"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-brown/80 via-black/60 to-brand-brown/90"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <span class="block text-brand-cream/80 text-sm md:text-base tracking-[0.3em] mb-4 uppercase reveal">Zhan's Bookstore</span>
+            <h1 class="text-5xl md:text-7xl font-bold text-brand-cream mb-6 tracking-wider drop-shadow-lg reveal" style="transition-delay: 100ms;">
+                詹氏書局
+            </h1>
+            <div class="h-12 md:h-16 mb-8 reveal" style="transition-delay: 200ms;">
+                <p class="text-xl md:text-3xl text-brand-cream/90 font-light tracking-wide inline-block">
+                    <span id="typewriter"></span><span class="cursor"></span>
+                </p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="transition-delay: 300ms;">
+                <a href="#features" class="px-8 py-3 bg-brand-red text-brand-cream rounded-sm hover:bg-red-900 transition-colors duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+                    探索典藏 <i data-lucide="book-open" class="w-5 h-5"></i>
+                </a>
+                <a href="#contact" class="px-8 py-3 bg-transparent border border-brand-cream text-brand-cream rounded-sm hover:bg-brand-cream hover:text-brand-brown transition-colors duration-300 flex items-center justify-center gap-2">
+                    聯絡我們 <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+            <a href="#about" class="text-brand-cream/70 hover:text-brand-cream transition-colors">
+                <i data-lucide="chevron-down" class="w-8 h-8"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="py-12 bg-brand-cream border-b border-brand-brown/10 relative z-20 shadow-[0_-10px_30px_rgba(0,0,0,0.1)] -mt-4 rounded-t-3xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+                <!-- Google Rating -->
+                <div class="flex items-center gap-4 reveal">
+                    <div class="flex items-center gap-1 text-yellow-500">
+                        <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                        <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                        <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                        <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                        <i data-lucide="star-half" class="w-6 h-6 fill-current"></i>
+                    </div>
+                    <div class="text-brand-brown">
+                        <span class="text-3xl font-bold counter" data-target="4.6">0</span>
+                        <span class="text-lg">/ 5.0</span>
+                    </div>
+                    <div class="text-gray-500 border-l border-gray-300 pl-4">
+                        來自 <span class="font-bold text-brand-brown counter" data-target="138">0</span> 位愛書人的推薦
+                    </div>
+                </div>
+                <!-- Location highlight -->
+                <div class="flex items-center gap-3 text-brand-green font-medium reveal" style="transition-delay: 100ms;">
+                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                    <span>台北大安區 口碑首選懷舊古籍書店</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-brand-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="lg:w-1/2 reveal">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=800&auto=format&fit=crop" alt="詹氏書局內部懷舊空間" class="rounded-sm shadow-2xl aspect-[4/3] object-cover border-4 border-white">
+                        <div class="absolute -bottom-6 -right-6 bg-brand-green text-brand-cream p-6 rounded-sm shadow-xl hidden md:block">
+                            <p class="text-2xl font-bold tracking-widest">時光流轉</p>
+                            <p class="text-sm mt-1 opacity-80">沉澱心靈的角落</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 space-y-6 reveal" style="transition-delay: 200ms;">
+                    <h2 class="text-sm font-bold tracking-widest text-brand-red uppercase">About Us</h2>
+                    <h3 class="text-4xl font-bold text-brand-brown leading-tight">一個充滿故事感、<br>溫暖且沉靜的線上空間</h3>
+                    <div class="w-16 h-1 bg-brand-red"></div>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        位於台北市大安區和平東路的詹氏書局，不僅僅是一個販售書籍的場所，更是一座連結過去與現在的文化橋樑。
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        我們致力於打造一個懷舊空間，讓每一位踏入這裡的訪客，都能感受到獨特的文化底蘊和閱讀氛圍。在這裡，時間的流逝變得緩慢，書頁的翻動聲是最好的背景音樂。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section id="features" class="py-24 bg-[#F0EBE1] border-y border-brand-brown/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-sm font-bold tracking-widest text-brand-red uppercase mb-2">Our Features</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-brand-brown">書香傳承與分享</h3>
+                <div class="w-16 h-1 bg-brand-green mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Feature 1 -->
+                <div class="bg-brand-cream p-10 rounded-sm shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group reveal border-t-4 border-transparent hover:border-brand-brown">
+                    <div class="w-16 h-16 bg-brand-brown/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-brown transition-colors duration-300">
+                        <i data-lucide="library" class="w-8 h-8 text-brand-brown group-hover:text-brand-cream transition-colors duration-300"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-brand-brown mb-4">典藏藝術與台灣史</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        專營並悉心保存各類藝術及台灣歷史相關的珍貴古籍。每一本書都承載著厚重的歷史記憶，等待著熱愛文化的您來發掘與品味。
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-brand-cream p-10 rounded-sm shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group reveal border-t-4 border-transparent hover:border-brand-green" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 bg-brand-green/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-green transition-colors duration-300">
+                        <i data-lucide="coffee" class="w-8 h-8 text-brand-green group-hover:text-brand-cream transition-colors duration-300"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-brand-brown mb-4">分享閱讀空間</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        提供一個靜謐、溫馨的環境。我們鼓勵愛書人在此駐足，點一盞暖燈，沉浸在文字的世界裡，與同好交流心得，享受純粹的閱讀時光。
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-brand-cream p-10 rounded-sm shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group reveal border-t-4 border-transparent hover:border-brand-red" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 bg-brand-red/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-red transition-colors duration-300">
+                        <i data-lucide="gift" class="w-8 h-8 text-brand-red group-hover:text-brand-cream transition-colors duration-300"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-brand-brown mb-4">歡迎舊書捐贈</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        讓好書的生命得以延續。我們誠摯歡迎並感謝各界捐贈珍藏的舊書，讓知識流傳，讓更多人有機會接觸並傳承這些寶貴的文化資產。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info & Contact Section -->
+    <section id="contact" class="py-24 bg-brand-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-sm shadow-2xl overflow-hidden flex flex-col lg:flex-row reveal border border-brand-brown/10">
+                <!-- Info -->
+                <div class="lg:w-1/2 p-10 md:p-16 bg-brand-brown text-brand-cream">
+                    <h3 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="info" class="w-8 h-8"></i> 營業資訊
+                    </h3>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-4">
+                            <i data-lucide="clock" class="w-6 h-6 mt-1 text-brand-cream/70"></i>
+                            <div>
+                                <h4 class="text-xl font-bold mb-1">營業時間</h4>
+                                <p class="text-brand-cream/90 text-lg">週一至週日</p>
+                                <p class="text-brand-cream/90 text-lg">09:00 - 17:00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <i data-lucide="phone" class="w-6 h-6 mt-1 text-brand-cream/70"></i>
+                            <div>
+                                <h4 class="text-xl font-bold mb-1">聯絡電話</h4>
+                                <a href="tel:023365653" class="text-brand-cream/90 text-lg hover:text-white transition-colors block">02 3365 653</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <i data-lucide="map-pin" class="w-6 h-6 mt-1 text-brand-cream/70"></i>
+                            <div>
+                                <h4 class="text-xl font-bold mb-1">實體店址</h4>
+                                <p class="text-brand-cream/90 text-lg leading-relaxed">
+                                    106 臺北市大安區<br>和平東路一段177號9樓之5
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 pt-8 border-t border-brand-cream/20">
+                        <a href="https://archbook.com.tw/" target="_blank" class="inline-flex items-center gap-2 text-brand-cream hover:text-white transition-colors group">
+                            <i data-lucide="globe" class="w-5 h-5 group-hover:animate-spin"></i> 訪問我們的舊版網站
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Map Area -->
+                <div class="lg:w-1/2 relative min-h-[400px] bg-gray-200 flex items-center justify-center group cursor-pointer" onclick="window.open('https://www.google.com/maps/search/?api=1&query=25.0265933,121.5322277', '_blank')">
+                    <!-- Placeholder for Map image to keep it lightweight, clicking opens real map -->
+                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-50 transition-opacity duration-500"></div>
+                    <div class="relative z-10 text-center p-8 bg-white/90 backdrop-blur-sm rounded-sm shadow-lg transform group-hover:scale-105 transition-transform duration-300">
+                        <i data-lucide="map" class="w-12 h-12 text-brand-green mx-auto mb-4"></i>
+                        <h4 class="text-2xl font-bold text-brand-brown mb-2">點擊開啟地圖導航</h4>
+                        <p class="text-gray-600">Google Maps 路線規劃</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-brand-green text-center px-4">
+        <div class="max-w-3xl mx-auto reveal">
+            <h2 class="text-3xl md:text-4xl font-bold text-brand-cream mb-6">尋找一本屬於您的時光記憶</h2>
+            <p class="text-brand-cream/80 text-lg mb-10">無論是尋寶、閱讀還是分享，詹氏書局都歡迎您的到來。</p>
+            <a href="tel:023365653" class="inline-flex items-center gap-2 px-8 py-4 bg-brand-cream text-brand-green font-bold rounded-sm hover:bg-white transition-colors duration-300 shadow-lg hover:shadow-xl">
+                <i data-lucide="phone-call" class="w-5 h-5"></i> 立即來電洽詢
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#2A1B16] text-brand-cream/60 py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <img src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260319083045_0.png" alt="詹氏書局 Logo" class="h-8 w-auto opacity-50 grayscale" onerror="this.style.display='none';">
+                <span class="text-xl font-bold text-brand-cream/80 tracking-widest">詹氏書局</span>
+            </div>
+            
+            <div class="text-center md:text-left text-sm">
+                <p>&copy; 2026 詹氏書局 Zhan's Bookstore. All rights reserved.</p>
+            </div>
+            
+            <div class="text-sm flex items-center gap-1">
+                Made by <span class="text-brand-cream font-medium">Webomate</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md');
+                navbar.style.background = 'rgba(250, 249, 246, 0.95)';
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.style.background = 'rgba(250, 249, 246, 0.85)';
+            }
+        });
+
+        // Typewriter Effect
+        const texts =['典藏藝術與台灣史珍貴古籍', '提供靜謐溫暖的閱讀空間', '歡迎捐贈與分享您的藏書'];
+        let count = 0;
+        let index = 0;
+        let currentText = '';
+        let letter = '';
+        let isDeleting = false;
+        const typeSpeed = 100;
+        const deleteSpeed = 50;
+        const delayBetweenTexts = 2000;
+
+        function type() {
+            if (count === texts.length) {
+                count = 0;
+            }
+            currentText = texts[count];
+
+            if (isDeleting) {
+                letter = currentText.slice(0, --index);
+            } else {
+                letter = currentText.slice(0, ++index);
+            }
+
+            document.getElementById('typewriter').textContent = letter;
+
+            let typeTimeout = isDeleting ? deleteSpeed : typeSpeed;
+
+            if (!isDeleting && letter.length === currentText.length) {
+                typeTimeout = delayBetweenTexts;
+                isDeleting = true;
+            } else if (isDeleting && letter.length === 0) {
+                isDeleting = false;
+                count++;
+                typeTimeout = 500;
+            }
+
+            setTimeout(type, typeTimeout);
+        }
+
+        // Start typing after a short delay
+        setTimeout(type, 1000);
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger on load
+
+        // Number Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200; // The lower the slower
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    
+                    // Lower inc to slow and higher to speed up
+                    const inc = target / speed;
+
+                    // Check if target is reached
+                    if (count < target) {
+                        // Add inc to count and output in counter
+                        // Use toFixed(1) if target has decimal, else Math.ceil
+                        if(target % 1 !== 0) {
+                            counter.innerText = (count + inc).toFixed(1);
+                        } else {
+                            counter.innerText = Math.ceil(count + inc);
+                        }
+                        // Call function every ms
+                        setTimeout(updateCount, 10);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // Trigger counter animation when section is in view
+        let counterAnimated = false;
+        window.addEventListener('scroll', () => {
+            const counterSection = document.querySelector('.counter').closest('section');
+            if (!counterSection) return;
+            
+            const sectionTop = counterSection.getBoundingClientRect().top;
+            if (sectionTop < window.innerHeight && !counterAnimated) {
+                animateCounters();
+                counterAnimated = true;
+            }
+        });
+        
+        // Initial check for counter in case it's already in view
+        if(document.querySelector('.counter')) {
+            const counterSection = document.querySelector('.counter').closest('section');
+            if (counterSection.getBoundingClientRect().top < window.innerHeight) {
+                animateCounters();
+                counterAnimated = true;
+            }
+        }
+    </script>
+</body>
+</html>
+```
