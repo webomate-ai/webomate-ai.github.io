@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香柏木SPA莊園 | 台北大安區頂級木質調SPA</title>
+    <meta name="description" content="香柏木SPA莊園位於台北大安區，以溫潤木質調空間結合頂級服務，提供油壓、臉部保養、足底按摩。24小時營業，為您打造城市中的靜謐綠洲。">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            wood: '#5C4033',      /* 沉穩深木色 */
+                            woodlight: '#8B5A2B', /* 溫暖淺木色 */
+                            gold: '#C5A059',      /* 低調奢華金 */
+                            goldlight: '#E6C98A',
+                            green: '#2C4A3B',     /* 點綴深綠色 */
+                            bg: '#FAF6F0',        /* 溫潤米色背景 */
+                            card: '#FFFFFF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                        serif:['"Noto Serif TC"', 'serif'],
+                    },
+                    boxShadow: {
+                        'gold': '0 10px 25px -5px rgba(197, 160, 89, 0.2)',
+                        'green': '0 10px 25px -5px rgba(44, 74, 59, 0.2)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Animations */
+        body {
+            background-color: #FAF6F0;
+        }
+        
+        .glass-nav {
+            background: rgba(250, 246, 240, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typewriter-text::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(44, 74, 59, 0.85), rgba(92, 64, 51, 0.6));
+        }
+        
+        /* Smooth Image Loading */
+        img {
+            transition: opacity 0.5s ease-in-out;
+        }
+        img[loading] {
+            opacity: 0;
+        }
+        img.loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="antialiased text-brand-wood font-sans selection:bg-brand-gold selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="relative w-10 h-10 flex items-center justify-center bg-brand-green rounded-full text-brand-gold">
+                        <i data-lucide="droplet" class="w-6 h-6"></i>
+                        <i data-lucide="leaf" class="w-3 h-3 absolute bottom-1 right-1 text-brand-goldlight"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-serif font-bold text-xl text-brand-green tracking-wider">香柏木</span>
+                        <span class="text-[10px] tracking-[0.2em] text-brand-gold uppercase">Cedar Wood SPA</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-brand-wood hover:text-brand-gold transition-colors font-medium">品牌精神</a>
+                    <a href="#services" class="text-brand-wood hover:text-brand-gold transition-colors font-medium">服務項目</a>
+                    <a href="#booking" class="text-brand-wood hover:text-brand-gold transition-colors font-medium">預約資訊</a>
+                    <a href="https://www.spa-cedar.com/contactus/" target="_blank" class="px-6 py-2.5 bg-brand-gold text-white rounded-full font-medium hover:bg-brand-woodlight transition-all duration-300 hover:-translate-y-0.5 shadow-md shadow-brand-gold/30 flex items-center gap-2">
+                        <i data-lucide="calendar-check" class="w-4 h-4"></i>
+                        立即預約
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-brand-wood hover:text-brand-gold focus:outline-none">
+                        <i data-lucide="menu" class="w-7 h-7"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-bg border-t border-brand-gold/20 absolute w-full">
+            <div class="px-4 pt-2 pb-6 space-y-2 shadow-xl">
+                <a href="#about" class="block px-3 py-3 text-brand-wood font-medium hover:bg-brand-gold/10 rounded-lg">品牌精神</a>
+                <a href="#services" class="block px-3 py-3 text-brand-wood font-medium hover:bg-brand-gold/10 rounded-lg">服務項目</a>
+                <a href="#booking" class="block px-3 py-3 text-brand-wood font-medium hover:bg-brand-gold/10 rounded-lg">預約資訊</a>
+                <a href="https://www.spa-cedar.com/contactus/" target="_blank" class="block px-3 py-3 text-center bg-brand-gold text-white rounded-lg font-medium mt-4">立即預約</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://source.unsplash.com/featured/1600x900?luxury,spa,interior" alt="香柏木SPA莊園環境" class="w-full h-full object-cover" onload="this.classList.add('loaded')">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
+            <span class="block text-brand-goldlight font-serif tracking-[0.3em] text-sm md:text-base mb-4 reveal">CEDAR WOOD SPA</span>
+            <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl text-white font-bold mb-6 tracking-wide leading-tight reveal" style="transition-delay: 100ms;">
+                香柏木SPA莊園
+            </h1>
+            <p class="text-lg md:text-2xl text-gray-200 font-light mb-10 h-8 reveal" style="transition-delay: 200ms;">
+                <span id="typewriter" class="typewriter-text"></span>
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 reveal" style="transition-delay: 300ms;">
+                <a href="https://www.spa-cedar.com/contactus/" target="_blank" class="px-8 py-4 bg-brand-gold text-white rounded-full font-medium hover:bg-white hover:text-brand-wood transition-all duration-300 hover:-translate-y-1 shadow-lg w-full sm:w-auto flex justify-center items-center gap-2">
+                    線上預約
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+                <a href="#services" class="px-8 py-4 bg-transparent border border-white text-white rounded-full font-medium hover:bg-white/10 transition-all duration-300 w-full sm:w-auto">
+                    探索服務
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+            <i data-lucide="chevron-down" class="w-8 h-8 text-white/70"></i>
+        </div>
+    </section>
+
+    <!-- Highlight Banner (Promotions & Features) -->
+    <div class="bg-brand-green text-brand-goldlight py-6 relative z-20 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-brand-gold/30">
+                <div class="flex items-center justify-center gap-3 py-2 md:py-0 reveal">
+                    <i data-lucide="clock" class="w-6 h-6"></i>
+                    <span class="font-medium tracking-wide">24小時營業 (週一公休)</span>
+                </div>
+                <div class="flex items-center justify-center gap-3 py-2 md:py-0 reveal" style="transition-delay: 100ms;">
+                    <i data-lucide="moon" class="w-6 h-6"></i>
+                    <span class="font-medium tracking-wide">半夜12點後 <strong class="text-white">七折優待</strong></span>
+                </div>
+                <div class="flex items-center justify-center gap-3 py-2 md:py-0 reveal" style="transition-delay: 200ms;">
+                    <i data-lucide="map-pin" class="w-6 h-6"></i>
+                    <span class="font-medium tracking-wide">台北大安區口碑首選</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative overflow-hidden">
+        <!-- Decorative Background Element -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-gold/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-brand-green/5 rounded-full blur-3xl -ml-20 -mb-20"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 relative reveal">
+                    <div class="absolute inset-0 bg-brand-gold rounded-2xl transform translate-x-4 translate-y-4 opacity-20"></div>
+                    <img src="https://source.unsplash.com/featured/800x1000?essential,oil,spa" alt="精油與放鬆環境" class="relative rounded-2xl shadow-xl w-full object-cover h-[500px]" onload="this.classList.add('loaded')">
+                    
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-gold flex items-center gap-4 border border-brand-bg">
+                        <div class="bg-brand-green/10 p-3 rounded-full text-brand-green">
+                            <i data-lucide="star" class="w-8 h-8 fill-brand-gold text-brand-gold"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Google 評分推薦</p>
+                            <p class="font-serif font-bold text-xl text-brand-wood">環境舒適、親切有禮</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-1 lg:order-2 reveal">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="h-[1px] w-12 bg-brand-gold"></div>
+                        <span class="text-brand-gold font-serif tracking-widest text-sm uppercase">About Us</span>
+                    </div>
+                    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-brand-green mb-8 leading-tight">
+                        為您打造城市中的<br><span class="text-brand-wood">靜謐綠洲</span>
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed mb-6 text-lg text-justify">
+                        香柏木SPA莊園，以溫潤的木質調空間，結合頂級奢華的服務，為您打造城市中的靜謐綠洲。在這裡，專業芳療師的溫柔手技，搭配多款精選精油，讓身心靈達到深層的放鬆與平衡。
+                    </p>
+                    <p class="text-gray-600 leading-relaxed mb-10 text-lg text-justify">
+                        我們相信，每一次的駐足，都是一場身心淨化的旅程。無論是白日的疲憊，或是深夜的放鬆渴望，我們都準備好讓您重拾光采，煥發活力。
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 border-t border-brand-wood/10 pt-8">
+                        <div>
+                            <p class="text-4xl font-serif text-brand-gold mb-2"><span class="counter" data-target="24">0</span><span class="text-xl">H</span></p>
+                            <p class="text-sm text-gray-500 font-medium">全天候為您服務</p>
+                        </div>
+                        <div>
+                            <p class="text-4xl font-serif text-brand-gold mb-2"><span class="counter" data-target="10">0</span><span class="text-xl">+</span></p>
+                            <p class="text-sm text-gray-500 font-medium">多種精選精油選擇</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-brand-green relative">
+        <!-- Subtle Pattern Overlay -->
+        <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23C5A059\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-goldlight font-serif tracking-widest text-sm uppercase block mb-3">Our Services</span>
+                <h2 class="font-serif text-3xl md:text-5xl font-bold text-white mb-6">尊榮療程項目</h2>
+                <p class="text-gray-300 max-w-2xl mx-auto">精緻裝潢與舒適氛圍，搭配專業手法，讓您享受極致的放鬆體驗。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-brand-bg rounded-2xl overflow-hidden group transition-all duration-500 hover:-translate-y-2 hover:shadow-gold reveal" style="transition-delay: 100ms;">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://source.unsplash.com/featured/800x600?massage,oil" alt="油壓服務" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onload="this.classList.add('loaded')">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 flex items-center gap-2 text-white">
+                            <div class="p-2 bg-brand-gold/80 backdrop-blur-sm rounded-lg">
+                                <i data-lucide="droplet" class="w-5 h-5"></i>
+                            </div>
+                            <span class="font-serif font-medium text-lg tracking-wide">精油油壓</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-end mb-4">
+                            <h3 class="text-2xl font-bold text-brand-wood">全身油壓</h3>
+                            <p class="text-brand-gold font-bold text-xl">$1000 <span class="text-sm text-gray-400 font-normal">- $2600</span></p>
+                        </div>
+                        <p class="text-gray-600 mb-6 line-clamp-2">提供多種頂級按摩精油供您選擇，透過深層推拿手法，釋放全身緊繃肌肉，達到身心靈的極致放鬆。</p>
+                        <ul class="space-y-2 mb-8 text-sm text-gray-500">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-gold"></i> 客製化精油選擇</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-gold"></i> 深層經絡放鬆</li>
+                        </ul>
+                        <a href="https://www.spa-cedar.com/contactus/" target="_blank" class="block w-full text-center py-3 border border-brand-gold text-brand-wood font-medium rounded-xl hover:bg-brand-gold hover:text-white transition-colors duration-300">
+                            預約此療程
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-brand-bg rounded-2xl overflow-hidden group transition-all duration-500 hover:-translate-y-2 hover:shadow-gold reveal" style="transition-delay: 200ms;">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://source.unsplash.com/featured/800x600?facial,spa" alt="臉部保養" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onload="this.classList.add('loaded')">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 flex items-center gap-2 text-white">
+                            <div class="p-2 bg-brand-gold/80 backdrop-blur-sm rounded-lg">
+                                <i data-lucide="sparkles" class="w-5 h-5"></i>
+                            </div>
+                            <span class="font-serif font-medium text-lg tracking-wide">精緻護理</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-end mb-4">
+                            <h3 class="text-2xl font-bold text-brand-wood">臉部保養</h3>
+                            <p class="text-brand-gold font-bold text-xl">$699</p>
+                        </div>
+                        <p class="text-gray-600 mb-6 line-clamp-2">深層清潔與滋養，為肌膚注入滿滿水分與活力，改善暗沉，讓您重拾透亮光采。</p>
+                        <ul class="space-y-2 mb-8 text-sm text-gray-500">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-gold"></i> 溫和深層清潔</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-gold"></i> 保濕提亮護理</li>
+                        </ul>
+                        <a href="https://www.spa-cedar.com/contactus/" target="_blank" class="block w-full text-center py-3 border border-brand-gold text-brand-wood font-medium rounded-xl hover:bg-brand-gold hover:text-white transition-colors duration-300">
+                            預約此療程
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-brand-bg rounded-2xl overflow-hidden group transition-all duration-500 hover:-translate-y-2 hover:shadow-gold reveal" style="transition-delay: 300ms;">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://source.unsplash.com/featured/800x600?foot,massage" alt="足底按摩" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onload="this.classList.add('loaded')">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 flex items-center gap-2 text-white">
+                            <div class="p-2 bg-brand-gold/80 backdrop-blur-sm rounded-lg">
+                                <i data-lucide="activity" class="w-5 h-5"></i>
+                            </div>
+                            <span class="font-serif font-medium text-lg tracking-wide">舒緩疲勞</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-end mb-4">
+                            <h3 class="text-2xl font-bold text-brand-wood">足底按摩</h3>
+                            <div class="text-right">
+                                <p class="text-brand-gold font-bold text-lg">$899 <span class="text-xs text-gray-400 font-normal">/ 40min</span></p>
+                                <p class="text-brand-gold font-bold text-lg">$1599 <span class="text-xs text-gray-400 font-normal">/ 90min</span></p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-6 line-clamp-2">針對足部穴位進行精準按壓，有效舒緩腿部腫脹與疲勞，促進全身循環，輕盈步伐。</p>
+                        <ul class="space-y-2 mb-8 text-sm text-gray-500">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-gold"></i> 專業穴位按壓</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-gold"></i> 舒緩腿部緊繃</li>
+                        </ul>
+                        <a href="https://www.spa-cedar.com/contactus/" target="_blank" class="block w-full text-center py-3 border border-brand-gold text-brand-wood font-medium rounded-xl hover:bg-brand-gold hover:text-white transition-colors duration-300">
+                            預約此療程
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Midnight Promo Alert -->
+            <div class="mt-12 bg-gradient-to-r from-brand-gold/20 via-brand-gold/10 to-transparent border-l-4 border-brand-gold p-6 rounded-r-xl reveal">
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <div class="bg-brand-gold p-3 rounded-full text-white shrink-0">
+                        <i data-lucide="moon-star" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-1">深夜專屬禮遇</h4>
+                        <p class="text-gray-300">半夜 12 點後蒞臨，所有療程均享 <strong class="text-brand-goldlight text-lg">七折</strong> 優待，讓夜歸的您也能享受頂級呵護。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Contact Section -->
+    <section id="booking" class="py-24 bg-brand-bg relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col lg:flex-row reveal">
+                
+                <!-- Info Side -->
+                <div class="lg:w-1/2 p-10 md:p-16 flex flex-col justify-center">
+                    <span class="text-brand-gold font-serif tracking-widest text-sm uppercase mb-2">Contact & Booking</span>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-wood mb-8">期待您的蒞臨</h2>
+                    
+                    <div class="space-y-6 mb-10">
+                        <div class="flex items-start gap-4">
+                            <div class="mt-1 bg-brand-bg p-2 rounded-lg text-brand-green">
+                                <i data-lucide="map-pin" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-brand-wood mb-1">莊園地址</p>
+                                <p class="text-gray-600">106 臺北市大安區敦化南路一段329巷17號</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="mt-1 bg-brand-bg p-2 rounded-lg text-brand-green">
+                                <i data-lucide="phone" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-brand-wood mb-1">預約專線</p>
+                                <a href="tel:0227099199" class="text-gray-600 hover:text-brand-gold transition-colors text-lg">02 - 2709 - 9199</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="mt-1 bg-brand-bg p-2 rounded-lg text-brand-green">
+                                <i data-lucide="clock" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-brand-wood mb-1">營業時間</p>
+                                <p class="text-gray-600">24 小時營業 <span class="text-brand-gold text-sm ml-2">(每週一公休)</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="https://www.google.com/maps/search/?api=1&query=106臺北市大安區敦化南路一段329巷17號" target="_blank" class="flex-1 py-4 bg-brand-green text-white text-center rounded-xl font-medium hover:bg-brand-wood transition-colors duration-300 flex justify-center items-center gap-2 shadow-md">
+                            <i data-lucide="navigation" class="w-5 h-5"></i>
+                            地圖導航
+                        </a>
+                        <a href="https://www.spa-cedar.com/contactus/" target="_blank" class="flex-1 py-4 bg-brand-gold text-white text-center rounded-xl font-medium hover:bg-brand-woodlight transition-colors duration-300 flex justify-center items-center gap-2 shadow-md">
+                            <i data-lucide="calendar" class="w-5 h-5"></i>
+                            線上預約
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Image Side -->
+                <div class="lg:w-1/2 relative min-h-[400px]">
+                    <img src="https://source.unsplash.com/featured/800x1000?spa,reception,wood" alt="香柏木SPA莊園櫃檯" class="absolute inset-0 w-full h-full object-cover" onload="this.classList.add('loaded')">
+                    <div class="absolute inset-0 bg-brand-wood/10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-wood text-brand-bg/80 py-12 border-t border-brand-gold/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                
+                <!-- Footer Logo -->
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 flex items-center justify-center bg-brand-gold rounded-full text-brand-wood">
+                        <i data-lucide="droplet" class="w-4 h-4"></i>
+                    </div>
+                    <span class="font-serif font-bold text-xl text-white tracking-wider">香柏木 SPA</span>
+                </div>
+                
+                <!-- Links -->
+                <div class="flex gap-6 text-sm">
+                    <a href="#about" class="hover:text-brand-gold transition-colors">品牌精神</a>
+                    <a href="#services" class="hover:text-brand-gold transition-colors">服務項目</a>
+                    <a href="#booking" class="hover:text-brand-gold transition-colors">聯絡我們</a>
+                </div>
+                
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/50">
+                <p>&copy; 2026 香柏木SPA莊園 Cedar Wood SPA. All rights reserved.</p>
+                <p>Made by Webomate</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Navbar Glass Effect on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-sm');
+                nav.style.background = 'rgba(250, 246, 240, 0.95)';
+            } else {
+                nav.classList.remove('shadow-sm');
+                nav.style.background = 'rgba(250, 246, 240, 0.85)';
+            }
+        });
+
+        // Typewriter Effect
+        const text = "台北大安區口碑首選 | 城市中的靜謐綠洲";
+        const typewriterElement = document.getElementById('typewriter');
+        let index = 0;
+
+        function typeWriter() {
+            if (index < text.length) {
+                typewriterElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        // Delay typing start to match reveal animation
+        setTimeout(typeWriter, 1000);
+
+        // Scroll Reveal Animation & Number Counter
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Reveal elements
+                    entry.target.classList.add('active');
+                    
+                    // Trigger counters if inside the revealed element
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const duration = 2000; // ms
+                        const increment = target / (duration / 16); // 60fps
+                        
+                        let current = 0;
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current < target) {
+                                counter.innerText = Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        
+                        // Prevent re-triggering
+                        if (counter.innerText === "0") {
+                            updateCounter();
+                        }
+                    });
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+```
