@@ -3,43 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>詹氏書局 Janstore | 懷舊時光與典藏記憶的所在</title>
-    <meta name="description" content="位於台北大安區和平東路的詹氏書局，提供懷舊閱讀空間，專注於藝術與台灣史古早書籍典藏。歡迎來此分享閱讀、捐贈好書，感受時光流轉的寧靜氛圍。">
+    <title>香柏木SPA莊園 | 台北大安區頂級精油按摩與放鬆空間</title>
+    <meta name="description" content="位於台北大安區的香柏木SPA莊園，24小時營業。提供專業油壓、臉部保養與足底按摩。溫暖木質調環境，多種精油選擇，半夜12點後享七折優惠。">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
     <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        serif:['"Noto Serif TC"', 'serif'],
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    },
                     colors: {
-                        retro: {
-                            bg: '#FAF8F5',       // 米白背景
-                            paper: '#F4EFE6',    // 舊紙張色
-                            coffee: '#5D4037',   // 咖啡主色
-                            green: '#2E4F4F',    // 深綠點綴
-                            brick: '#A0522D',    // 磚紅強調色
-                            text: '#3E2723',     // 深咖啡文字
-                            muted: '#8D6E63'     // 柔和次要文字
+                        brand: {
+                            50: '#FFFCF2',  // 極淡黃 (背景)
+                            100: '#FFF8E1', // 淡黃
+                            200: '#FFECB3',
+                            300: '#FFE082',
+                            400: '#FFD54F',
+                            500: '#D4A373', // 木質調輔助色
+                            600: '#A98467', // 淺木紋
+                            700: '#8B5A2B', // 經典木質調
+                            800: '#6F4E37', // 深木質調
+                            900: '#4A3728', // 極深木紋 (文字主色)
                         }
                     },
-                    fontFamily: {
-                        sans: ['"Noto Sans TC"', 'sans-serif'],
-                        serif: ['"Noto Serif TC"', 'serif'],
-                    },
                     boxShadow: {
-                        'retro': '4px 4px 0px 0px rgba(93, 64, 55, 0.2)',
-                        'retro-hover': '6px 6px 0px 0px rgba(93, 64, 55, 0.3)',
+                        'soft': '0 10px 40px -10px rgba(111, 78, 55, 0.08)',
                     }
                 }
             }
@@ -47,80 +49,80 @@
     </script>
 
     <style>
-        /* Custom Styles & Animations */
+        /* Custom Styles */
         body {
-            background-color: #FAF8F5;
-            color: #3E2723;
+            background-color: #FFFCF2; /* 淡黃色背景 */
+            color: #4A3728; /* 深木質調文字 */
         }
         
-        /* Scroll Reveal Utility */
+        .glass-nav {
+            background: rgba(255, 252, 242, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(139, 90, 43, 0.1);
+        }
+
         .reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
+
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Typewriter Cursor */
-        .cursor::after {
+        .typewriter-text::after {
             content: '|';
-            animation: blink 1s step-start infinite;
+            animation: blink 1s step-end infinite;
         }
+
         @keyframes blink {
             50% { opacity: 0; }
         }
 
-        /* Image Overlay Gradient */
-        .hero-gradient {
-            background: linear-gradient(to bottom, rgba(62, 39, 35, 0.4) 0%, rgba(62, 39, 35, 0.8) 100%);
+        /* 漸層遮罩 */
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(255, 252, 242, 0.95) 0%, rgba(255, 252, 242, 0.7) 50%, rgba(255, 252, 242, 0.3) 100%);
         }
-
-        /* Texture overlay for retro feel */
-        .texture-overlay {
-            position: absolute;
-            inset: 0;
-            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.05"/></svg>');
-            pointer-events: none;
-            z-index: 10;
+        
+        @media (max-width: 768px) {
+            .hero-overlay {
+                background: linear-gradient(to bottom, rgba(255, 252, 242, 0.9) 0%, rgba(255, 252, 242, 0.8) 100%);
+            }
         }
     </style>
 </head>
-<body class="antialiased font-sans selection:bg-retro-brick selection:text-white flex flex-col min-h-screen">
+<body class="antialiased font-sans flex flex-col min-h-screen selection:bg-brand-200 selection:text-brand-900">
 
     <!-- Navbar -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4">
-        <div class="absolute inset-0 backdrop-blur-md bg-retro-bg/85 border-b border-retro-coffee/10 shadow-sm"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div class="flex justify-between items-center">
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
-                <a href="#" class="flex items-center gap-3 group">
-                    <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-retro-coffee/20 group-hover:border-retro-brick transition-colors duration-300 bg-white flex items-center justify-center">
-                        <img src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260319091405_0.png" alt="詹氏書局 Logo" class="w-full h-full object-cover">
+                <a href="#" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 group-hover:bg-brand-700 group-hover:text-white transition-colors duration-300">
+                        <!-- 精油/水滴圖案 Logo -->
+                        <i data-lucide="droplet" class="w-6 h-6"></i>
                     </div>
-                    <div>
-                        <h1 class="font-serif text-2xl font-bold text-retro-coffee tracking-wider">詹氏書局</h1>
-                        <span class="text-xs text-retro-muted tracking-widest uppercase font-medium">Janstore</span>
-                    </div>
+                    <span class="font-serif font-bold text-xl tracking-wider text-brand-800">香柏木SPA莊園</span>
                 </a>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="text-retro-text hover:text-retro-brick font-medium transition-colors">關於我們</a>
-                    <a href="#collections" class="text-retro-text hover:text-retro-brick font-medium transition-colors">典藏領域</a>
-                    <a href="#services" class="text-retro-text hover:text-retro-brick font-medium transition-colors">空間服務</a>
-                    <a href="#visit" class="text-retro-text hover:text-retro-brick font-medium transition-colors">來訪資訊</a>
-                    <a href="https://archbook.com.tw/" target="_blank" rel="noopener noreferrer" class="bg-retro-coffee text-white px-6 py-2.5 rounded-sm font-medium hover:bg-retro-brick transition-colors shadow-retro hover:shadow-retro-hover transform hover:-translate-y-0.5 flex items-center gap-2">
-                        <span>線上書目</span>
-                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                    <a href="#about" class="text-brand-800 hover:text-brand-600 font-medium transition-colors">關於我們</a>
+                    <a href="#services" class="text-brand-800 hover:text-brand-600 font-medium transition-colors">服務項目</a>
+                    <a href="#promo" class="text-brand-800 hover:text-brand-600 font-medium transition-colors">限時優惠</a>
+                    <a href="https://www.spa-cedar.com/contactus/" target="_blank" rel="noopener noreferrer" class="bg-brand-700 text-white px-6 py-2.5 rounded-full font-medium hover:bg-brand-800 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 flex items-center gap-2">
+                        <i data-lucide="calendar-heart" class="w-4 h-4"></i>
+                        立即預約
                     </a>
                 </div>
 
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-retro-coffee hover:text-retro-brick focus:outline-none p-2">
+                    <button id="mobile-menu-btn" class="text-brand-800 hover:text-brand-600 focus:outline-none">
                         <i data-lucide="menu" class="w-6 h-6"></i>
                     </button>
                 </div>
@@ -128,329 +130,268 @@
         </div>
 
         <!-- Mobile Menu Panel -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-retro-bg border-b border-retro-coffee/10 shadow-lg">
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-50 border-t border-brand-100 absolute w-full shadow-lg">
             <div class="px-4 pt-2 pb-6 space-y-2">
-                <a href="#about" class="block px-3 py-3 text-retro-text font-medium hover:bg-retro-paper rounded-md">關於我們</a>
-                <a href="#collections" class="block px-3 py-3 text-retro-text font-medium hover:bg-retro-paper rounded-md">典藏領域</a>
-                <a href="#services" class="block px-3 py-3 text-retro-text font-medium hover:bg-retro-paper rounded-md">空間服務</a>
-                <a href="#visit" class="block px-3 py-3 text-retro-text font-medium hover:bg-retro-paper rounded-md">來訪資訊</a>
-                <a href="https://archbook.com.tw/" target="_blank" class="block px-3 py-3 text-retro-brick font-medium hover:bg-retro-paper rounded-md flex items-center gap-2">
-                    <span>瀏覽線上舊網站</span>
-                    <i data-lucide="external-link" class="w-4 h-4"></i>
-                </a>
+                <a href="#about" class="block px-3 py-3 text-brand-800 font-medium hover:bg-brand-100 rounded-lg">關於我們</a>
+                <a href="#services" class="block px-3 py-3 text-brand-800 font-medium hover:bg-brand-100 rounded-lg">服務項目</a>
+                <a href="#promo" class="block px-3 py-3 text-brand-800 font-medium hover:bg-brand-100 rounded-lg">限時優惠</a>
+                <a href="https://www.spa-cedar.com/contactus/" target="_blank" rel="noopener noreferrer" class="block px-3 py-3 mt-4 text-center bg-brand-700 text-white font-medium rounded-lg hover:bg-brand-800">立即預約</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
         <!-- Background Image -->
         <div class="absolute inset-0 z-0">
-            <img src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260319091405_1.png" alt="懷舊書店內部" class="w-full h-full object-cover object-center scale-105 animate-[pulse_20s_ease-in-out_infinite_alternate]">
-            <div class="absolute inset-0 hero-gradient"></div>
-            <div class="texture-overlay"></div>
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&q=80" alt="SPA 環境" class="w-full h-full object-cover object-center" />
+            <div class="absolute inset-0 hero-overlay"></div>
         </div>
 
-        <!-- Content -->
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-retro-bg/20 backdrop-blur-md border border-white/20 text-white/90 text-sm font-medium mb-6 reveal">
-                <i data-lucide="map-pin" class="w-4 h-4"></i>
-                <span>台北市大安區和平東路一段</span>
-            </div>
-            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg reveal transition-delay-100">
-                時光流轉的<br class="md:hidden"><span class="text-retro-paper">懷舊空間</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-retro-paper/90 font-light mb-10 h-8 reveal transition-delay-200">
-                <span id="typewriter" class="cursor"></span>
-            </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal transition-delay-300">
-                <a href="#about" class="w-full sm:w-auto px-8 py-3.5 bg-retro-brick text-white rounded-sm font-medium text-lg hover:bg-red-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                    探索書店故事
-                </a>
-                <a href="#visit" class="w-full sm:w-auto px-8 py-3.5 bg-transparent border-2 border-white/80 text-white rounded-sm font-medium text-lg hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
-                    來訪營業資訊
-                </a>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="max-w-2xl reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-100/80 text-brand-800 text-sm font-medium mb-6 backdrop-blur-sm border border-brand-200">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                    台北大安區口碑首選
+                </div>
+                <h1 class="text-5xl md:text-6xl font-serif font-bold text-brand-900 leading-tight mb-6">
+                    沉浸於木質調的<br>
+                    <span class="text-brand-700">純粹放鬆時光</span>
+                </h1>
+                <p class="text-lg md:text-xl text-brand-800 mb-8 h-8" id="typewriter-container">
+                    <!-- Typewriter content will be injected here -->
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://www.spa-cedar.com/contactus/" target="_blank" rel="noopener noreferrer" class="bg-brand-700 text-white px-8 py-4 rounded-full font-medium text-center hover:bg-brand-800 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
+                        線上預約療程
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#services" class="bg-white text-brand-800 border border-brand-200 px-8 py-4 rounded-full font-medium text-center hover:bg-brand-50 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                        探索服務項目
+                    </a>
+                </div>
             </div>
         </div>
+    </section>
+
+    <!-- Trust / Features Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-900 mb-4">為什麼選擇香柏木？</h2>
+                <div class="w-24 h-1 bg-brand-300 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-brand-50 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-soft transition-all duration-300 border border-brand-100 reveal">
+                    <div class="w-16 h-16 mx-auto bg-white rounded-full flex items-center justify-center text-brand-600 mb-6 shadow-sm">
+                        <i data-lucide="sparkles" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-brand-900 mb-3">氣氛裝潢</h3>
+                    <p class="text-brand-700 leading-relaxed">溫暖的木質調與淡黃色系，打造如家一般舒適放鬆的空間。</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-brand-50 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-soft transition-all duration-300 border border-brand-100 reveal" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 mx-auto bg-white rounded-full flex items-center justify-center text-brand-600 mb-6 shadow-sm">
+                        <i data-lucide="smile" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-brand-900 mb-3">親切服務</h3>
+                    <p class="text-brand-700 leading-relaxed">櫃檯人員與芳療師皆受過專業訓練，提供您最貼心有禮的接待。</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-brand-50 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-soft transition-all duration-300 border border-brand-100 reveal" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 mx-auto bg-white rounded-full flex items-center justify-center text-brand-600 mb-6 shadow-sm">
+                        <i data-lucide="flask-conical" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-brand-900 mb-3">多種精油</h3>
+                    <p class="text-brand-700 leading-relaxed">油壓療程提供多款嚴選天然精油，滿足您不同的香氣與療效需求。</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="bg-brand-50 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-soft transition-all duration-300 border border-brand-100 reveal" style="transition-delay: 300ms;">
+                    <div class="w-16 h-16 mx-auto bg-white rounded-full flex items-center justify-center text-brand-600 mb-6 shadow-sm">
+                        <i data-lucide="clock" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-brand-900 mb-3">24H 營業</h3>
+                    <p class="text-brand-700 leading-relaxed">全天候為您敞開大門（週一公休），無論何時都能享受極致舒壓。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services & Pricing -->
+    <section id="services" class="py-24 bg-brand-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-900 mb-4">專業療程服務</h2>
+                <p class="text-brand-700 max-w-2xl mx-auto">以專業的手法與頂級的產品，為您褪去一身疲憊，找回身心靈的平衡。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1: Oil Massage -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-soft hover:-translate-y-2 transition-all duration-300 group reveal">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1608280731043-34502cea2bc5?auto=format&fit=crop&w=800&q=80" alt="精油油壓" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-brand-800 font-medium text-sm">
+                            熱門推薦
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-serif font-bold text-brand-900">頂級精油油壓</h3>
+                        </div>
+                        <p class="text-brand-700 mb-6 line-clamp-2">提供多種天然精油供您選擇，芳療師運用柔和且深層的手法，釋放肌肉緊繃，達到全身心的極致放鬆。</p>
+                        <div class="flex items-end justify-between mt-auto">
+                            <div>
+                                <span class="text-sm text-brand-600 block mb-1">價格範圍</span>
+                                <span class="text-2xl font-bold text-brand-800">NT$ 1,000 <span class="text-lg font-normal text-brand-600">~ 2,600</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 2: Facial Care -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-soft hover:-translate-y-2 transition-all duration-300 group reveal" style="transition-delay: 100ms;">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80" alt="臉部保養" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-serif font-bold text-brand-900">精緻臉部保養</h3>
+                        </div>
+                        <p class="text-brand-700 mb-6 line-clamp-2">溫和深層清潔搭配滋養導入，改善肌膚暗沉與疲態，讓臉部重現水潤透亮的自然光采。</p>
+                        <div class="flex items-end justify-between mt-auto">
+                            <div>
+                                <span class="text-sm text-brand-600 block mb-1">單次療程</span>
+                                <span class="text-2xl font-bold text-brand-800">NT$ 699</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 3: Foot Massage -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-soft hover:-translate-y-2 transition-all duration-300 group reveal" style="transition-delay: 200ms;">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80" alt="足底按摩" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-serif font-bold text-brand-900">舒壓足底按摩</h3>
+                        </div>
+                        <p class="text-brand-700 mb-6 line-clamp-2">針對足底穴位進行精準按壓，有效舒緩雙腿腫脹與疲憊感，促進全身血液循環。</p>
+                        <div class="flex flex-col gap-2 mt-auto">
+                            <div class="flex justify-between items-center border-b border-brand-50 pb-2">
+                                <span class="text-brand-700">40 分鐘</span>
+                                <span class="text-xl font-bold text-brand-800">NT$ 899</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-1">
+                                <span class="text-brand-700">90 分鐘</span>
+                                <span class="text-xl font-bold text-brand-800">NT$ 1,599</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Promo Banner -->
+    <section id="promo" class="py-16 bg-brand-800 text-brand-50 relative overflow-hidden">
+        <!-- Decorative elements -->
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 text-brand-700 opacity-50">
+            <i data-lucide="moon-star" class="w-64 h-64"></i>
+        </div>
         
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
-            <a href="#trust" class="text-white/70 hover:text-white transition-colors">
-                <i data-lucide="chevron-down" class="w-8 h-8"></i>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center reveal">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-700 text-brand-100 mb-6">
+                <i data-lucide="moon" class="w-8 h-8"></i>
+            </div>
+            <h2 class="text-3xl md:text-5xl font-serif font-bold mb-6 text-white">深夜專屬 ‧ 靜謐時光優惠</h2>
+            <p class="text-xl md:text-2xl text-brand-200 mb-8 font-light">
+                半夜 12 點後蒞臨香柏木SPA莊園<br class="md:hidden">
+                <span class="font-bold text-white border-b-2 border-brand-400 pb-1">全品項療程即享 7 折優待</span>
+            </p>
+            <a href="https://www.spa-cedar.com/contactus/" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-400 text-brand-900 px-8 py-4 rounded-full font-bold hover:bg-white hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                預約深夜療程
             </a>
         </div>
     </section>
 
-    <!-- Social Proof / Trust Banner -->
-    <section id="trust" class="bg-retro-paper py-8 border-y border-retro-coffee/10">
+    <!-- Contact & Footer -->
+    <footer class="bg-white border-t border-brand-100 pt-20 pb-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 reveal">
-                <div class="flex items-center gap-4">
-                    <div class="flex -space-x-1 text-yellow-500">
-                        <i data-lucide="star" class="w-6 h-6 fill-current"></i>
-                        <i data-lucide="star" class="w-6 h-6 fill-current"></i>
-                        <i data-lucide="star" class="w-6 h-6 fill-current"></i>
-                        <i data-lucide="star" class="w-6 h-6 fill-current"></i>
-                        <i data-lucide="star-half" class="w-6 h-6 fill-current"></i>
-                    </div>
-                    <div class="text-retro-text font-medium">
-                        <span class="text-2xl font-bold font-serif text-retro-coffee">4.6</span> / 5.0
-                    </div>
-                </div>
-                <div class="hidden md:block w-px h-8 bg-retro-coffee/20"></div>
-                <div class="text-retro-muted text-center md:text-left">
-                    <p class="font-medium text-retro-text">「深藏在大安區的寶庫，充滿溫度的懷舊書店。」</p>
-                    <p class="text-sm mt-1">來自 138 位愛書人的 Google 真實評價</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-24 bg-retro-bg relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="order-2 lg:order-1 relative reveal">
-                    <div class="aspect-[4/5] rounded-t-full rounded-b-md overflow-hidden border-8 border-white shadow-2xl relative z-10">
-                        <!-- Using the third visual plan image concept -->
-                        <img src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260319091405_2.png" alt="古董扶手椅與舊書" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-retro-coffee/10 mix-blend-multiply"></div>
-                    </div>
-                    <!-- Decorative element -->
-                    <div class="absolute -bottom-6 -left-6 w-48 h-48 bg-retro-green/10 rounded-full -z-10 blur-2xl"></div>
-                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-retro-brick/10 rounded-full -z-10 blur-xl"></div>
-                </div>
-                
-                <div class="order-1 lg:order-2 reveal">
-                    <div class="inline-flex items-center gap-2 text-retro-brick font-medium mb-4">
-                        <span class="w-8 h-px bg-retro-brick"></span>
-                        關於詹氏書局
-                    </div>
-                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-retro-coffee mb-6 leading-tight">
-                        為每一本舊書，<br>尋找下一個知音。
-                    </h2>
-                    <div class="space-y-6 text-lg text-retro-text/80 leading-relaxed">
-                        <p>
-                            座落於台北市和平東路一段的喧囂之中，詹氏書局宛如一處凝結時光的靜謐角落。我們不只是一家書店，更是一個充滿溫度的懷舊空間。
-                        </p>
-                        <p>
-                            這裡沒有刺眼的白光，只有柔和的暖暈與木質書架散發的淡淡書香。我們用心典藏古早書籍，讓那些乘載著歷史記憶與藝術價值的文字，能在這裡靜靜等待懂它的讀者。
-                        </p>
-                        <div class="bg-retro-paper p-6 border-l-4 border-retro-green rounded-r-md mt-8 shadow-sm">
-                            <h3 class="font-serif font-bold text-retro-green text-xl mb-2 flex items-center gap-2">
-                                <i data-lucide="book-heart" class="w-5 h-5"></i>
-                                分享與傳承
-                            </h3>
-                            <p class="text-base text-retro-text">
-                                我們深信閱讀是一種分享。除了提供舒適的空間讓大家翻閱典藏，我們也非常歡迎並感謝各界捐贈珍貴書籍，讓知識的火花得以在不同世代間持續傳遞。
-                            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 reveal">
+                <!-- Brand Info -->
+                <div class="lg:col-span-1">
+                    <a href="#" class="flex items-center gap-2 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-700">
+                            <i data-lucide="droplet" class="w-6 h-6"></i>
                         </div>
-                    </div>
+                        <span class="font-serif font-bold text-xl text-brand-800">香柏木SPA莊園</span>
+                    </a>
+                    <p class="text-brand-600 leading-relaxed mb-6">
+                        為您打造溫暖舒適的木質調空間，在繁忙的都市中，尋找一處讓身心靈徹底放鬆的靜謐莊園。
+                    </p>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="font-serif font-bold text-lg text-brand-900 mb-6">聯絡我們</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 text-brand-700">
+                            <i data-lucide="phone" class="w-5 h-5 text-brand-500 mt-0.5"></i>
+                            <div>
+                                <span class="block text-sm text-brand-500">預約專線</span>
+                                <a href="tel:0227099199" class="font-medium hover:text-brand-900 transition-colors">02-2709-9199</a>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 text-brand-700">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-brand-500 mt-0.5"></i>
+                            <div>
+                                <span class="block text-sm text-brand-500">莊園地址</span>
+                                <a href="https://www.google.com/maps/search/?api=1&query=香柏木SPA莊園+台北市大安區" target="_blank" rel="noopener noreferrer" class="hover:text-brand-900 transition-colors">台北市大安區</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Hours -->
+                <div>
+                    <h4 class="font-serif font-bold text-lg text-brand-900 mb-6">營業時間</h4>
+                    <ul class="space-y-4 text-brand-700">
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="clock" class="w-5 h-5 text-brand-500"></i>
+                            <div>
+                                <span class="block font-medium">24小時營業</span>
+                                <span class="text-sm text-brand-500">週二至週日</span>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="calendar-x-2" class="w-5 h-5 text-brand-500"></i>
+                            <span class="font-medium text-red-800/80">每週一公休</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-serif font-bold text-lg text-brand-900 mb-6">線上服務</h4>
+                    <a href="https://www.spa-cedar.com/contactus/" target="_blank" rel="noopener noreferrer" class="block w-full bg-brand-50 border border-brand-200 text-brand-800 text-center py-3 rounded-xl font-medium hover:bg-brand-100 transition-colors mb-4">
+                        前往線上預約系統
+                    </a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=香柏木SPA莊園+台北市大安區" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full bg-white border border-brand-200 text-brand-700 text-center py-3 rounded-xl font-medium hover:bg-brand-50 transition-colors">
+                        <i data-lucide="navigation" class="w-4 h-4"></i>
+                        開啟 Google 導航
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Core Collections Section -->
-    <section id="collections" class="py-24 bg-retro-coffee text-retro-paper relative">
-        <div class="texture-overlay opacity-20"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-                <h2 class="text-sm font-medium text-retro-brick tracking-widest uppercase mb-3">Our Collections</h2>
-                <h3 class="text-3xl md:text-4xl font-serif font-bold mb-6">專注於歲月的沉澱</h3>
-                <p class="text-retro-paper/80 text-lg">
-                    詹氏書局的藏書豐富多樣，但我們特別引以為傲的是在以下兩大領域的深耕與典藏，為研究者與愛好者保留珍貴史料。
+            <div class="border-t border-brand-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-brand-500 text-sm">
+                    &copy; 2026 香柏木SPA莊園. All rights reserved.
                 </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-                <!-- Category 1 -->
-                <div class="group bg-retro-bg/5 p-8 rounded-xl border border-retro-paper/10 hover:bg-retro-bg/10 transition-all duration-300 reveal backdrop-blur-sm">
-                    <div class="w-16 h-16 bg-retro-brick/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-retro-brick/40 transition-colors">
-                        <i data-lucide="palette" class="w-8 h-8 text-retro-paper"></i>
-                    </div>
-                    <h4 class="text-2xl font-serif font-bold mb-4">藝術史典藏</h4>
-                    <p class="text-retro-paper/70 leading-relaxed mb-6">
-                        從古典藝術理論到近代藝術發展，我們收藏了豐富的畫冊、藝術評論、展覽圖錄與美學論著。無論是西方藝術巨匠的軌跡，或是東方水墨的流變，都能在這裡找到歲月留下的痕跡。
-                    </p>
-                    <ul class="space-y-2 text-retro-paper/90">
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-retro-brick"></i> 中外美術史專著</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-retro-brick"></i> 絕版藝術展覽圖錄</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-retro-brick"></i> 經典建築與設計文獻</li>
-                    </ul>
-                </div>
-
-                <!-- Category 2 -->
-                <div class="group bg-retro-bg/5 p-8 rounded-xl border border-retro-paper/10 hover:bg-retro-bg/10 transition-all duration-300 reveal backdrop-blur-sm transition-delay-100">
-                    <div class="w-16 h-16 bg-retro-green/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-retro-green/40 transition-colors">
-                        <i data-lucide="map" class="w-8 h-8 text-retro-paper"></i>
-                    </div>
-                    <h4 class="text-2xl font-serif font-bold mb-4">台灣史文獻</h4>
-                    <p class="text-retro-paper/70 leading-relaxed mb-6">
-                        深耕在地記憶，我們致力於收集關於這片土地的歷史切片。包含早期地方志、日治時期文獻、民俗文化研究及各類台灣本土歷史論述，為保存台灣記憶盡一份心力。
-                    </p>
-                    <ul class="space-y-2 text-retro-paper/90">
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-retro-green"></i> 台灣地方文史資料</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-retro-green"></i> 早期原版歷史書籍</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-retro-green"></i> 台灣民俗與人類學著作</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services / Experience -->
-    <section id="services" class="py-24 bg-retro-paper">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-retro-coffee mb-4">書局空間與服務</h2>
-                <div class="w-24 h-1 bg-retro-brick mx-auto rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="bg-retro-bg p-8 rounded-lg shadow-sm hover:shadow-retro transition-all duration-300 transform hover:-translate-y-1 reveal">
-                    <div class="w-12 h-12 bg-retro-paper rounded-full flex items-center justify-center mb-6 border border-retro-coffee/10">
-                        <i data-lucide="armchair" class="w-6 h-6 text-retro-coffee"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-retro-coffee mb-3">懷舊閱讀空間</h3>
-                    <p class="text-retro-text/80 leading-relaxed">
-                        提供安靜、舒適的座位區。您可以點亮一盞暖燈，在這裡細細品味一本老書，享受不受打擾的午後時光。
-                    </p>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="bg-retro-bg p-8 rounded-lg shadow-sm hover:shadow-retro transition-all duration-300 transform hover:-translate-y-1 reveal transition-delay-100">
-                    <div class="w-12 h-12 bg-retro-paper rounded-full flex items-center justify-center mb-6 border border-retro-coffee/10">
-                        <i data-lucide="library" class="w-6 h-6 text-retro-green"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-retro-coffee mb-3">古籍典藏與交流</h3>
-                    <p class="text-retro-text/80 leading-relaxed">
-                        除了現場閱覽，我們也提供部分珍稀書籍的交流。若您在尋找特定領域的絕版書，歡迎與我們聊聊。
-                    </p>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="bg-retro-bg p-8 rounded-lg shadow-sm hover:shadow-retro transition-all duration-300 transform hover:-translate-y-1 reveal transition-delay-200">
-                    <div class="w-12 h-12 bg-retro-paper rounded-full flex items-center justify-center mb-6 border border-retro-coffee/10">
-                        <i data-lucide="gift" class="w-6 h-6 text-retro-brick"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-retro-coffee mb-3">二手書捐贈收受</h3>
-                    <p class="text-retro-text/80 leading-relaxed">
-                        延續書籍的生命。我們歡迎各界捐贈藝術、歷史及人文類書籍，讓好書能在這裡遇見下一個珍視它的人。
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Visit / Contact Section -->
-    <section id="visit" class="py-24 bg-retro-bg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col lg:flex-row border border-retro-paper reveal">
-                
-                <!-- Info Side -->
-                <div class="lg:w-1/2 p-10 md:p-16 bg-retro-coffee text-retro-paper relative overflow-hidden">
-                    <div class="texture-overlay opacity-30"></div>
-                    <div class="relative z-10">
-                        <h2 class="text-3xl font-serif font-bold mb-2">來訪資訊</h2>
-                        <p class="text-retro-paper/70 mb-10">期待在充滿書香的空間與您相遇</p>
-
-                        <div class="space-y-8">
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-full bg-retro-paper/10 flex items-center justify-center shrink-0">
-                                    <i data-lucide="clock" class="w-5 h-5 text-retro-paper"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-lg mb-1">營業時間</h4>
-                                    <p class="text-retro-paper/80">週一至週日 Everyday</p>
-                                    <p class="text-xl font-serif font-bold text-retro-brick mt-1">09:00 - 17:00</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-full bg-retro-paper/10 flex items-center justify-center shrink-0">
-                                    <i data-lucide="map-pin" class="w-5 h-5 text-retro-paper"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-lg mb-1">書店地址</h4>
-                                    <p class="text-retro-paper/80 leading-relaxed">
-                                        106 臺北市大安區<br>
-                                        和平東路一段177號9樓之5
-                                    </p>
-                                    <a href="https://www.google.com/maps/search/?api=1&query=25.0265933,121.5322277" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-sm text-retro-brick hover:text-white mt-2 transition-colors">
-                                        開啟 Google 地圖導航 <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-full bg-retro-paper/10 flex items-center justify-center shrink-0">
-                                    <i data-lucide="globe" class="w-5 h-5 text-retro-paper"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-lg mb-1">線上資源</h4>
-                                    <p class="text-retro-paper/80 mb-2">瀏覽我們完整的線上書目資料庫</p>
-                                    <a href="https://archbook.com.tw/" target="_blank" rel="noopener noreferrer" class="inline-block px-5 py-2 border border-retro-paper/30 hover:bg-retro-paper/10 rounded transition-colors text-sm">
-                                        前往 Archbook 舊網站
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Map Side (Visual representation) -->
-                <div class="lg:w-1/2 bg-retro-paper p-8 flex items-center justify-center min-h-[400px]">
-                     <div class="w-full h-full border-4 border-white shadow-md rounded-lg overflow-hidden relative group">
-                        <!-- Simulated Map Image or abstract representation -->
-                        <div class="absolute inset-0 bg-retro-bg flex flex-col items-center justify-center text-retro-coffee/50">
-                            <i data-lucide="map-pinned" class="w-16 h-16 mb-4 opacity-50"></i>
-                            <p class="font-serif text-lg tracking-widest">大安區和平東路一段</p>
-                        </div>
-                        
-                        <!-- Overlay CTA -->
-                        <div class="absolute inset-0 bg-retro-coffee/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                            <a href="https://www.google.com/maps/place/?q=place_id:ChIJwXTajYapQjQRoNYnT9B7y7w" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-white text-retro-coffee font-medium rounded shadow-lg hover:bg-retro-paper transition-colors flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                <i data-lucide="navigation" class="w-5 h-5"></i>
-                                立即導航前往
-                            </a>
-                        </div>
-                     </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-[#2C241B] text-retro-paper/60 py-12 border-t-4 border-retro-brick mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
-                        <img src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260319091405_0.png" alt="Logo" class="w-8 h-8 object-cover opacity-80 grayscale">
-                    </div>
-                    <div>
-                        <h5 class="text-retro-paper font-serif font-bold text-lg">詹氏書局</h5>
-                        <p class="text-xs uppercase tracking-widest">Janstore</p>
-                    </div>
-                </div>
-
-                <div class="flex gap-6 text-sm">
-                    <a href="#about" class="hover:text-retro-paper transition-colors">關於我們</a>
-                    <a href="#collections" class="hover:text-retro-paper transition-colors">典藏領域</a>
-                    <a href="#services" class="hover:text-retro-paper transition-colors">空間服務</a>
-                    <a href="https://archbook.com.tw/" target="_blank" class="hover:text-retro-paper transition-colors">線上書目</a>
-                </div>
-
-            </div>
-            
-            <div class="mt-8 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-                <p>&copy; 2026 詹氏書局 Janstore. All rights reserved.</p>
-                <p class="flex items-center gap-1">
-                    Made with <i data-lucide="heart" class="w-3 h-3 text-retro-brick fill-current"></i> by Webomate
+                <p class="text-brand-400 text-sm font-medium flex items-center gap-1">
+                    Made by <span class="text-brand-600 font-bold tracking-wide">Webomate</span>
                 </p>
             </div>
         </div>
@@ -469,61 +410,59 @@
             menu.classList.toggle('hidden');
         });
 
-        // Close mobile menu when a link is clicked
-        const mobileLinks = menu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-            });
-        });
-
         // Navbar Scroll Effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('py-2');
-                navbar.classList.remove('py-4');
+            if (window.scrollY > 10) {
+                navbar.classList.add('shadow-sm');
+                navbar.style.background = 'rgba(255, 252, 242, 0.95)';
             } else {
-                navbar.classList.add('py-4');
-                navbar.classList.remove('py-2');
+                navbar.classList.remove('shadow-sm');
+                navbar.style.background = 'rgba(255, 252, 242, 0.85)';
             }
         });
 
-        // Typewriter Effect
-        const text = "專注藝術與台灣史的典藏角落，歡迎來此分享閱讀與捐贈。";
-        const typewriterElement = document.getElementById('typewriter');
-        let i = 0;
+        // Scroll Reveal Animation using Intersection Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+        
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Typewriter Effect for Hero Subtitle
+        const textToType = "為您帶來極致放鬆的療癒體驗。";
+        const typewriterContainer = document.getElementById('typewriter-container');
+        let charIndex = 0;
 
         function typeWriter() {
-            if (i < text.length) {
-                typewriterElement.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
+            if (charIndex < textToType.length) {
+                typewriterContainer.innerHTML = textToType.substring(0, charIndex + 1) + '<span class="typewriter-text"></span>';
+                charIndex++;
+                setTimeout(typeWriter, 100); // Typing speed
             } else {
-                // Remove cursor blink after typing finishes
-                setTimeout(() => {
-                    typewriterElement.classList.remove('cursor');
-                }, 2000);
+                typewriterContainer.innerHTML = textToType; // Remove cursor when done
             }
         }
 
-        // Start typing effect after a short delay
-        setTimeout(typeWriter, 1000);
+        // Start typewriter after a short delay
+        setTimeout(typeWriter, 500);
 
-        // Scroll Reveal Animation
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal(); // Trigger once on load
     </script>
 </body>
 </html>
