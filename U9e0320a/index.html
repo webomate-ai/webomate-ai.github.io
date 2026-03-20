@@ -1,489 +1,360 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="zh-TW" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cedarwood SPA Manor | Elegant Relaxation in Taipei</title>
-    <meta name="description" content="An urban oasis for complete physical and mental relaxation. Experience top-tier massage and spa services in Da'an District, Taipei.">
-    
-    <!-- Google Fonts -->
+    <title>唐山書店 | 二十年歲月，感謝相伴</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Urbanist:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- Tailwind Config for Elegant Wooden Theme -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         wood: {
-                            50: '#FAF8F5',  // Soft off-white background
-                            100: '#F0EBE1', // Light gray/beige
-                            200: '#E2D5C4',
-                            300: '#CDBCA3',
-                            400: '#B59F80', // Light wood
-                            500: '#9C825D',
-                            600: '#826544', // Primary wood tone
-                            700: '#664D34',
-                            800: '#4A3625', // Deep wood
-                            900: '#33241A', // Very dark wood (Text)
+                            50: '#fdfbf7',
+                            100: '#f4ecd8',
+                            200: '#e8d5b5',
+                            300: '#d4b58a',
+                            400: '#c19663',
+                            500: '#8b5a2b',
+                            600: '#754b22',
+                            700: '#5c4033',
+                            800: '#4a332a',
+                            900: '#3e2723',
+                        },
+                        ink: {
+                            DEFAULT: '#1a1a1a',
+                            light: '#333333',
+                            muted: '#666666'
                         }
                     },
                     fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans:['"Urbanist"', 'sans-serif'],
+                        sans:['"Noto Sans TC"', 'sans-serif'],
+                        serif: ['"Noto Serif TC"', 'serif'],
                     }
                 }
             }
         }
     </script>
-
     <style>
-        /* Custom Animations & Styles */
         .glass-nav {
-            background: rgba(250, 248, 245, 0.85);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(130, 101, 68, 0.1);
+            background: rgba(244, 236, 216, 0.9);
         }
-        
-        .reveal-up {
+        .reveal {
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
-        
-        .reveal-up.active {
+        .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-
-        .typing-cursor::after {
+        .typing-text::after {
             content: '|';
-            animation: blink 1s step-start infinite;
+            animation: blink 1s step-end infinite;
         }
-
         @keyframes blink {
             50% { opacity: 0; }
         }
-
-        .service-card:hover .service-img {
-            transform: scale(1.05);
-        }
     </style>
 </head>
-<body class="font-sans text-wood-900 bg-wood-50 antialiased selection:bg-wood-200 selection:text-wood-900">
+<body class="bg-wood-50 text-ink font-sans antialiased selection:bg-wood-300 selection:text-wood-900">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-nav border-b border-wood-200 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <img src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260319151559_0.png" alt="Cedarwood SPA Manor Logo" class="h-12 w-auto object-contain">
-                    <span class="font-serif text-xl font-semibold text-wood-800 tracking-wide hidden sm:block">Cedarwood SPA Manor</span>
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <i data-lucide="book-open" class="w-8 h-8 text-wood-700"></i>
+                    <span class="font-serif text-2xl font-bold tracking-wider text-wood-900">唐山書店</span>
                 </div>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="text-wood-700 hover:text-wood-500 transition-colors text-sm font-medium uppercase tracking-wider">Philosophy</a>
-                    <a href="#services" class="text-wood-700 hover:text-wood-500 transition-colors text-sm font-medium uppercase tracking-wider">Treatments</a>
-                    <a href="#reviews" class="text-wood-700 hover:text-wood-500 transition-colors text-sm font-medium uppercase tracking-wider">Reviews</a>
-                    <a href="https://www.spa-cedar.com/contactus/" target="_blank" rel="noopener noreferrer" class="bg-wood-800 text-wood-50 px-6 py-2.5 rounded-sm hover:bg-wood-700 transition-all duration-300 shadow-md hover:shadow-lg text-sm font-medium uppercase tracking-wider flex items-center gap-2">
-                        <i data-lucide="calendar-check" class="w-4 h-4"></i> Book Now
-                    </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-ink-light hover:text-wood-700 font-medium transition-colors">書店故事</a>
+                    <a href="#collection" class="text-ink-light hover:text-wood-700 font-medium transition-colors">思想聚落</a>
+                    <a href="#farewell" class="text-wood-700 font-bold hover:text-wood-900 transition-colors">最後的道別</a>
+                    <a href="#info" class="text-ink-light hover:text-wood-700 font-medium transition-colors">營業資訊</a>
                 </div>
-
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-wood-800 hover:text-wood-600 focus:outline-none p-2">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-wood-50 border-t border-wood-200 absolute w-full shadow-xl">
-            <div class="px-4 pt-2 pb-6 space-y-1">
-                <a href="#about" class="block px-3 py-3 text-wood-800 font-medium border-b border-wood-100">Philosophy</a>
-                <a href="#services" class="block px-3 py-3 text-wood-800 font-medium border-b border-wood-100">Treatments</a>
-                <a href="#reviews" class="block px-3 py-3 text-wood-800 font-medium border-b border-wood-100">Reviews</a>
-                <a href="https://www.spa-cedar.com/contactus/" target="_blank" class="block px-3 py-3 text-wood-600 font-bold mt-2">Book Appointment</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
-        <!-- Background Image -->
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&q=80" alt="Luxurious SPA Interior" class="w-full h-full object-cover object-center">
-            <div class="absolute inset-0 bg-gradient-to-b from-wood-900/60 via-wood-900/40 to-wood-900/70"></div>
+            <img src="https://picsum.photos/1920/1080?random=1" alt="唐山書店內部" class="w-full h-full object-cover object-center" />
+            <div class="absolute inset-0 bg-wood-900/70 mix-blend-multiply"></div>
         </div>
-
-        <!-- Content -->
+        
         <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
-            <span class="block text-wood-200 text-sm md:text-base tracking-[0.3em] uppercase mb-4 reveal-up">Welcome to your sanctuary</span>
-            <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl text-white font-medium leading-tight mb-6 drop-shadow-lg reveal-up" style="transition-delay: 100ms;">
-                <span id="typewriter" class="typing-cursor"></span>
+            <span class="block text-wood-200 font-serif text-lg md:text-xl mb-4 tracking-[0.2em] reveal">台灣獨立書店的老牌地標</span>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-wood-50 mb-6 leading-tight tracking-wide reveal" style="transition-delay: 200ms;">
+                堅守二十載<br>地下室的知識微光
             </h1>
-            <p class="text-wood-100 text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto reveal-up leading-relaxed" style="transition-delay: 200ms;">
-                Experience the ultimate relaxation with our professional massage and spa services in the heart of Taipei.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center reveal-up" style="transition-delay: 300ms;">
-                <a href="https://www.spa-cedar.com/contactus/" target="_blank" class="bg-wood-600/90 backdrop-blur-sm text-white px-8 py-4 rounded-sm hover:bg-wood-500 transition-all duration-300 w-full sm:w-auto text-center tracking-wider uppercase text-sm font-medium shadow-[0_4px_20px_rgba(130,101,68,0.3)] hover:-translate-y-1 border border-wood-500/50">
-                    Reserve Your Journey
-                </a>
-                <a href="#services" class="bg-transparent border border-wood-200/50 text-wood-50 px-8 py-4 rounded-sm hover:bg-wood-50/10 transition-all duration-300 w-full sm:w-auto text-center tracking-wider uppercase text-sm font-medium hover:-translate-y-1">
-                    Explore Treatments
+            <p class="text-xl md:text-2xl text-wood-100 mb-12 font-light tracking-wider reveal typing-text h-8" style="transition-delay: 400ms;" id="typewriter"></p>
+            <div class="reveal" style="transition-delay: 600ms;">
+                <a href="#farewell" class="inline-flex items-center gap-2 bg-wood-700 text-wood-50 px-8 py-4 rounded-sm hover:bg-wood-800 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 font-serif text-lg tracking-wider border border-wood-600">
+                    閱讀我們的道別
+                    <i data-lucide="arrow-down" class="w-5 h-5"></i>
                 </a>
             </div>
         </div>
-        
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
-            <i data-lucide="chevron-down" class="w-8 h-8 text-white/70"></i>
-        </div>
     </section>
 
-    <!-- Philosophy / Brand Spirit -->
-    <section id="about" class="py-24 bg-wood-50 relative">
-        <!-- Decorative subtle pattern/shape -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-wood-100 rounded-bl-full opacity-50 pointer-events-none"></div>
-        
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <i data-lucide="leaf" class="w-10 h-10 text-wood-400 mx-auto mb-6 reveal-up"></i>
-            <h2 class="font-serif text-3xl md:text-4xl text-wood-800 mb-8 reveal-up">Our Philosophy</h2>
-            <div class="w-16 h-px bg-wood-300 mx-auto mb-8 reveal-up"></div>
-            <p class="text-lg md:text-xl text-wood-700 leading-loose font-light reveal-up">
-                "With the warm scent of cedarwood and professional, delicate massage techniques, we create an urban oasis for complete physical and mental relaxation. We are dedicated to providing top-tier service experiences, allowing you to find inner balance and tranquility amidst a busy life, radiating from the inside out."
+    <!-- Farewell Section -->
+    <section id="farewell" class="py-24 bg-wood-100 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <i data-lucide="calendar-clock" class="w-12 h-12 text-wood-700 mx-auto mb-6"></i>
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-wood-900 mb-8 tracking-wider">最後的時光，感謝相伴</h2>
+            <div class="w-24 h-1 bg-wood-700 mx-auto mb-8"></div>
+            <p class="text-lg md:text-xl text-ink-light leading-relaxed mb-6 font-serif">
+                二十年的歲月，唐山書店在這裡見證了無數思想的碰撞與學術的交流。<br>
+                如今，我們即將畫下句點。
             </p>
-        </div>
-    </section>
-
-    <!-- Services & Pricing -->
-    <section id="services" class="py-24 bg-white relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal-up">
-                <span class="text-wood-500 text-sm tracking-[0.2em] uppercase block mb-2">Curated Menus</span>
-                <h2 class="font-serif text-3xl md:text-4xl text-wood-900">Signature Treatments</h2>
-                <div class="w-16 h-px bg-wood-300 mx-auto mt-6"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="group service-card bg-wood-50 rounded-sm overflow-hidden border border-wood-100 reveal-up shadow-sm hover:shadow-xl transition-all duration-500" style="transition-delay: 100ms;">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80" alt="Essential Oil Massage" class="service-img w-full h-full object-cover transition-transform duration-700">
-                        <div class="absolute inset-0 bg-wood-900/10 group-hover:bg-transparent transition-all duration-500"></div>
-                    </div>
-                    <div class="p-8 text-center">
-                        <i data-lucide="droplet" class="w-6 h-6 text-wood-500 mx-auto mb-4"></i>
-                        <h3 class="font-serif text-2xl text-wood-800 mb-3">Essential Oil Massage</h3>
-                        <p class="text-wood-600 text-sm mb-6 font-light h-16">Choose from a wide variety of premium massage oils. Relieve tension and restore your body's natural harmony.</p>
-                        <div class="text-wood-800 font-medium tracking-wide border-t border-wood-200 pt-4">
-                            NT$ 1,000 - 2,600
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="group service-card bg-wood-50 rounded-sm overflow-hidden border border-wood-100 reveal-up shadow-sm hover:shadow-xl transition-all duration-500" style="transition-delay: 200ms;">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80" alt="Facial Care" class="service-img w-full h-full object-cover transition-transform duration-700">
-                        <div class="absolute inset-0 bg-wood-900/10 group-hover:bg-transparent transition-all duration-500"></div>
-                    </div>
-                    <div class="p-8 text-center">
-                        <i data-lucide="sparkles" class="w-6 h-6 text-wood-500 mx-auto mb-4"></i>
-                        <h3 class="font-serif text-2xl text-wood-800 mb-3">Facial Care</h3>
-                        <p class="text-wood-600 text-sm mb-6 font-light h-16">Deep cleansing and nourishing treatments to rejuvenate your skin, leaving it glowing and refreshed.</p>
-                        <div class="text-wood-800 font-medium tracking-wide border-t border-wood-200 pt-4">
-                            NT$ 699
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="group service-card bg-wood-50 rounded-sm overflow-hidden border border-wood-100 reveal-up shadow-sm hover:shadow-xl transition-all duration-500" style="transition-delay: 300ms;">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1552693673-1bf958298935?auto=format&fit=crop&w=800&q=80" alt="Foot Reflexology" class="service-img w-full h-full object-cover transition-transform duration-700">
-                        <div class="absolute inset-0 bg-wood-900/10 group-hover:bg-transparent transition-all duration-500"></div>
-                    </div>
-                    <div class="p-8 text-center">
-                        <i data-lucide="footprints" class="w-6 h-6 text-wood-500 mx-auto mb-4"></i>
-                        <h3 class="font-serif text-2xl text-wood-800 mb-3">Foot Reflexology</h3>
-                        <p class="text-wood-600 text-sm mb-6 font-light h-16">Targeted pressure point therapy to improve circulation, reduce fatigue, and promote overall wellness.</p>
-                        <div class="flex flex-col gap-1 text-wood-800 font-medium tracking-wide border-t border-wood-200 pt-4">
-                            <span>NT$ 899 / 40 min</span>
-                            <span class="text-wood-500 text-sm">NT$ 1,599 / 90 min</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Late Night Special Banner -->
-            <div class="mt-16 bg-wood-800 text-wood-50 rounded-sm p-8 md:p-12 flex flex-col md:flex-row items-center justify-between reveal-up shadow-2xl relative overflow-hidden">
-                <!-- Abstract background element -->
-                <div class="absolute -right-20 -top-20 w-64 h-64 border border-wood-600/30 rounded-full pointer-events-none"></div>
-                <div class="absolute -right-10 -top-10 w-48 h-48 border border-wood-600/20 rounded-full pointer-events-none"></div>
-
-                <div class="flex items-center gap-6 mb-6 md:mb-0 relative z-10">
-                    <div class="bg-wood-700 p-4 rounded-full">
-                        <i data-lucide="moon" class="w-8 h-8 text-wood-200"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-serif text-2xl md:text-3xl mb-1 text-white">Late Night Special</h4>
-                        <p class="text-wood-200 font-light">Enjoy a tranquil escape after hours.</p>
-                    </div>
-                </div>
-                <div class="text-center md:text-right relative z-10">
-                    <div class="text-4xl md:text-5xl font-serif text-wood-300 mb-2">30% OFF</div>
-                    <p class="text-wood-100 tracking-wider text-sm uppercase">For visits after 12:00 AM (Midnight)</p>
-                </div>
+            <p class="text-lg md:text-xl text-wood-800 font-bold leading-relaxed mb-10">
+                希望在最後的這一個月裡，舊雨新知能再次走下那熟悉的地下室階梯，<br>
+                帶走一本感動您的書，也帶走我們共同的回憶。
+            </p>
+            <div class="inline-block border-2 border-wood-700 p-8 rounded-sm bg-wood-50 shadow-sm">
+                <h3 class="font-serif text-xl text-wood-900 mb-3 font-bold">最後營業時間</h3>
+                <p class="text-ink text-lg tracking-wider">週一至週五 09:00 - 17:00</p>
             </div>
         </div>
     </section>
 
-    <!-- Social Proof / Reviews -->
-    <section id="reviews" class="py-24 bg-wood-100 relative overflow-hidden">
+    <!-- About / History Section -->
+    <section id="about" class="py-24 bg-wood-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-                
-                <!-- Google Rating Summary -->
-                <div class="text-center lg:text-left reveal-up">
-                    <h2 class="font-serif text-3xl md:text-4xl text-wood-900 mb-4">Trusted by Our Guests</h2>
-                    <p class="text-wood-600 font-light mb-8">Located in Da'an District, Taipei. We pride ourselves on delivering an exceptional environment and service.</p>
-                    
-                    <div class="inline-flex flex-col items-center lg:items-start p-6 bg-white rounded-sm shadow-sm border border-wood-200">
-                        <div class="flex items-center gap-4 mb-2">
-                            <span class="text-5xl font-serif text-wood-800 counter" data-target="4.6">0.0</span>
-                            <div class="flex flex-col">
-                                <div class="flex text-yellow-500 mb-1">
-                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                    <i data-lucide="star-half" class="w-4 h-4 fill-current"></i>
-                                </div>
-                                <span class="text-xs text-wood-500 tracking-wider uppercase">Google Reviews</span>
-                            </div>
-                        </div>
-                        <div class="text-wood-600 text-sm">Based on <span class="font-semibold text-wood-800 counter" data-target="414">0</span> authentic ratings</div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal order-2 lg:order-1">
+                    <div class="relative">
+                        <img src="https://picsum.photos/800/1000?random=2" alt="書店書架" class="w-full h-auto rounded-sm shadow-2xl sepia-[0.2]" />
+                        <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-wood-200 -z-10 rounded-sm"></div>
+                        <div class="absolute -top-6 -left-6 w-32 h-32 border-2 border-wood-700 -z-10 rounded-sm"></div>
                     </div>
                 </div>
-
-                <!-- Review Cards -->
-                <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <!-- Review 1 -->
-                    <div class="bg-white p-8 rounded-sm shadow-sm border border-wood-200 reveal-up" style="transition-delay: 100ms;">
-                        <i data-lucide="quote" class="w-8 h-8 text-wood-200 mb-4"></i>
-                        <p class="text-wood-700 italic font-light mb-6">"The decor has a great atmosphere, and the front desk staff are incredibly polite and welcoming. A truly premium experience."</p>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-wood-200 rounded-full flex items-center justify-center text-wood-700 font-serif">A</div>
-                            <div class="text-sm">
-                                <div class="font-semibold text-wood-900">Anonymous Guest</div>
-                                <div class="text-wood-400">Local Guide</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Review 2 -->
-                    <div class="bg-white p-8 rounded-sm shadow-sm border border-wood-200 reveal-up" style="transition-delay: 200ms;">
-                        <i data-lucide="quote" class="w-8 h-8 text-wood-200 mb-4"></i>
-                        <p class="text-wood-700 italic font-light mb-6">"Highly recommend the oil massage! They offer a wide variety of massage oils to choose from. The environment is extremely comfortable."</p>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-wood-300 rounded-full flex items-center justify-center text-wood-800 font-serif">W</div>
-                            <div class="text-sm">
-                                <div class="font-semibold text-wood-900">W Chan</div>
-                                <div class="text-wood-400">Verified Review</div>
-                            </div>
-                        </div>
+                <div class="reveal order-1 lg:order-2">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-wood-900 mb-8 tracking-wider">硬派與務實的知識殿堂</h2>
+                    <div class="space-y-6 text-lg text-ink-light leading-relaxed">
+                        <p>
+                            從羅斯福路的地下室入口走入，就能知道這不是一間追求打卡的文青店，反而是極度硬派、務實的人文社科據點。
+                        </p>
+                        <p>
+                            更讓人敬佩的是它在台灣知識史上的位置。即便在早年思想管控嚴格的年代，唐山書店仍無畏地引介各種非主流的人文社科與左翼閱讀，甚至曾經面對臨檢查抄的歷史。
+                        </p>
+                        <p>
+                            一路走來，書店見證了學術思潮與社會運動的起伏，成為許多人心中不可取代的公共議題讀者聚落。店家與老闆直到現在仍在為書店與出版事業堅持，這份精神，是這座城市最珍貴的資產。
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer / Contact -->
-    <footer class="bg-wood-900 text-wood-100 pt-20 pb-10">
+    <!-- Features / Collection Section -->
+    <section id="collection" class="py-24 bg-wood-900 text-wood-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                
-                <!-- Brand Info -->
-                <div class="lg:col-span-1">
-                    <div class="flex items-center gap-3 mb-6">
-                        <img src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260319151559_0.png" alt="Logo" class="h-10 w-auto brightness-0 invert opacity-90">
-                        <span class="font-serif text-xl font-semibold tracking-wide text-white">Cedarwood SPA</span>
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 tracking-wider">思想的重量</h2>
+                <div class="w-16 h-1 bg-wood-400 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Feature 1 -->
+                <div class="text-center reveal" style="transition-delay: 100ms;">
+                    <div class="w-20 h-20 mx-auto bg-wood-800 rounded-full flex items-center justify-center mb-6 border border-wood-600 transition-transform duration-300 hover:scale-110">
+                        <i data-lucide="library" class="w-10 h-10 text-wood-300"></i>
                     </div>
-                    <p class="text-wood-300 text-sm font-light leading-relaxed mb-6">
-                        Your urban oasis in Taipei. Finding inner balance and tranquility amidst a busy life.
+                    <h3 class="text-2xl font-serif font-bold mb-4 text-wood-200">完整深度的藏書</h3>
+                    <p class="text-wood-100/80 leading-relaxed text-left md:text-center">
+                        書架上從文學、歷史、哲學、文化研究到各類社會科學一應俱全，尤其是理論、方法論、政治社會議題相關的書籍，是學術研究者的寶庫。
                     </p>
                 </div>
 
-                <!-- Contact Links -->
-                <div>
-                    <h4 class="font-serif text-lg text-white mb-6 tracking-wide">Contact Us</h4>
-                    <ul class="space-y-4">
-                        <li>
-                            <a href="tel:0227099199" class="flex items-start gap-3 group">
-                                <i data-lucide="phone" class="w-5 h-5 text-wood-400 group-hover:text-wood-200 transition-colors mt-0.5"></i>
-                                <div>
-                                    <span class="block text-sm text-wood-400 uppercase tracking-wider mb-1">Phone</span>
-                                    <span class="text-wood-200 group-hover:text-white transition-colors">02-2709-9199</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://maps.google.com/?q=106臺北市大安區敦化南路一段329巷17號" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 group">
-                                <i data-lucide="map-pin" class="w-5 h-5 text-wood-400 group-hover:text-wood-200 transition-colors mt-0.5"></i>
-                                <div>
-                                    <span class="block text-sm text-wood-400 uppercase tracking-wider mb-1">Address</span>
-                                    <span class="text-wood-200 group-hover:text-white transition-colors leading-relaxed">
-                                        No. 17, Ln. 329, Sec. 1,<br>Dunhua S. Rd., Da'an Dist.,<br>Taipei City 106
-                                    </span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
+                <!-- Feature 2 -->
+                <div class="text-center reveal" style="transition-delay: 200ms;">
+                    <div class="w-20 h-20 mx-auto bg-wood-800 rounded-full flex items-center justify-center mb-6 border border-wood-600 transition-transform duration-300 hover:scale-110">
+                        <i data-lucide="scroll-text" class="w-10 h-10 text-wood-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold mb-4 text-wood-200">見證歷史的刻痕</h3>
+                    <p class="text-wood-100/80 leading-relaxed text-left md:text-center">
+                        在思想管控的年代，勇敢引介非主流與左翼閱讀。每一次的打壓，都刻劃了書店捍衛思想自由的決心，成為台灣知識史上的重要地標。
+                    </p>
                 </div>
 
-                <!-- Hours -->
-                <div>
-                    <h4 class="font-serif text-lg text-white mb-6 tracking-wide">Hours</h4>
-                    <ul class="space-y-3 text-wood-300 font-light">
-                        <li class="flex justify-between border-b border-wood-800 pb-2">
-                            <span>Open Daily</span>
-                            <span>24 Hours</span>
-                        </li>
-                        <li class="pt-2 text-wood-400 text-sm italic">
-                            * Late night special (30% off) available after 12:00 AM.
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Action -->
-                <div>
-                    <h4 class="font-serif text-lg text-white mb-6 tracking-wide">Reservation</h4>
-                    <p class="text-wood-300 text-sm font-light mb-6">Secure your moment of peace. Book your treatment online.</p>
-                    <a href="https://www.spa-cedar.com/contactus/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 w-full bg-wood-600 text-white px-6 py-3 rounded-sm hover:bg-wood-500 transition-colors text-sm uppercase tracking-wider font-medium">
-                        Book Online Now <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </a>
-                    
-                    <a href="https://maps.google.com/?q=106臺北市大安區敦化南路一段329巷17號" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 w-full mt-4 bg-transparent border border-wood-700 text-wood-300 px-6 py-3 rounded-sm hover:bg-wood-800 hover:text-white transition-colors text-sm uppercase tracking-wider font-medium">
-                        <i data-lucide="navigation" class="w-4 h-4"></i> Get Directions
-                    </a>
+                <!-- Feature 3 -->
+                <div class="text-center reveal" style="transition-delay: 300ms;">
+                    <div class="w-20 h-20 mx-auto bg-wood-800 rounded-full flex items-center justify-center mb-6 border border-wood-600 transition-transform duration-300 hover:scale-110">
+                        <i data-lucide="users" class="w-10 h-10 text-wood-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold mb-4 text-wood-200">公共議題的聚落</h3>
+                    <p class="text-wood-100/80 leading-relaxed text-left md:text-center">
+                        這裡不僅僅是買賣書籍的場所，更是關心社會、熱愛思辨的讀者們聚集交流的空間。我們陪伴著無數讀者，一起走過社會運動的浪潮。
+                    </p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Copyright -->
-            <div class="border-t border-wood-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-wood-500 uppercase tracking-wider">
-                <p>&copy; 2026 Cedarwood SPA Manor. All rights reserved.</p>
-                <p>Made by Webomate</p>
+    <!-- Info & Social Proof Section -->
+    <section id="info" class="py-24 bg-wood-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-sm shadow-xl overflow-hidden reveal flex flex-col lg:flex-row border border-wood-200">
+                
+                <!-- Info -->
+                <div class="p-10 lg:p-16 lg:w-1/2 bg-wood-50 flex flex-col justify-center">
+                    <h2 class="text-3xl font-serif font-bold text-wood-900 mb-10 tracking-wider">來訪資訊</h2>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-5">
+                            <i data-lucide="map-pin" class="w-7 h-7 text-wood-700 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <h4 class="font-bold text-ink text-lg mb-2">書店地址</h4>
+                                <p class="text-ink-light text-lg">106臺北市大安區羅斯福路三段333巷9號B1樓</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-5">
+                            <i data-lucide="clock" class="w-7 h-7 text-wood-700 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <h4 class="font-bold text-ink text-lg mb-2">最後營業時間</h4>
+                                <p class="text-ink-light text-lg">週一至週五 09:00 - 17:00</p>
+                                <p class="text-sm text-wood-600 mt-2 font-medium">*即將結束20年營業，敬請把握最後一個月</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12">
+                        <a href="https://www.google.com/maps/place/?q=place_id:ChIJe_MK3oupQjQRrwtbV80r0Bw" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 w-full bg-wood-700 text-wood-50 px-6 py-4 rounded-sm hover:bg-wood-900 transition-all duration-300 font-bold tracking-wider hover:-translate-y-1 hover:shadow-lg">
+                            <i data-lucide="navigation" class="w-5 h-5"></i>
+                            開啟 Google 地圖導航
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Social Proof -->
+                <div class="p-10 lg:p-16 lg:w-1/2 bg-wood-800 text-wood-50 flex flex-col justify-center items-center text-center relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-wood-100 to-transparent"></div>
+                    
+                    <h3 class="text-2xl font-serif mb-8 relative z-10">讀者真實回饋</h3>
+                    <div class="flex items-center gap-3 mb-6 relative z-10">
+                        <span class="text-6xl font-bold text-wood-200 counter font-serif" data-target="4.6">0</span>
+                        <span class="text-2xl text-wood-400 mt-4">/ 5.0</span>
+                    </div>
+                    <div class="flex gap-1 text-wood-300 mb-6 relative z-10">
+                        <i data-lucide="star" class="w-7 h-7 fill-current"></i>
+                        <i data-lucide="star" class="w-7 h-7 fill-current"></i>
+                        <i data-lucide="star" class="w-7 h-7 fill-current"></i>
+                        <i data-lucide="star" class="w-7 h-7 fill-current"></i>
+                        <i data-lucide="star-half" class="w-7 h-7 fill-current"></i>
+                    </div>
+                    <p class="text-wood-200 mb-10 text-lg relative z-10">來自 <span class="font-bold text-white counter text-xl" data-target="434">0</span> 位愛書人的 Google 評價</p>
+                    
+                    <blockquote class="italic text-wood-100/90 border-l-4 border-wood-500 pl-6 text-left text-lg leading-relaxed relative z-10">
+                        「位於台北大安區的知識寶庫，深具歷史意義的獨立書店。選書極度專業，是人文社科愛好者不可錯過的地標。」
+                    </blockquote>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-wood-900 text-wood-300 py-12 border-t border-wood-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <i data-lucide="book-open" class="w-6 h-6"></i>
+                <span class="font-serif text-xl font-bold tracking-wider text-wood-100">唐山書店</span>
+            </div>
+            <div class="text-sm text-center md:text-left tracking-wider">
+                <p>二十年歲月，感謝每一位走進地下室的讀者。</p>
+            </div>
+            <div class="text-sm tracking-wider">
+                &copy; 2026 唐山書店. Made by Webomate.
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Mobile Menu Toggle
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-
-        // Navbar Scroll Effect
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 20) {
-                nav.classList.add('shadow-md');
-            } else {
-                nav.classList.remove('shadow-md');
-            }
-        });
-
-        // Hero Typing Effect
-        const typeTarget = document.getElementById('typewriter');
-        const textToType = "Discover Your Inner Peace";
-        let i = 0;
-        function typeWriter() {
-            if (i < textToType.length) {
-                typeTarget.innerHTML += textToType.charAt(i);
-                i++;
-                setTimeout(typeWriter, 80);
-            } else {
-                typeTarget.classList.remove('typing-cursor'); // Remove cursor after done
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
             }
         }
-        // Start typing after a short delay
-        setTimeout(typeWriter, 500);
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger on load
 
-        // Scroll Reveal Animation
-        const revealElements = document.querySelectorAll('.reveal-up');
-        const revealObserver = new IntersectionObserver((entries, observer) => {
+        // Typewriter Effect
+        const textToType = "我們即將結束20年營業，邀請您在最後一個月前來。";
+        const typingElement = document.getElementById('typewriter');
+        let typeIndex = 0;
+        
+        function typeWriter() {
+            if (typeIndex < textToType.length) {
+                typingElement.textContent += textToType.charAt(typeIndex);
+                typeIndex++;
+                setTimeout(typeWriter, 120);
+            } else {
+                setTimeout(() => {
+                    typingElement.classList.remove('typing-text');
+                }, 2000);
+            }
+        }
+        
+        // Start typing after a short delay
+        setTimeout(typeWriter, 1000);
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200; 
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    if(target % 1 !== 0) {
+                        counter.innerText = (count + inc).toFixed(1);
+                    } else {
+                        counter.innerText = Math.ceil(count + inc);
+                    }
+                    setTimeout(animateCounters, 15);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+        
+        // Use Intersection Observer to trigger counter when visible
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+                    animateCounters();
                     observer.unobserve(entry.target);
                 }
             });
-        }, {
-            root: null,
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        });
-        
-        revealElements.forEach(el => revealObserver.observe(el));
-
-        // Number Counter Animation
-        const counters = document.querySelectorAll('.counter');
-        const counterObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const target = entry.target;
-                    const finalValue = parseFloat(target.getAttribute('data-target'));
-                    const isFloat = target.getAttribute('data-target').includes('.');
-                    const duration = 2000; // ms
-                    const frameRate = 30; // ms
-                    const totalFrames = Math.round(duration / frameRate);
-                    let currentFrame = 0;
-
-                    const counterInterval = setInterval(() => {
-                        currentFrame++;
-                        const progress = currentFrame / totalFrames;
-                        // Ease out quad
-                        const easeProgress = progress * (2 - progress);
-                        const currentVal = finalValue * easeProgress;
-
-                        if (isFloat) {
-                            target.innerText = currentVal.toFixed(1);
-                        } else {
-                            target.innerText = Math.round(currentVal);
-                        }
-
-                        if (currentFrame >= totalFrames) {
-                            clearInterval(counterInterval);
-                            target.innerText = isFloat ? finalValue.toFixed(1) : finalValue;
-                        }
-                    }, frameRate);
-                    
-                    observer.unobserve(target);
-                }
-            });
         }, { threshold: 0.5 });
+        
+        document.querySelector('#info').querySelectorAll('.counter').forEach(c => {
+            observer.observe(c.parentElement);
+        });
 
-        counters.forEach(counter => counterObserver.observe(counter));
     </script>
 </body>
 </html>
