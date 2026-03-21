@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>咖啡意識 Coffice | 溫馨復古精品咖啡館</title>
+    <meta name="description" content="位於新北永和的精品咖啡館，堅持手工挑豆，專注咖啡本質。提供虹吸咖啡、義大利咖啡與客製化烘焙豆。">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf8f5',
+                            100: '#f8ebe4',
+                            200: '#eed4c6',
+                            300: '#e1b59f',
+                            400: '#d18f70',
+                            500: '#c26e46', // 暖橘棕主色
+                            600: '#b45636',
+                            700: '#96432f',
+                            800: '#79382a',
+                            900: '#623125',
+                        },
+                        earth: {
+                            light: '#fdfbf7', // 溫暖米白背景
+                            DEFAULT: '#8b7355',
+                            dark: '#4a3f35', // 深咖啡文字
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                        serif: ['"Noto Serif TC"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fdfbf7;
+            color: #4a3f35;
+        }
+        
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            background: rgba(253, 251, 247, 0.85);
+            border-bottom: 1px solid rgba(194, 110, 70, 0.1);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .menu-dots {
+            flex-grow: 1;
+            border-bottom: 2px dotted #eed4c6;
+            margin: 0 15px;
+            position: relative;
+            top: -6px;
+        }
+    </style>
+</head>
+<body class="antialiased font-sans selection:bg-brand-500 selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i data-lucide="coffee" class="h-8 w-8 text-brand-500"></i>
+                    <span class="font-serif text-2xl font-bold text-earth-dark tracking-wider">咖啡意識</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#story" class="text-earth-dark hover:text-brand-500 transition-colors duration-300 font-medium tracking-wide">品牌故事</a>
+                    <a href="#features" class="text-earth-dark hover:text-brand-500 transition-colors duration-300 font-medium tracking-wide">專業堅持</a>
+                    <a href="#menu" class="text-earth-dark hover:text-brand-500 transition-colors duration-300 font-medium tracking-wide">嚴選豆單</a>
+                    <a href="#contact" class="text-earth-dark hover:text-brand-500 transition-colors duration-300 font-medium tracking-wide">尋訪我們</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-earth-dark hover:text-brand-500 focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-earth-light border-t border-brand-100 absolute w-full">
+            <div class="px-4 pt-2 pb-4 space-y-1 shadow-lg">
+                <a href="#story" class="block px-3 py-2 text-earth-dark hover:text-brand-500 hover:bg-brand-50 rounded-md">品牌故事</a>
+                <a href="#features" class="block px-3 py-2 text-earth-dark hover:text-brand-500 hover:bg-brand-50 rounded-md">專業堅持</a>
+                <a href="#menu" class="block px-3 py-2 text-earth-dark hover:text-brand-500 hover:bg-brand-50 rounded-md">嚴選豆單</a>
+                <a href="#contact" class="block px-3 py-2 text-earth-dark hover:text-brand-500 hover:bg-brand-50 rounded-md">尋訪我們</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="咖啡意識店內氛圍" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black/50 mix-blend-multiply"></div>
+            <!-- 暖色調濾鏡 -->
+            <div class="absolute inset-0 bg-brand-900/20"></div> 
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
+            <span class="block text-brand-300 font-serif text-lg md:text-xl mb-4 tracking-[0.2em] reveal">COFFICE ROASTERY</span>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 tracking-wider drop-shadow-lg reveal" style="transition-delay: 200ms;">
+                咖啡意識
+            </h1>
+            <div class="h-8 md:h-12 mb-8">
+                <p id="typing-text" class="text-lg md:text-2xl text-brand-50 font-light tracking-wide typing-cursor drop-shadow-md"></p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="transition-delay: 400ms;">
+                <a href="#menu" class="px-8 py-3 bg-brand-500 text-white rounded-sm hover:bg-brand-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand-500/30 font-medium tracking-wider">
+                    探索風味
+                </a>
+                <a href="#story" class="px-8 py-3 bg-transparent border border-white text-white rounded-sm hover:bg-white hover:text-earth-dark transition-all duration-300 hover:-translate-y-1 font-medium tracking-wider">
+                    品牌故事
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof / Trust Section -->
+    <section class="bg-brand-900 text-brand-50 py-8 relative z-20 -mt-2 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-4">
+                    <div class="flex text-yellow-400">
+                        <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                        <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                        <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                        <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                        <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                    </div>
+                    <div class="text-lg font-medium">
+                        <span class="text-2xl font-bold counter" data-target="4.9">0</span> 
+                        <span class="text-brand-200 text-sm ml-1">/ 5.0 Google 顧客真實評價</span>
+                    </div>
+                </div>
+                <div class="text-center md:text-right border-l-0 md:border-l border-brand-700 pl-0 md:pl-8">
+                    <p class="text-brand-100 font-serif text-lg">「位於新北永和，在地深耕18年，深受饕客喜愛的頂級精品咖啡。」</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Story Section -->
+    <section id="story" class="py-24 bg-earth-light overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 reveal">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1611162458324-aae1eb4129a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="咖啡職人手沖" class="rounded-sm shadow-2xl z-10 relative">
+                        <div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-brand-500 rounded-sm z-0 hidden md:block"></div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 reveal" style="transition-delay: 200ms;">
+                    <h4 class="text-brand-500 font-bold tracking-widest uppercase mb-2 text-sm">Our Story</h4>
+                    <h2 class="text-4xl font-serif font-bold text-earth-dark mb-6">小是我故意的<br><span class="text-2xl text-earth mt-2 block">Less is More 的品牌哲學</span></h2>
+                    <div class="space-y-4 text-gray-600 leading-relaxed">
+                        <p>
+                            2007年春，台灣、永和、一個所有Business Model皆不會選擇的地點，咖啡意識烘焙館卻落腳於此。一如創辦人Jerry所說的 Slogan～<strong class="text-brand-600">”小是我故意的”</strong>，選擇不刻意擴張，故意限制成長，需要的是勇氣。我們將時間與精力，用來專注於咖啡的本質與提供真誠的服務。
+                        </p>
+                        <p>
+                            創立於18年前的「咖啡意識」，是精品咖啡領域的專業品牌，專注於虹吸咖啡與義大利咖啡。我們相信，簡單是極致的美好——無論是咖啡製作的工藝還是與顧客的互動，都專注於呈現最本質的價值。
+                        </p>
+                        <p>
+                            每一杯咖啡都是一段故事，也是一種連結。沒有過度裝修，更沒有華麗的詞藻，歸零的初心，一杯有溫度的咖啡，這是我們的 <strong class="text-brand-600 font-serif">咖啡意識</strong>。
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-8 border-t border-brand-200 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center text-brand-500">
+                            <i data-lucide="award" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-earth-dark">創辦人 Jerry 張文蔚</p>
+                            <p class="text-sm text-gray-500">SCA、CQI、IIAC認證杯測師/烘焙師・台北精品咖啡商業發展協會理事長</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h4 class="text-brand-500 font-bold tracking-widest uppercase mb-2 text-sm">Why Choose Us</h4>
+                <h2 class="text-4xl font-serif font-bold text-earth-dark">專業與堅持</h2>
+                <div class="w-24 h-1 bg-brand-500 mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Feature 1 -->
+                <div class="text-center group reveal" style="transition-delay: 100ms;">
+                    <div class="w-20 h-20 mx-auto bg-brand-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300 text-brand-500 shadow-sm">
+                        <i data-lucide="leaf" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-earth-dark mb-4 font-serif">堅持手工挑豆</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        “一粒米壞了一鍋粥, 一顆缺陷豆毀了一杯好咖啡”。我們堅持細心手工挑除瑕疵豆，避免心悸、反胃等不良反應，以最純粹的方式，釋放咖啡原始風味。
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="text-center group reveal" style="transition-delay: 200ms;">
+                    <div class="w-20 h-20 mx-auto bg-brand-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300 text-brand-500 shadow-sm">
+                        <i data-lucide="flame" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-earth-dark mb-4 font-serif">客製化專業烘焙</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        提供客製化烘焙豆及量身訂製配方豆服務。充分溝通需求並記錄咖啡履歷，讓每一位咖啡愛好者尋找記憶中充滿回憶的美好滋味。
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="text-center group reveal" style="transition-delay: 300ms;">
+                    <div class="w-20 h-20 mx-auto bg-brand-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300 text-brand-500 shadow-sm">
+                        <i data-lucide="coffee" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-earth-dark mb-4 font-serif">極致沖煮工藝</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        專注於單品虹吸咖啡與義大利式咖啡。每一位咖啡師皆經過嚴格訓練與考核，將美好的時光與溫暖，透過一杯有溫度的咖啡傳遞給您。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-24 bg-[#f8ebe4] relative">
+        <!-- 背景裝飾 -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-brand-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h4 class="text-brand-600 font-bold tracking-widest uppercase mb-2 text-sm">Selected Menu</h4>
+                <h2 class="text-4xl font-serif font-bold text-earth-dark">嚴選豆單與名物</h2>
+                <p class="text-gray-600 mt-4">世界各地精選莊園級精品咖啡豆，杯測嚴格把關</p>
+            </div>
+
+            <div class="bg-white/80 backdrop-blur-sm p-8 md:p-12 rounded-sm shadow-xl reveal" style="transition-delay: 200ms;">
+                <div class="space-y-8">
+                    
+                    <!-- Menu Item 1 -->
+                    <div class="flex flex-col sm:flex-row justify-between items-baseline group">
+                        <div class="pr-4 bg-transparent z-10">
+                            <h3 class="text-lg font-bold text-earth-dark group-hover:text-brand-600 transition-colors">巴西 ～ 喜拉朵 水洗SC18</h3>
+                            <p class="text-sm text-gray-500 mt-1">半磅 227G</p>
+                        </div>
+                        <div class="menu-dots hidden sm:block"></div>
+                        <div class="pl-4 bg-transparent z-10 mt-2 sm:mt-0">
+                            <span class="text-xl font-serif font-bold text-brand-600">NT$300</span>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 2 -->
+                    <div class="flex flex-col sm:flex-row justify-between items-baseline group">
+                        <div class="pr-4 bg-transparent z-10">
+                            <h3 class="text-lg font-bold text-earth-dark group-hover:text-brand-600 transition-colors">巴西 ～ 冠軍莊園 日曬黃波本</h3>
+                            <p class="text-sm text-gray-500 mt-1">半磅 227G</p>
+                        </div>
+                        <div class="menu-dots hidden sm:block"></div>
+                        <div class="pl-4 bg-transparent z-10 mt-2 sm:mt-0">
+                            <span class="text-xl font-serif font-bold text-brand-600">NT$350 – $400</span>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 3 -->
+                    <div class="flex flex-col sm:flex-row justify-between items-baseline group">
+                        <div class="pr-4 bg-transparent z-10 max-w-xl">
+                            <h3 class="text-lg font-bold text-earth-dark group-hover:text-brand-600 transition-colors leading-snug">巴拿馬 波奎特 阿爾鐵里莊園 蘿拉地塊<br>厭氧慢乾日曬 卡杜艾</h3>
+                            <p class="text-sm text-gray-500 mt-1">1/2 磅 227G</p>
+                        </div>
+                        <div class="menu-dots hidden sm:block"></div>
+                        <div class="pl-4 bg-transparent z-10 mt-2 sm:mt-0 whitespace-nowrap">
+                            <span class="text-xl font-serif font-bold text-brand-600">NT$900</span>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 4 -->
+                    <div class="flex flex-col sm:flex-row justify-between items-baseline group">
+                        <div class="pr-4 bg-transparent z-10 max-w-xl">
+                            <h3 class="text-lg font-bold text-earth-dark group-hover:text-brand-600 transition-colors leading-snug">哥倫比亞 薇拉省 無際原野 伊格納西小農<br>發酵水洗 粉紅波旁</h3>
+                            <p class="text-sm text-gray-500 mt-1">1/2 磅 227G</p>
+                        </div>
+                        <div class="menu-dots hidden sm:block"></div>
+                        <div class="pl-4 bg-transparent z-10 mt-2 sm:mt-0 whitespace-nowrap">
+                            <span class="text-xl font-serif font-bold text-brand-600">NT$700</span>
+                        </div>
+                    </div>
+
+                    <!-- Special Item -->
+                    <div class="mt-12 pt-8 border-t border-brand-200">
+                        <div class="flex flex-col sm:flex-row justify-between items-baseline group">
+                            <div class="pr-4 bg-transparent z-10 max-w-xl">
+                                <div class="inline-block px-2 py-1 bg-brand-100 text-brand-700 text-xs font-bold rounded-sm mb-2">人氣推薦名物</div>
+                                <h3 class="text-lg font-bold text-earth-dark group-hover:text-brand-600 transition-colors leading-snug">”桂“ 絕生 吐司</h3>
+                                <p class="text-sm text-gray-500 mt-1">實驗室等級的吐司革命～連老外都來排隊的美味</p>
+                            </div>
+                            <div class="menu-dots hidden sm:block"></div>
+                            <div class="pl-4 bg-transparent z-10 mt-2 sm:mt-0 whitespace-nowrap">
+                                <span class="text-xl font-serif font-bold text-brand-600">NT$150</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Location Section -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16">
+                
+                <!-- Info -->
+                <div class="lg:w-1/3 space-y-10 reveal">
+                    <div>
+                        <h2 class="text-4xl font-serif font-bold text-earth-dark mb-2">尋訪我們</h2>
+                        <p class="text-gray-500">踏上土地的旅程，來品嚐一杯有溫度的咖啡。</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-brand-50 rounded-full flex items-center justify-center text-brand-500 flex-shrink-0 mt-1">
+                                <i data-lucide="map-pin" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-earth-dark mb-1">店鋪地址</h4>
+                                <p class="text-gray-600">234新北市永和區永利路109號</p>
+                                <a href="https://maps.google.com/?q=234新北市永和區永利路109號" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-brand-500 hover:text-brand-700 mt-2 font-medium transition-colors">
+                                    開啟 Google 導航 <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-brand-50 rounded-full flex items-center justify-center text-brand-500 flex-shrink-0 mt-1">
+                                <i data-lucide="clock" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-earth-dark mb-1">營業時間</h4>
+                                <p class="text-gray-600">週一到週六 PM 13:00 - 21:00</p>
+                                <p class="text-sm text-gray-500 mt-1">週日公休</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-brand-50 rounded-full flex items-center justify-center text-brand-500 flex-shrink-0 mt-1">
+                                <i data-lucide="phone" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-earth-dark mb-1">聯絡電話</h4>
+                                <a href="tel:02-29229358" class="text-gray-600 hover:text-brand-500 transition-colors">02-29229358</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-gray-100 flex gap-4">
+                        <a href="https://www.facebook.com/coffice.tw/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 bg-earth-dark text-white rounded-full flex items-center justify-center hover:bg-brand-500 transition-all duration-300 hover:-translate-y-1 shadow-md hover:shadow-lg">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://www.instagram.com/coffice.tw/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 bg-earth-dark text-white rounded-full flex items-center justify-center hover:bg-brand-500 transition-all duration-300 hover:-translate-y-1 shadow-md hover:shadow-lg">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Map Placeholder (Image acting as map visual for better UI, linked to real map) -->
+                <div class="lg:w-2/3 reveal" style="transition-delay: 200ms;">
+                    <a href="https://maps.google.com/?q=234新北市永和區永利路109號" target="_blank" rel="noopener noreferrer" class="block relative w-full h-[400px] rounded-sm overflow-hidden group shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="地圖位置示意" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-brand-900/40 group-hover:bg-brand-900/20 transition-colors duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-xl flex items-center gap-2 text-earth-dark font-bold transform transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="map" class="w-5 h-5 text-brand-500"></i>
+                                點擊查看 Google 地圖
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-earth-dark text-earth-light py-12 border-t-4 border-brand-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <i data-lucide="coffee" class="h-6 w-6 text-brand-400"></i>
+                <span class="font-serif text-xl font-bold tracking-wider">咖啡意識 Coffice</span>
+            </div>
+            <div class="text-sm text-gray-400 text-center md:text-left">
+                &copy; 2026 咖啡意識烘焙館. All rights reserved. <br class="md:hidden">
+                <span class="hidden md:inline"> | </span> 
+                Made by Webomate
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+
+        // Typing Effect
+        const text = "踏上土地的旅程，專注於本質，一杯有溫度的咖啡。";
+        let i = 0;
+        const speed = 100; // typing speed in ms
+        const typingElement = document.getElementById("typing-text");
+        
+        function typeWriter() {
+            if (i < text.length) {
+                typingElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                // Remove cursor animation class after done to keep it static or keep blinking
+                // typingElement.classList.remove('typing-cursor');
+            }
+        }
+        
+        // Start typing effect shortly after load
+        setTimeout(typeWriter, 800);
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100; // threshold
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger once on load
+
+        // Number Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        const speedCounter = 50; 
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                if(target === 0) return; // Skip if 0
+                
+                const updateCount = () => {
+                    const current = +counter.innerText;
+                    // Lower increment for decimals
+                    const inc = target / speedCounter; 
+                    
+                    if (current < target) {
+                        // For floating point (like 4.9)
+                        counter.innerText = (current + inc).toFixed(1);
+                        setTimeout(updateCount, 40);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // Intersection Observer for Counters
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        counters.forEach(counter => {
+            observer.observe(counter);
+        });
+
+    </script>
+</body>
+</html>
+```
