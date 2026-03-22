@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美敦力心臟節律器 | 專業顧問 德哥</title>
+    
+    <!-- Google Fonts: Noto Sans TC for professional and clean typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans:['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488', // Primary Teal (Blue-Green)
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        warm: {
+                            50: '#fdfbf7', // Warm beige/off-white background
+                            100: '#f4f1ea',
+                            200: '#e8e2d5',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(13, 148, 136, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Animations */
+        body {
+            background-color: #fdfbf7; /* warm-50 */
+        }
+        
+        .glass-nav {
+            background: rgba(253, 251, 247, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(13, 148, 136, 0.1);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: #0d9488;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+            margin-left: 4px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.9) 0%, rgba(19, 78, 74, 0.7) 100%);
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -15px rgba(13, 148, 136, 0.2);
+            border-color: rgba(13, 148, 136, 0.3);
+        }
+
+        .icon-pulse {
+            animation: heartPulse 2s infinite;
+        }
+
+        @keyframes heartPulse {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800 selection:bg-brand-200 selection:text-brand-900">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo Area -->
+                <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="p-2 bg-brand-50 rounded-lg text-brand-600">
+                        <i data-lucide="activity" class="w-6 h-6 icon-pulse"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-wider text-brand-900">美敦力心臟節律器</span>
+                    <span class="hidden md:inline-block ml-2 px-2 py-0.5 rounded text-xs font-medium bg-brand-100 text-brand-700">
+                        專業顧問 德哥
+                    </span>
+                </div>
+
+                <!-- Contact Button -->
+                <div class="flex items-center">
+                    <a href="#contact" class="inline-flex items-center gap-2 bg-brand-600 text-white px-6 py-2.5 rounded-full font-medium hover:bg-brand-700 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
+                        <i data-lucide="phone" class="w-4 h-4"></i>
+                        <span>聯絡德哥</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+        <!-- Background Image (Hospital/Tech abstract) -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2000&auto=format&fit=crop" alt="Medical Technology Background" class="w-full h-full object-cover object-center" />
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center md:text-left">
+            <div class="max-w-3xl reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-brand-50 mb-6">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                    <span class="text-sm font-medium tracking-wide">業界領導品牌 · 值得信賴的選擇</span>
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6 tracking-tight">
+                    精準科技，<br class="md:hidden" />
+                    <span class="text-brand-300">延續溫暖的生命節奏</span>
+                </h1>
+                
+                <div class="h-8 md:h-10 mb-8">
+                    <p class="text-lg md:text-2xl text-brand-50 font-light tracking-wide">
+                        <span id="typewriter"></span><span class="typewriter-cursor"></span>
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#features" class="inline-flex justify-center items-center gap-2 bg-white text-brand-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                        探索核心優勢
+                        <i data-lucide="arrow-down" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative curved bottom -->
+        <div class="absolute bottom-0 left-0 right-0 z-10">
+            <svg viewBox="0 0 1440 120" class="w-full h-auto text-warm-50 fill-current" preserveAspectRatio="none">
+                <path d="M0,120 C320,120 420,0 720,0 C1020,0 1120,120 1440,120 L1440,120 L0,120 Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <section id="features" class="py-24 bg-warm-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-900 mb-4">三大核心承諾</h2>
+                <div class="w-20 h-1 bg-brand-500 mx-auto rounded-full mb-6"></div>
+                <p class="text-gray-600 text-lg">我們深知每一次的心跳都乘載著家庭的期盼。透過最穩定的技術與市場的肯定，給予醫師與病患最安心的後盾。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Value 1 -->
+                <div class="bg-white rounded-2xl p-8 border border-brand-50 card-hover reveal shadow-soft">
+                    <div class="w-14 h-14 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 mb-6">
+                        <i data-lucide="crown" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">市場領導品牌</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        累積最多使用者的信賴選擇。作為全球心臟節律管理的先驅，我們持續提供引領業界的解決方案，讓每一次選擇都毫無懸念。
+                    </p>
+                </div>
+
+                <!-- Value 2 -->
+                <div class="bg-white rounded-2xl p-8 border border-brand-50 card-hover reveal shadow-soft transition-delay-100">
+                    <div class="w-14 h-14 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 mb-6">
+                        <i data-lucide="anchor" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">極致穩定可靠</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        經得起時間考驗的卓越品質。採用最先進的微電子技術與長效電池，確保節律器在各種環境下皆能提供不間斷的穩定守護。
+                    </p>
+                </div>
+
+                <!-- Value 3 -->
+                <div class="bg-white rounded-2xl p-8 border border-brand-50 card-hover reveal shadow-soft transition-delay-200">
+                    <div class="w-14 h-14 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 mb-6">
+                        <i data-lucide="stethoscope" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">最多醫師推薦</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        榮獲各大醫療院所心臟專科醫師指定使用。我們不僅提供頂尖設備，更提供專業的臨床支援，是醫師最堅實的合作夥伴。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section (Tech + Humanity) -->
+    <section class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <!-- Image Side -->
+                <div class="w-full lg:w-1/2 reveal relative">
+                    <div class="absolute inset-0 bg-brand-600 rounded-3xl transform translate-x-4 translate-y-4 opacity-10"></div>
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2000&auto=format&fit=crop" alt="Doctor caring for patient" class="relative z-10 rounded-3xl shadow-2xl object-cover h-[500px] w-full" />
+                    
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-6 -left-6 z-20 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 flex items-center gap-4">
+                        <div class="bg-brand-100 p-3 rounded-full text-brand-600">
+                            <i data-lucide="heart-handshake" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">我們承諾</p>
+                            <p class="text-lg font-bold text-brand-900">以人為本的科技</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Side -->
+                <div class="w-full lg:w-1/2 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold text-brand-900 mb-6">
+                        冰冷的科技，<br/>
+                        <span class="text-brand-600">為了傳遞最溫暖的關懷</span>
+                    </h2>
+                    <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+                        我們了解，對於醫師而言，選擇心臟節律器不僅僅是選擇一項醫療器材，更是對病患未來生活品質的莊嚴承諾。
+                    </p>
+                    
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div class="mt-1 bg-brand-50 p-2 rounded-lg text-brand-600">
+                                <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-1">無縫接軌的生活體驗</h4>
+                                <p class="text-gray-600">讓病患忘記器材的存在，重拾日常的自信與活力，是我們設計的初衷。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="mt-1 bg-brand-50 p-2 rounded-lg text-brand-600">
+                                <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-1">專屬顧問的全程陪伴</h4>
+                                <p class="text-gray-600">從術前評估到術後追蹤，德哥將提供最即時、專業的支援，為醫護團隊分憂解勞。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="mt-1 bg-brand-50 p-2 rounded-lg text-brand-600">
+                                <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-1">捍衛市場價值的堅持</h4>
+                                <p class="text-gray-600">我們專注於提供無可取代的醫療價值，保障專業醫療人員的選擇優勢。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section id="contact" class="py-24 bg-warm-100 relative overflow-hidden">
+        <!-- Decorative Background Elements -->
+        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-brand-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-brand-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center reveal">
+            <div class="bg-white rounded-3xl shadow-2xl p-10 md:p-16 border border-white">
+                <div class="w-20 h-20 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-6 text-brand-600">
+                    <i data-lucide="message-square" class="w-10 h-10"></i>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-black text-brand-900 mb-6">為您的病患選擇最好的</h2>
+                <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+                    想進一步了解我們的臨床優勢與專業服務？<br class="hidden md:block"/>
+                    請隨時與我聯繫，我將為您提供專屬的諮詢。
+                </p>
+                
+                <div class="inline-block bg-warm-50 border border-brand-100 rounded-2xl p-6 md:p-8 w-full max-w-md">
+                    <p class="text-sm text-brand-600 font-bold tracking-widest uppercase mb-2">您的專業顧問</p>
+                    <p class="text-4xl font-black text-brand-900 mb-6">德哥</p>
+                    
+                    <button onclick="alert('感謝您的點擊！德哥將會盡快與您聯繫。 (此為展示用按鈕)')" class="w-full flex items-center justify-center gap-3 bg-brand-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-700 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                        <i data-lucide="calendar-check" class="w-6 h-6"></i>
+                        預約專屬諮詢
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-900 text-brand-50 py-12 border-t border-brand-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="activity" class="w-6 h-6 text-brand-400"></i>
+                    <span class="font-bold text-xl tracking-wider">美敦力心臟節律器</span>
+                </div>
+                
+                <div class="text-brand-200 text-sm text-center md:text-left">
+                    <p>專注醫療科技，傳遞溫暖人性。</p>
+                    <p class="mt-1">專業顧問：德哥</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-brand-800/50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-brand-300/60">
+                <p>&copy; 2026 美敦力心臟節律器推廣團隊. All rights reserved.</p>
+                <p class="flex items-center gap-1">
+                    Made by <span class="font-semibold text-brand-300">Webomate</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-sm');
+                nav.style.background = 'rgba(253, 251, 247, 0.95)';
+            } else {
+                nav.classList.remove('shadow-sm');
+                nav.style.background = 'rgba(253, 251, 247, 0.85)';
+            }
+        });
+
+        // Typewriter Effect
+        const textToType = "結合頂尖醫療科技，給予病患最溫暖的守護。";
+        const typeWriterElement = document.getElementById('typewriter');
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < textToType.length) {
+                typeWriterElement.innerHTML += textToType.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100); // Typing speed
+            }
+        }
+
+        // Start typewriter after a short delay
+        setTimeout(typeWriter, 500);
+
+        // Scroll Reveal Animation using Intersection Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
+```
