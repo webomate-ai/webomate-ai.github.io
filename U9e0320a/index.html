@@ -3,49 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>一甲美濃粄條 | 永和在地推薦手工粄條</title>
-    <meta name="description" content="位於新北永和民生路的一甲美濃粄條，傳承傳統古早味，堅持手工每日現做。招牌美濃粄條、陽春麵及各式美味小菜，深受在地饕客喜愛。">
+    <title>FigureVerseAI | 重塑多維宇宙的 AI 智慧生態</title>
+    <meta name="description" content="具備國際視野與頂尖工程實力，為醫療、體育、政治與娛樂建構跨維度 AI 解決方案。">
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Noto Sans TC for Chinese, Rajdhani for Tech/Numbers -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Tailwind Config -->
+    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans:['"Noto Sans TC"', 'sans-serif'],
-                        serif: ['"Noto Serif TC"', 'serif'],
-                    },
                     colors: {
                         brand: {
-                            50: '#FDFBF7',  // Cream background
-                            100: '#F5ECE1',
-                            200: '#E6D2B5',
-                            300: '#D4B384',
-                            400: '#C29156',
-                            500: '#A64B2A',  // Terracotta / Brick Red (Primary)
-                            600: '#8A3B1E',
-                            700: '#6B2D16',
-                            800: '#4A3B32',  // Dark Wood (Text)
-                            900: '#2A201A',
-                        },
-                        accent: {
-                            500: '#5C715E',  // Muted Green
-                            600: '#4A5D4C',
+                            black: '#111111',
+                            orange: '#FF5E00',
+                            dark: '#1A1A1A',
+                            gray: '#2A2A2A'
                         }
                     },
-                    backgroundImage: {
-                        'texture': "url('https://www.transparenttextures.com/patterns/rice-paper.png')",
+                    fontFamily: {
+                        sans:['"Noto Sans TC"', 'sans-serif'],
+                        tech: ['"Rajdhani"', 'sans-serif'],
+                    },
+                    animation: {
+                        'marquee': 'marquee 25s linear infinite',
+                        'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: 1, boxShadow: '0 0 15px rgba(255, 94, 0, 0.4)' },
+                            '50%': { opacity: .8, boxShadow: '0 0 30px rgba(255, 94, 0, 0.8)' },
+                        }
                     }
                 }
             }
@@ -53,414 +54,267 @@
     </script>
 
     <style>
-        /* Custom Styles & Animations */
         body {
-            background-color: #FDFBF7;
-            color: #4A3B32;
+            background-color: #111111;
+            color: #E5E7EB;
+            /* Cyberpunk Grid Background */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-attachment: fixed;
         }
         
-        .glass-nav {
-            backdrop-filter: blur(12px);
-            background: rgba(253, 251, 247, 0.85);
-            border-bottom: 1px solid rgba(166, 75, 42, 0.1);
+        /* Neon text utility */
+        .text-neon {
+            text-shadow: 0 0 10px rgba(255,94,0,0.5), 0 0 20px rgba(255,94,0,0.3);
         }
 
+        /* Scroll Reveal Utility */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
-
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .typewriter-text::after {
-            content: '|';
-            animation: blink 1s step-end infinite;
+        /* Hide scrollbar for marquee */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 0.5rem;
-            align-items: end;
-        }
-
-        .menu-dots {
-            border-bottom: 2px dotted #D4B384;
-            margin-bottom: 0.25rem;
-            flex-grow: 1;
-            margin-left: 0.5rem;
-            margin-right: 0.5rem;
+        
+        /* Video Placeholder Overlay */
+        .video-scanline {
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+            background-size: 100% 4px;
         }
     </style>
 </head>
-<body class="antialiased selection:bg-brand-500 selection:text-white">
+<body class="antialiased overflow-x-hidden">
 
     <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 glass-nav py-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center">
-                <a href="#" class="flex items-center gap-2 group">
-                    <div class="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-white group-hover:bg-brand-600 transition-colors">
-                        <i data-lucide="bowl"></i>
-                    </div>
-                    <span class="font-serif text-2xl font-bold text-brand-800 tracking-wider">一甲美濃粄條</span>
-                </a>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="font-medium hover:text-brand-500 transition-colors">品牌精神</a>
-                    <a href="#menu" class="font-medium hover:text-brand-500 transition-colors">美味菜單</a>
-                    <a href="#reviews" class="font-medium hover:text-brand-500 transition-colors">顧客回饋</a>
-                    <a href="#contact" class="px-5 py-2 rounded-full bg-brand-500 text-white font-medium hover:bg-brand-600 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
-                        聯絡我們
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-brand-800 hover:text-brand-500 transition-colors">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </button>
+    <nav class="fixed w-full z-50 backdrop-blur-md bg-brand-black/80 border-b border-brand-orange/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer group">
+                <i data-lucide="hexagon" class="text-brand-orange group-hover:animate-spin" style="animation-duration: 3s;"></i>
+                <span class="text-2xl font-tech font-bold tracking-wider text-white">FigureVerse<span class="text-brand-orange">AI</span></span>
             </div>
-        </div>
-        
-        <!-- Mobile Menu Panel -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-brand-50 border-b border-brand-200 shadow-lg">
-            <div class="px-4 py-4 flex flex-col space-y-4">
-                <a href="#about" class="block font-medium hover:text-brand-500 mobile-link">品牌精神</a>
-                <a href="#menu" class="block font-medium hover:text-brand-500 mobile-link">美味菜單</a>
-                <a href="#reviews" class="block font-medium hover:text-brand-500 mobile-link">顧客回饋</a>
-                <a href="#contact" class="block font-medium hover:text-brand-500 mobile-link">聯絡我們</a>
+            <div class="hidden md:flex gap-8 text-sm tracking-widest text-gray-400">
+                <a href="#core-tech" class="hover:text-brand-orange transition-colors">核心技術</a>
+                <a href="#solutions" class="hover:text-brand-orange transition-colors">產業賦能</a>
+                <a href="#partners" class="hover:text-brand-orange transition-colors">合作夥伴</a>
             </div>
+            <a href="#contact" class="hidden md:inline-block px-6 py-2 border border-brand-orange text-brand-orange rounded-full hover:bg-brand-orange hover:text-white hover:shadow-[0_0_15px_#FF5E00] transition-all duration-300 text-sm font-bold">
+                預約演示
+            </a>
+            <!-- Mobile Menu Button (Visual Only) -->
+            <button class="md:hidden text-brand-orange">
+                <i data-lucide="menu"></i>
+            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <!-- Background Image with Overlay -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=1920&q=80" alt="傳統美食背景" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-brand-50/90"></div>
-        </div>
-
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
-            <span class="inline-block py-1 px-3 rounded-full bg-brand-500/20 text-brand-100 backdrop-blur-sm border border-brand-500/30 mb-6 font-medium tracking-widest text-sm reveal">
-                新北永和在地推薦
-            </span>
-            <h1 class="font-serif text-5xl md:text-7xl font-bold text-white mb-6 tracking-wide drop-shadow-lg reveal" style="transition-delay: 100ms;">
-                傳承時光的<br class="md:hidden"/><span class="text-brand-300">純粹美味</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-100 mb-10 h-8 reveal" style="transition-delay: 200ms;">
-                <span id="typewriter" class="typewriter-text font-light tracking-wide"></span>
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4 reveal" style="transition-delay: 300ms;">
-                <a href="#menu" class="px-8 py-4 rounded-full bg-brand-500 text-white font-bold text-lg hover:bg-brand-600 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    查看美味菜單
-                </a>
-                <a href="#contact" class="px-8 py-4 rounded-full bg-white/10 text-white backdrop-blur-md border border-white/30 font-bold text-lg hover:bg-white/20 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2">
-                    <i data-lucide="map-pin" class="w-5 h-5"></i>
-                    前往門市
-                </a>
-            </div>
-        </div>
+    <header class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- Background Glow -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-orange/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
         
-        <!-- Scroll Down Indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
-            <a href="#about" class="text-brand-800 hover:text-brand-500 transition-colors">
-                <i data-lucide="chevron-down" class="w-8 h-8"></i>
-            </a>
+        <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8 z-10">
+                <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-brand-orange/30 bg-brand-orange/10 text-brand-orange text-sm font-tech tracking-wider mb-4">
+                    <span class="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span>
+                    SYSTEM ONLINE
+                </div>
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight tracking-tight">
+                    重塑多維宇宙的<br>
+                    <span class="text-brand-orange text-neon">AI 智慧生態</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 leading-relaxed min-h-[60px]" id="typing-container">
+                    <span id="typing-text"></span><span class="animate-pulse text-brand-orange">_</span>
+                </p>
+                <div class="pt-4 flex flex-wrap gap-4">
+                    <a href="#contact" class="px-8 py-4 bg-brand-orange text-white rounded-full font-bold text-lg hover:bg-orange-600 hover:shadow-[0_0_25px_#FF5E00] transition-all duration-300 flex items-center gap-2 group animate-pulse-glow">
+                        啟動專屬 AI 引擎
+                        <i data-lucide="arrow-right" class="group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 3D Digital Human Video Placeholder -->
+            <div class="relative w-full aspect-[4/5] md:aspect-square lg:aspect-[4/5] rounded-2xl overflow-hidden border border-gray-800 shadow-[0_0_40px_rgba(255,94,0,0.15)] group z-10">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop" alt="3D Digital Human" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-brand-black/40 video-scanline pointer-events-none"></div>
+                <!-- Play Button Overlay -->
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div class="w-20 h-20 rounded-full bg-brand-orange/20 backdrop-blur-sm border border-brand-orange/50 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-orange/40 transition-all duration-300">
+                        <i data-lucide="play" class="text-brand-orange w-8 h-8 ml-1"></i>
+                    </div>
+                </div>
+                <!-- Tech HUD Elements -->
+                <div class="absolute top-4 left-4 text-brand-orange font-tech text-xs tracking-widest">[ VERSE_ENGINE_V2.0 ]
+                </div>
+                <div class="absolute bottom-4 right-4 text-brand-orange font-tech text-xs tracking-widest flex items-center gap-2">
+                    RENDERING <span class="w-1.5 h-1.5 rounded-full bg-brand-orange animate-ping"></span>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Social Proof / Trust Banner -->
-    <section class="py-10 bg-brand-800 text-brand-50 relative z-20 shadow-xl">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-brand-600/50">
-                <div class="reveal">
-                    <div class="flex justify-center mb-2 text-yellow-400">
-                        <i data-lucide="star" class="fill-current w-6 h-6"></i>
-                        <i data-lucide="star" class="fill-current w-6 h-6"></i>
-                        <i data-lucide="star" class="fill-current w-6 h-6"></i>
-                        <i data-lucide="star" class="fill-current w-6 h-6"></i>
-                        <i data-lucide="star-half" class="fill-current w-6 h-6"></i>
-                    </div>
-                    <p class="text-3xl font-bold font-serif mb-1"><span class="counter" data-target="4.6">0</span></p>
-                    <p class="text-sm text-brand-200">Google 顧客好評</p>
-                </div>
-                <div class="reveal" style="transition-delay: 100ms;">
-                    <div class="flex justify-center mb-2 text-brand-300">
-                        <i data-lucide="clock" class="w-6 h-6"></i>
-                    </div>
-                    <p class="text-3xl font-bold font-serif mb-1">每日</p>
-                    <p class="text-sm text-brand-200">堅持手工現做</p>
-                </div>
-                <div class="reveal" style="transition-delay: 200ms;">
-                    <div class="flex justify-center mb-2 text-brand-300">
-                        <i data-lucide="users" class="w-6 h-6"></i>
-                    </div>
-                    <p class="text-3xl font-bold font-serif mb-1"><span class="counter" data-target="100">0</span>%</p>
-                    <p class="text-sm text-brand-200">在地鄉親推薦</p>
-                </div>
-                <div class="reveal" style="transition-delay: 300ms;">
-                    <div class="flex justify-center mb-2 text-brand-300">
-                        <i data-lucide="utensils-crossed" class="w-6 h-6"></i>
-                    </div>
-                    <p class="text-3xl font-bold font-serif mb-1"><span class="counter" data-target="30">0</span>+</p>
-                    <p class="text-sm text-brand-200">豐富美味品項</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-24 bg-texture relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row items-center gap-16">
-                <div class="w-full lg:w-1/2 reveal">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=800&q=80" alt="手工製作粄條" class="rounded-2xl shadow-2xl z-10 relative">
-                        <div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-brand-500 rounded-2xl z-0"></div>
-                        <div class="absolute -top-6 -left-6 w-32 h-32 bg-accent-500/10 rounded-full blur-2xl z-0"></div>
-                    </div>
-                </div>
-                <div class="w-full lg:w-1/2 space-y-6 reveal" style="transition-delay: 200ms;">
-                    <div class="inline-flex items-center gap-2 text-brand-500 font-medium tracking-widest text-sm">
-                        <i data-lucide="chef-hat" class="w-5 h-5"></i>
-                        <span>品牌精神</span>
-                    </div>
-                    <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-900 leading-tight">
-                        傳統古早味 <br>
-                        <span class="text-brand-500">堅持手工每日現做</span>
-                    </h2>
-                    <p class="text-lg text-brand-700 leading-relaxed">
-                        「一甲美濃粄條」座落於新北永和民生路，我們深知一碗好吃的粄條，靈魂在於那份對傳統工序的堅持。
-                    </p>
-                    <p class="text-lg text-brand-700 leading-relaxed">
-                        我們嚴選食材，每日手工現做，只為保留那份最純粹、最彈牙的口感。搭配精心熬煮的甘甜湯頭與獨門醬料，每一口都能嚐到懷舊而真誠的古早風味。無論是招牌美濃粄條、香濃麻醬麵，還是各式入味的經典小菜，都是我們獻給您的用心之作。
-                    </p>
-                    
-                    <div class="grid grid-cols-2 gap-6 pt-6">
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 shrink-0">
-                                <i data-lucide="heart-handshake"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-brand-900 mb-1">真誠款待</h4>
-                                <p class="text-sm text-brand-600">把客人當作家人般用心服務</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-accent-500/10 flex items-center justify-center text-accent-600 shrink-0">
-                                <i data-lucide="leaf"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-brand-900 mb-1">新鮮食材</h4>
-                                <p class="text-sm text-brand-600">嚴選在地食材，吃得安心</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Menu Section -->
-    <section id="menu" class="py-24 bg-brand-50 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Core Technologies -->
+    <section id="core-tech" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
-                <span class="text-brand-500 font-medium tracking-widest text-sm mb-2 block">MENU</span>
-                <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-900 mb-4">美味菜單</h2>
-                <div class="w-24 h-1 bg-brand-500 mx-auto rounded-full"></div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">硬核技術底座</h2>
+                <div class="w-20 h-1 bg-brand-orange mx-auto rounded-full"></div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
-                
-                <!-- Left Column: Mains & Soups -->
-                <div class="space-y-12">
-                    <!-- Mains -->
-                    <div class="reveal bg-white p-8 rounded-2xl shadow-sm border border-brand-100">
-                        <div class="flex items-center gap-3 mb-8 pb-4 border-b border-brand-200">
-                            <i data-lucide="bowl" class="text-brand-500 w-8 h-8"></i>
-                            <h3 class="font-serif text-3xl font-bold text-brand-900">主食 <span class="text-lg font-normal text-brand-500 ml-2">粄條 / 麵</span></h3>
-                        </div>
-                        <div class="space-y-6">
-                            <!-- Item -->
-                            <div class="flex flex-col">
-                                <div class="flex items-end justify-between w-full">
-                                    <h4 class="text-xl font-bold text-brand-800">美濃粄條 / 陽春麵 / 意麵</h4>
-                                    <div class="menu-dots"></div>
-                                    <span class="text-xl font-bold text-brand-500">65 / 50</span>
-                                </div>
-                                <p class="text-sm text-brand-400 mt-1">招牌必點，傳統好滋味</p>
-                            </div>
-                            <!-- Item -->
-                            <div class="flex flex-col">
-                                <div class="flex items-end justify-between w-full">
-                                    <h4 class="text-xl font-bold text-brand-800">榨菜肉絲 (粄條/麵)</h4>
-                                    <div class="menu-dots"></div>
-                                    <span class="text-xl font-bold text-brand-500">80 / 70</span>
-                                </div>
-                            </div>
-                            <!-- Item -->
-                            <div class="flex flex-col">
-                                <div class="flex items-end justify-between w-full">
-                                    <h4 class="text-xl font-bold text-brand-800">餛飩 (粄條/麵)</h4>
-                                    <div class="menu-dots"></div>
-                                    <span class="text-xl font-bold text-brand-500">80 / 70</span>
-                                </div>
-                            </div>
-                            <!-- Item -->
-                            <div class="flex flex-col">
-                                <div class="flex items-end justify-between w-full">
-                                    <h4 class="text-xl font-bold text-brand-800">抄手 (粄條/麵)</h4>
-                                    <div class="menu-dots"></div>
-                                    <span class="text-xl font-bold text-brand-500">90 / 80</span>
-                                </div>
-                            </div>
-                            <!-- Item -->
-                            <div class="flex flex-col">
-                                <div class="flex items-end justify-between w-full">
-                                    <h4 class="text-xl font-bold text-brand-800">豬腳 (粄條/麵)</h4>
-                                    <div class="menu-dots"></div>
-                                    <span class="text-xl font-bold text-brand-500">110 / 100</span>
-                                </div>
-                            </div>
-                            <!-- Item -->
-                            <div class="flex flex-col">
-                                <div class="flex items-end justify-between w-full">
-                                    <h4 class="text-xl font-bold text-brand-800">麻醬麵</h4>
-                                    <div class="menu-dots"></div>
-                                    <span class="text-xl font-bold text-brand-500">65</span>
-                                </div>
-                            </div>
-                            <!-- Item -->
-                            <div class="flex flex-col">
-                                <div class="flex items-end justify-between w-full">
-                                    <h4 class="text-xl font-bold text-brand-800">紅油抄手</h4>
-                                    <div class="menu-dots"></div>
-                                    <span class="text-xl font-bold text-brand-500">70</span>
-                                </div>
-                            </div>
-                            <!-- Item -->
-                            <div class="flex flex-col">
-                                <div class="flex items-end justify-between w-full">
-                                    <h4 class="text-xl font-bold text-brand-800">肝連麵 / 粉腸麵</h4>
-                                    <div class="menu-dots"></div>
-                                    <span class="text-xl font-bold text-brand-500">80</span>
-                                </div>
-                            </div>
-                            <!-- Item -->
-                            <div class="flex flex-col">
-                                <div class="flex items-end justify-between w-full">
-                                    <h4 class="text-xl font-bold text-brand-800">鮮蝦餛飩麵</h4>
-                                    <div class="menu-dots"></div>
-                                    <span class="text-xl font-bold text-brand-500">80</span>
-                                </div>
-                            </div>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-brand-dark border border-brand-gray p-8 rounded-2xl hover:border-brand-orange hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(255,94,0,0.15)] transition-all duration-300 group reveal">
+                    <div class="w-14 h-14 bg-brand-black border border-brand-orange/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-orange/10 transition-colors">
+                        <i data-lucide="brain-circuit" class="text-brand-orange w-7 h-7"></i>
                     </div>
+                    <h3 class="text-xl font-bold text-white mb-3">LDPA 邏輯推導架構</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">突破傳統限制，打造無幻覺 (No Hallucination) 的精準 AI，提供企業級絕對可靠的決策大腦。</p>
+                </div>
 
-                    <!-- Soups -->
-                    <div class="reveal bg-white p-8 rounded-2xl shadow-sm border border-brand-100">
-                        <div class="flex items-center gap-3 mb-8 pb-4 border-b border-brand-200">
-                            <i data-lucide="soup" class="text-brand-500 w-8 h-8"></i>
-                            <h3 class="font-serif text-3xl font-bold text-brand-900">暖心湯品</h3>
+                <!-- Card 2 -->
+                <div class="bg-brand-dark border border-brand-gray p-8 rounded-2xl hover:border-brand-orange hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(255,94,0,0.15)] transition-all duration-300 group reveal" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 bg-brand-black border border-brand-orange/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-orange/10 transition-colors">
+                        <i data-lucide="box" class="text-brand-orange w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">AI+MR 空間運算</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">讓數位分身從平面走向空間，透過混合實境技術實現跨維度的沉浸式互動與整合。</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-brand-dark border border-brand-gray p-8 rounded-2xl hover:border-brand-orange hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(255,94,0,0.15)] transition-all duration-300 group reveal" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 bg-brand-black border border-brand-orange/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-orange/10 transition-colors">
+                        <i data-lucide="users" class="text-brand-orange w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">EAAP 智慧平台</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">企業級代理人平台，讓您輕鬆建構、部署與管理高達 99 位專屬 AI Agent 協同作業。</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-brand-dark border border-brand-gray p-8 rounded-2xl hover:border-brand-orange hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(255,94,0,0.15)] transition-all duration-300 group reveal" style="transition-delay: 300ms;">
+                    <div class="w-14 h-14 bg-brand-black border border-brand-orange/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-orange/10 transition-colors">
+                        <i data-lucide="shield-check" class="text-brand-orange w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Azure 原生整合</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">深度整合微軟 Azure 雲端生態，提供全球最高等級的企業資安防護與無縫擴展能力。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8 Industry Solutions (Bento Box) -->
+    <section id="solutions" class="py-24 relative z-10 bg-brand-black">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-brand-orange/5 blur-[150px] -z-10 pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">八大產業賦能</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">跨越界限，將頂尖 AI 技術注入多元產業，創造前所未有的商業價值。</p>
+            </div>
+
+            <!-- Bento Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[220px] reveal">
+                
+                <!-- 1. Healthcare (Large Box) -->
+                <div class="relative overflow-hidden rounded-2xl group border border-brand-gray hover:border-brand-orange transition-all duration-500 col-span-1 md:col-span-2 row-span-2">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800&auto=format&fit=crop" alt="智慧醫療" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/70 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6 md:p-8 w-full">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i data-lucide="activity" class="text-brand-orange w-5 h-5"></i>
+                            <span class="text-brand-orange font-bold tracking-widest text-sm">HEALTHCARE</span>
                         </div>
-                        <div class="space-y-6">
-                            <div class="flex items-end justify-between w-full">
-                                <h4 class="text-xl font-bold text-brand-800">貢丸湯</h4>
-                                <div class="menu-dots"></div>
-                                <span class="text-xl font-bold text-brand-500">35</span>
-                            </div>
-                            <div class="flex items-end justify-between w-full">
-                                <h4 class="text-xl font-bold text-brand-800">餛飩湯 / 青菜湯</h4>
-                                <div class="menu-dots"></div>
-                                <span class="text-xl font-bold text-brand-500">40</span>
-                            </div>
-                            <div class="flex items-end justify-between w-full">
-                                <h4 class="text-xl font-bold text-brand-800">粉腸湯 / 肝連湯 / 鮮蝦餛飩湯</h4>
-                                <div class="menu-dots"></div>
-                                <span class="text-xl font-bold text-brand-500">60</span>
-                            </div>
-                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">智慧醫療</h3>
+                        <p class="text-gray-300 text-sm md:text-base">維態/銀河醫療集團深度合作，輔助赴美上市，打造專屬「數位生命帳戶」。</p>
                     </div>
                 </div>
 
-                <!-- Right Column: Sides -->
-                <div class="reveal bg-white p-8 rounded-2xl shadow-sm border border-brand-100 h-fit">
-                    <div class="flex items-center gap-3 mb-8 pb-4 border-b border-brand-200">
-                        <i data-lucide="utensils" class="text-brand-500 w-8 h-8"></i>
-                        <h3 class="font-serif text-3xl font-bold text-brand-900">經典小菜</h3>
+                <!-- 2. Life Science -->
+                <div class="relative overflow-hidden rounded-2xl group border border-brand-gray hover:border-brand-orange transition-all duration-500 col-span-1 row-span-1">
+                    <img src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?q=80&w=600&auto=format&fit=crop" alt="生命科學" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-50">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-5 w-full">
+                        <i data-lucide="dna" class="text-brand-orange w-5 h-5 mb-2"></i>
+                        <h3 class="text-xl font-bold text-white mb-1">生命科學</h3>
+                        <p class="text-gray-400 text-xs">專屬長照與自閉症家庭的成長型數位伴侶。</p>
                     </div>
-                    
-                    <div class="mb-6 rounded-xl overflow-hidden h-48">
-                        <img src="https://images.unsplash.com/photo-1564834724105-918b73d1b9e0?auto=format&fit=crop&w=800&q=80" alt="美味小菜" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                    </div>
+                </div>
 
-                    <div class="space-y-6">
-                        <div class="flex items-end justify-between w-full">
-                            <h4 class="text-xl font-bold text-brand-800">油豆腐</h4>
-                            <div class="menu-dots"></div>
-                            <span class="text-xl font-bold text-brand-500">20</span>
-                        </div>
-                        <div class="flex items-end justify-between w-full">
-                            <h4 class="text-xl font-bold text-brand-800">豆干 <span class="text-sm font-normal text-brand-400">(3片)</span></h4>
-                            <div class="menu-dots"></div>
-                            <span class="text-xl font-bold text-brand-500">20</span>
-                        </div>
-                        <div class="flex items-end justify-between w-full">
-                            <h4 class="text-xl font-bold text-brand-800">豆皮 <span class="text-sm font-normal text-brand-400">(1片)</span></h4>
-                            <div class="menu-dots"></div>
-                            <span class="text-xl font-bold text-brand-500">20</span>
-                        </div>
-                        <div class="flex items-end justify-between w-full">
-                            <h4 class="text-xl font-bold text-brand-800">花干 <span class="text-sm font-normal text-brand-400">(1個)</span></h4>
-                            <div class="menu-dots"></div>
-                            <span class="text-xl font-bold text-brand-500">25</span>
-                        </div>
-                        <div class="flex items-end justify-between w-full">
-                            <h4 class="text-xl font-bold text-brand-800">海帶 <span class="text-sm font-normal text-brand-400">(2個)</span></h4>
-                            <div class="menu-dots"></div>
-                            <span class="text-xl font-bold text-brand-500">25</span>
-                        </div>
-                        <div class="flex items-end justify-between w-full">
-                            <h4 class="text-xl font-bold text-brand-800">嫩豆腐</h4>
-                            <div class="menu-dots"></div>
-                            <span class="text-xl font-bold text-brand-500">25</span>
-                        </div>
-                        <div class="flex items-end justify-between w-full">
-                            <h4 class="text-xl font-bold text-brand-800">豬耳朵 / 豬頭皮</h4>
-                            <div class="menu-dots"></div>
-                            <span class="text-xl font-bold text-brand-500">40</span>
-                        </div>
-                        <div class="flex items-end justify-between w-full">
-                            <h4 class="text-xl font-bold text-brand-800">燙青菜</h4>
-                            <div class="menu-dots"></div>
-                            <span class="text-xl font-bold text-brand-500">40</span>
-                        </div>
-                        <div class="flex items-end justify-between w-full">
-                            <h4 class="text-xl font-bold text-brand-800">嘴邊肉</h4>
-                            <div class="menu-dots"></div>
-                            <span class="text-xl font-bold text-brand-500">60</span>
-                        </div>
-                        <div class="flex items-end justify-between w-full">
-                            <h4 class="text-xl font-bold text-brand-800">粉腸 / 肝連</h4>
-                            <div class="menu-dots"></div>
-                            <span class="text-xl font-bold text-brand-500">60</span>
-                        </div>
-                        <div class="flex items-end justify-between w-full">
-                            <h4 class="text-xl font-bold text-brand-800">滷豬腳</h4>
-                            <div class="menu-dots"></div>
-                            <span class="text-xl font-bold text-brand-500">90</span>
-                        </div>
+                <!-- 3. Sports -->
+                <div class="relative overflow-hidden rounded-2xl group border border-brand-gray hover:border-brand-orange transition-all duration-500 col-span-1 row-span-1">
+                    <img src="https://images.unsplash.com/photo-1519861531473-9200262188bf?q=80&w=600&auto=format&fit=crop" alt="國際體育" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-50">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-5 w-full">
+                        <i data-lucide="trophy" class="text-brand-orange w-5 h-5 mb-2"></i>
+                        <h3 class="text-xl font-bold text-white mb-1">國際體育</h3>
+                        <p class="text-gray-400 text-xs">GOAT Lab 戰略合作，NBA 球星 IP 與 AI 籃球智能學校。</p>
+                    </div>
+                </div>
+
+                <!-- 4. Entertainment (Wide Box) -->
+                <div class="relative overflow-hidden rounded-2xl group border border-brand-gray hover:border-brand-orange transition-all duration-500 col-span-1 md:col-span-2 lg:col-span-2 row-span-1">
+                    <img src="https://images.unsplash.com/photo-1616469829941-c7200edec809?q=80&w=800&auto=format&fit=crop" alt="娛樂經濟" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-50">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <i data-lucide="music" class="text-brand-orange w-5 h-5 mb-2"></i>
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-1">娛樂經濟</h3>
+                        <p class="text-gray-300 text-sm">打造偶像/啦啦隊 24/7 在線超擬真數位分身。</p>
+                    </div>
+                </div>
+
+                <!-- 5. Election (Tall Box) -->
+                <div class="relative overflow-hidden rounded-2xl group border border-brand-gray hover:border-brand-orange transition-all duration-500 col-span-1 row-span-2">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop" alt="選戰數位總部" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-50">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-brand-black/20"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <i data-lucide="flag" class="text-brand-orange w-6 h-6 mb-3"></i>
+                        <h3 class="text-2xl font-bold text-white mb-2">選戰數位總部</h3>
+                        <p class="text-gray-300 text-sm">2026 選戰戰略系統，多語系 AI 互動與裂變機制。</p>
+                    </div>
+                </div>
+
+                <!-- 6. Mobility -->
+                <div class="relative overflow-hidden rounded-2xl group border border-brand-gray hover:border-brand-orange transition-all duration-500 col-span-1 row-span-1">
+                    <img src="https://images.unsplash.com/photo-1563728923380-6b08b1111623?q=80&w=600&auto=format&fit=crop" alt="高端移動" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-50">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-5 w-full">
+                        <i data-lucide="car" class="text-brand-orange w-5 h-5 mb-2"></i>
+                        <h3 class="text-xl font-bold text-white mb-1">高端移動</h3>
+                        <p class="text-gray-400 text-xs">日本 MODEx Mobility 合作，豪華車隊 AI 私人管家。</p>
+                    </div>
+                </div>
+
+                <!-- 7. Education (Wide Box) -->
+                <div class="relative overflow-hidden rounded-2xl group border border-brand-gray hover:border-brand-orange transition-all duration-500 col-span-1 md:col-span-2 row-span-1">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop" alt="健康教育" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-50">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <i data-lucide="graduation-cap" class="text-brand-orange w-5 h-5 mb-2"></i>
+                        <h3 class="text-xl font-bold text-white mb-1">健康教育</h3>
+                        <p class="text-gray-300 text-sm">澳洲 ANWA 合作，AI 數位導師與多語系內容工廠。</p>
+                    </div>
+                </div>
+
+                <!-- 8. Media -->
+                <div class="relative overflow-hidden rounded-2xl group border border-brand-gray hover:border-brand-orange transition-all duration-500 col-span-1 row-span-1">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=600&auto=format&fit=crop" alt="全媒體轉型" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-50">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-5 w-full">
+                        <i data-lucide="smartphone" class="text-brand-orange w-5 h-5 mb-2"></i>
+                        <h3 class="text-xl font-bold text-white mb-1">全媒體轉型</h3>
+                        <p class="text-gray-400 text-xs">自媒體 AI 自動化代操，極速網頁與系統開發。</p>
                     </div>
                 </div>
 
@@ -468,289 +322,160 @@
         </div>
     </section>
 
-    <!-- Reviews Section -->
-    <section id="reviews" class="py-24 bg-brand-800 text-brand-50 relative overflow-hidden">
-        <!-- Background Pattern -->
-        <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/rice-paper.png');"></div>
+    <!-- Partner Marquee -->
+    <section id="partners" class="py-16 bg-[#0a0a0a] border-y border-brand-gray overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
+            <h3 class="text-sm font-tech tracking-[0.2em] text-gray-500">TRUSTED BY GLOBAL PARTNERS</h3>
+        </div>
         
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16 reveal">
-                <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">在地饕客推薦</h2>
-                <div class="w-24 h-1 bg-brand-400 mx-auto rounded-full mb-6"></div>
-                <p class="text-brand-200 text-lg max-w-2xl mx-auto">
-                    感謝永和鄉親的長年支持，每一句好評都是我們堅持手工現做的最大動力。
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Review Card 1 -->
-                <div class="bg-brand-900/50 p-8 rounded-2xl border border-brand-700 backdrop-blur-sm reveal hover:-translate-y-2 transition-transform duration-300">
-                    <div class="flex text-yellow-400 mb-4">
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                    </div>
-                    <p class="text-brand-100 mb-6 leading-relaxed">
-                        「粄條超級Q彈，湯頭很甘甜！每次來必點招牌美濃粄條配上一盤滷豬腳，真的是永和最棒的古早味。」
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-brand-700 flex items-center justify-center font-bold text-brand-200">陳</div>
-                        <div>
-                            <h5 class="font-bold">陳先生</h5>
-                            <span class="text-sm text-brand-400">在地嚮導</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review Card 2 -->
-                <div class="bg-brand-900/50 p-8 rounded-2xl border border-brand-700 backdrop-blur-sm reveal hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 150ms;">
-                    <div class="flex text-yellow-400 mb-4">
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                    </div>
-                    <p class="text-brand-100 mb-6 leading-relaxed">
-                        「每天下午開門就客滿！小菜選擇很多，大推嘴邊肉跟肝連，處理得很乾淨沒有腥味，價格也很實惠。」
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-brand-700 flex items-center justify-center font-bold text-brand-200">林</div>
-                        <div>
-                            <h5 class="font-bold">林小姐</h5>
-                            <span class="text-sm text-brand-400">Google 評論</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review Card 3 -->
-                <div class="bg-brand-900/50 p-8 rounded-2xl border border-brand-700 backdrop-blur-sm reveal hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 300ms;">
-                    <div class="flex text-yellow-400 mb-4">
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star-half" class="fill-current w-5 h-5"></i>
-                    </div>
-                    <p class="text-brand-100 mb-6 leading-relaxed">
-                        「麻醬麵香氣濃郁，紅油抄手辣度剛剛好。老闆娘很親切，店裡環境雖然是小吃店但很乾淨，會一再回訪！」
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-brand-700 flex items-center justify-center font-bold text-brand-200">王</div>
-                        <div>
-                            <h5 class="font-bold">王先生</h5>
-                            <span class="text-sm text-brand-400">Google 評論</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Location & Contact Section -->
-    <section id="contact" class="py-24 bg-texture relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-3xl shadow-xl overflow-hidden reveal border border-brand-100">
-                <div class="grid grid-cols-1 lg:grid-cols-2">
-                    
-                    <!-- Contact Info -->
-                    <div class="p-10 lg:p-16 flex flex-col justify-center bg-brand-50">
-                        <div class="inline-flex items-center gap-2 text-brand-500 font-medium tracking-widest text-sm mb-4">
-                            <i data-lucide="store" class="w-5 h-5"></i>
-                            <span>聯絡資訊</span>
-                        </div>
-                        <h2 class="font-serif text-4xl font-bold text-brand-900 mb-8">期待您的光臨</h2>
-                        
-                        <div class="space-y-8">
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 shrink-0">
-                                    <i data-lucide="map-pin"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-brand-900 text-lg mb-1">門市地址</h4>
-                                    <p class="text-brand-700">234 新北市永和區民生路14號</p>
-                                    <a href="https://maps.google.com/?q=234新北市永和區民生路14號" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-brand-500 hover:text-brand-600 mt-2 font-medium transition-colors">
-                                        開啟 Google 導航 <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 shrink-0">
-                                    <i data-lucide="clock"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-brand-900 text-lg mb-1">營業時間</h4>
-                                    <p class="text-brand-700">每日 15:30 開始營業</p>
-                                    <p class="text-sm text-brand-500 mt-1">（無固定公休日，賣完為止）</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 shrink-0">
-                                    <i data-lucide="phone"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-brand-900 text-lg mb-1">聯絡專線</h4>
-                                    <p class="text-brand-700 text-xl font-medium tracking-wider">0920-452-898</p>
-                                    <p class="text-sm text-brand-500 mt-1">歡迎來電預訂外帶</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Map -->
-                    <div class="h-96 lg:h-auto w-full relative">
-                        <!-- Using iframe for Google Maps based on address -->
-                        <iframe 
-                            src="https://maps.google.com/maps?q=234新北市永和區民生路14號&t=&z=16&ie=UTF8&iwloc=&output=embed" 
-                            width="100%" 
-                            height="100%" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade"
-                            class="absolute inset-0 w-full h-full object-cover">
-                        </iframe>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-brand-900 text-brand-200 py-12 border-t border-brand-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white">
-                        <i data-lucide="bowl" class="w-5 h-5"></i>
-                    </div>
-                    <span class="font-serif text-xl font-bold text-white tracking-wider">一甲美濃粄條</span>
-                </div>
-                
-                <div class="flex gap-6 text-sm">
-                    <a href="#about" class="hover:text-white transition-colors">品牌精神</a>
-                    <a href="#menu" class="hover:text-white transition-colors">美味菜單</a>
-                    <a href="#contact" class="hover:text-white transition-colors">聯絡資訊</a>
-                </div>
-            </div>
+        <div class="relative flex overflow-x-hidden group">
+            <!-- Gradient Masks -->
+            <div class="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#0a0a0a] to-transparent z-10"></div>
+            <div class="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#0a0a0a] to-transparent z-10"></div>
             
-            <div class="border-t border-brand-800/50 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-brand-400">
-                <p>&copy; 2026 一甲美濃粄條. All rights reserved.</p>
-                <p>Made by <span class="text-brand-300 font-medium">Webomate</span></p>
+            <div class="flex animate-marquee whitespace-nowrap items-center">
+                <!-- Set 1 -->
+                <div class="flex items-center gap-16 mx-8">
+                    <div class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors cursor-default">
+                        <i data-lucide="cloud" class="w-8 h-8 text-brand-orange"></i>
+                        <span class="text-2xl font-bold font-tech">Microsoft Azure</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors cursor-default">
+                        <i data-lucide="heart-pulse" class="w-8 h-8 text-brand-orange"></i>
+                        <span class="text-2xl font-bold font-tech">WellTech</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors cursor-default">
+                        <i data-lucide="dribbble" class="w-8 h-8 text-brand-orange"></i>
+                        <span class="text-2xl font-bold font-tech">GOAT Lab</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors cursor-default">
+                        <i data-lucide="leaf" class="w-8 h-8 text-brand-orange"></i>
+                        <span class="text-2xl font-bold font-tech">ANWA</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors cursor-default">
+                        <i data-lucide="car-front" class="w-8 h-8 text-brand-orange"></i>
+                        <span class="text-2xl font-bold font-tech">MODEx Mobility</span>
+                    </div>
+                </div>
+                <!-- Set 2 (Duplicate for infinite loop) -->
+                <div class="flex items-center gap-16 mx-8">
+                    <div class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors cursor-default">
+                        <i data-lucide="cloud" class="w-8 h-8 text-brand-orange"></i>
+                        <span class="text-2xl font-bold font-tech">Microsoft Azure</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors cursor-default">
+                        <i data-lucide="heart-pulse" class="w-8 h-8 text-brand-orange"></i>
+                        <span class="text-2xl font-bold font-tech">WellTech</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors cursor-default">
+                        <i data-lucide="dribbble" class="w-8 h-8 text-brand-orange"></i>
+                        <span class="text-2xl font-bold font-tech">GOAT Lab</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors cursor-default">
+                        <i data-lucide="leaf" class="w-8 h-8 text-brand-orange"></i>
+                        <span class="text-2xl font-bold font-tech">ANWA</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors cursor-default">
+                        <i data-lucide="car-front" class="w-8 h-8 text-brand-orange"></i>
+                        <span class="text-2xl font-bold font-tech">MODEx Mobility</span>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Footer & CTA Section -->
+    <footer id="contact" class="relative pt-32 pb-12 overflow-hidden bg-brand-black">
+        <!-- Background Elements -->
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-brand-orange/10 blur-[100px] rounded-full pointer-events-none"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
+            <i data-lucide="hexagon" class="text-brand-orange w-12 h-12 mx-auto mb-6"></i>
+            <h2 class="text-4xl md:text-5xl font-black text-white mb-6">
+                準備好讓您的企業<br>
+                <span class="text-brand-orange text-neon">跨入下一個維度了嗎？</span>
+            </h2>
+            <p class="text-gray-400 mb-10 text-lg">留下您的聯絡方式，我們的 AI 架構師將為您量身打造專屬演示。</p>
+            
+            <form class="flex flex-col md:flex-row gap-4 justify-center max-w-2xl mx-auto mb-20" onsubmit="event.preventDefault();">
+                <input type="email" placeholder="輸入您的企業信箱" class="flex-1 bg-brand-dark border border-brand-gray rounded-full px-6 py-4 text-white focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange transition-all placeholder-gray-600">
+                <button type="submit" class="bg-brand-orange text-white px-8 py-4 rounded-full font-bold hover:bg-orange-600 hover:shadow-[0_0_20px_#FF5E00] transition-all duration-300 whitespace-nowrap">
+                    立即預約技術演示
+                </button>
+            </form>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 border-t border-brand-gray pt-8 flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
+            <div class="flex items-center gap-2">
+                <i data-lucide="hexagon" class="text-brand-orange w-5 h-5"></i>
+                <span class="text-xl font-tech font-bold text-white">FigureVerse<span class="text-brand-orange">AI</span></span>
+            </div>
+            <p class="text-gray-600 text-sm font-tech tracking-wider">
+                &copy; 2026 FigureVerseAI. All rights reserved. <br class="md:hidden">
+                <span class="text-gray-500">Made by Webomate</span>
+            </p>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Initialize Scripts -->
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Navbar Scroll Effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('shadow-md');
-                navbar.style.background = 'rgba(253, 251, 247, 0.95)';
-            } else {
-                navbar.classList.remove('shadow-md');
-                navbar.style.background = 'rgba(253, 251, 247, 0.85)';
-            }
-        });
-
-        // Typewriter Effect
-        const textToType = "堅持手工每日現做，永和在地人推薦的古早味粄條。";
-        const typewriterElement = document.getElementById('typewriter');
-        let typeIndex = 0;
+        // Typing Effect for Hero Subtitle
+        const text = "具備國際視野與頂尖工程實力，為醫療、體育、政治與娛樂建構跨維度 AI 解決方案。";
+        let i = 0;
+        const speed = 50; // typing speed in ms
+        const typingElement = document.getElementById("typing-text");
 
         function typeWriter() {
-            if (typeIndex < textToType.length) {
-                typewriterElement.innerHTML += textToType.charAt(typeIndex);
-                typeIndex++;
-                setTimeout(typeWriter, 100);
+            if (i < text.length) {
+                typingElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
             }
         }
-        
-        // Start typing after a short delay
-        setTimeout(typeWriter, 1000);
 
-        // Scroll Reveal Animation
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    // Optional: Stop observing once revealed
-                    // revealObserver.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1,
+        // Start typing effect after a short delay
+        setTimeout(typeWriter, 500);
+
+        // Scroll Reveal Animation Observer
+        const revealOptions = {
+            threshold: 0.15,
             rootMargin: "0px 0px -50px 0px"
-        });
+        };
 
-        revealElements.forEach(element => {
+        const revealObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Trigger only once
+            });
+        }, revealOptions);
+
+        document.querySelectorAll('.reveal').forEach(element => {
             revealObserver.observe(element);
         });
 
-        // Number Counter Animation
-        const counters = document.querySelectorAll('.counter');
-        const speed = 200; // The lower the slower
-
-        const counterObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    const updateCount = () => {
-                        const target = +counter.getAttribute('data-target');
-                        const count = +counter.innerText;
-                        
-                        // Lower inc to slow and higher to speed up
-                        const inc = target / speed;
-
-                        if (count < target) {
-                            // Format to 1 decimal place if it's a float (like 4.6)
-                            if (target % 1 !== 0) {
-                                counter.innerText = (count + inc).toFixed(1);
-                            } else {
-                                counter.innerText = Math.ceil(count + inc);
-                            }
-                            setTimeout(updateCount, 10);
-                        } else {
-                            counter.innerText = target;
-                        }
-                    };
-                    updateCount();
-                    observer.unobserve(counter);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        counters.forEach(counter => {
-            counterObserver.observe(counter);
+        // Navbar blur effect on scroll
+        const navbar = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-[0_4px_30px_rgba(0,0,0,0.5)]');
+                navbar.classList.replace('bg-brand-black/80', 'bg-brand-black/95');
+            } else {
+                navbar.classList.remove('shadow-[0_4px_30px_rgba(0,0,0,0.5)]');
+                navbar.classList.replace('bg-brand-black/95', 'bg-brand-black/80');
+            }
         });
     </script>
 </body>
 </html>
 ```
+
+### 💡 設計與技術亮點說明：
+1. **嚴格遵守色彩協議**：全站以 `#111111` 深炭黑為底色，所有按鈕、線條、Icon 與強調文字皆採用 `#FF5E00` 霓虹亮橘，並在按鈕與重點標題上加入了 `text-neon` 與 `box-shadow` 發光特效，強化 Cyberpunk 科技感。
+2. **首屏沉浸式體驗**：右側預留了 3D 數字人影片版位（目前使用高質感的科技圖替代），並加上了 `video-scanline` 掃描線遮罩與跳動的系統字樣，營造出正在運算渲染的未來感。副標題則加入了原生的 JavaScript **打字機效果**。
+3. **Bento Box 網格排版**：在「八大產業賦能」區塊，使用 CSS Grid 搭配不同的 `col-span` 與 `row-span`，打造出錯落有致的 Bento Box 佈局，Hover 時圖片會微放大並閃爍橘色邊框。
+4. **無限跑馬燈**：在國際合作夥伴區域，利用 Tailwind 的自定義 `keyframes` 實作了無限向左滾動的 Marquee 效果。
+5. **單檔與圖片協議**：完全採用原生 HTML/Tailwind CDN/JS 撰寫，無依賴任何框架，圖片皆合法取自 Unsplash 商業圖庫，可直接部署至 GitHub Pages 立即生效。
