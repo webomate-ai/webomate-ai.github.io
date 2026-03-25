@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哇來收 | 雙北最省心的代收垃圾服務</title>
+    <meta name="description" content="哇來收提供台北市、新北市全區代收垃圾服務。月費990元，每週收4次，方便快速、友善環保、服務周到。讓您不再為了追垃圾車而煩惱！">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans:['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#F0FDF4',
+                            100: '#DCFCE7',
+                            200: '#BBF7D0',
+                            300: '#86EFAC',
+                            400: '#4ADE80',
+                            500: '#22C55E', // 主亮綠色
+                            600: '#16A34A',
+                            700: '#15803D',
+                            800: '#166534',
+                            900: '#14532D',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typewriter::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(240, 253, 244, 0.9) 0%, rgba(220, 252, 231, 0.4) 100%);
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800 bg-gray-50">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 glass-nav py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <img class="h-12 w-auto object-contain rounded-lg" src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260325110015_0.png" alt="哇來收 Logo">
+                    <span class="ml-3 text-2xl font-black text-brand-700 tracking-wider">哇來收</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#features" class="text-gray-600 hover:text-brand-500 font-medium transition-colors">品牌特色</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-brand-500 font-medium transition-colors">收費方案</a>
+                    <a href="#area" class="text-gray-600 hover:text-brand-500 font-medium transition-colors">服務範圍</a>
+                    <a href="#contact" class="bg-brand-500 hover:bg-brand-600 text-white px-6 py-2.5 rounded-full font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-brand-500/30">
+                        立即預約
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brand-500 focus:outline-none p-2">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#features" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-500 hover:bg-brand-50 rounded-md">品牌特色</a>
+                <a href="#pricing" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-500 hover:bg-brand-50 rounded-md">收費方案</a>
+                <a href="#area" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-500 hover:bg-brand-50 rounded-md">服務範圍</a>
+                <a href="#contact" class="block px-3 py-3 text-base font-bold text-brand-600 hover:bg-brand-50 rounded-md text-center mt-4 border-2 border-brand-500">立即預約</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=2070&auto=format&fit=crop" alt="乾淨明亮的環境" class="w-full h-full object-cover object-center opacity-20">
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="inline-block py-1 px-3 rounded-full bg-brand-100 text-brand-700 text-sm font-bold tracking-wider mb-6 animate-float">
+                雙北專屬・專業代收
+            </span>
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 mb-6 leading-tight">
+                把時間留給自己 <br class="hidden md:block">
+                <span class="text-brand-500">垃圾交給 哇來收</span>
+            </h1>
+            <p class="mt-4 text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto font-medium h-8 flex items-center justify-center">
+                <span id="typewriter" class="typewriter text-brand-600 font-bold"></span>
+            </p>
+            <p class="mt-6 text-lg text-gray-500 max-w-2xl mx-auto">
+                免追垃圾車、免提重物！我們提供最簡約、快速且環保的代收服務，讓您的居家生活永遠保持清爽乾淨。
+            </p>
+            
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#pricing" class="px-8 py-4 text-lg font-bold rounded-full text-white bg-brand-500 hover:bg-brand-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-brand-500/40 flex items-center justify-center">
+                    查看收費方案
+                    <i data-lucide="arrow-right" class="ml-2 h-5 w-5"></i>
+                </a>
+                <a href="#features" class="px-8 py-4 text-lg font-bold rounded-full text-brand-600 bg-white border-2 border-brand-200 hover:border-brand-500 hover:bg-brand-50 transition-all duration-300 flex items-center justify-center">
+                    了解服務特色
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-brand-500 font-bold tracking-wide uppercase text-sm mb-2">Why Choose Us</h2>
+                <h3 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">為什麼選擇哇來收？</h3>
+                <p class="text-lg text-gray-600">秉持著簡約、清新的服務理念，我們致力於為雙北市民提供最高品質的代收體驗。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-3xl p-10 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 reveal">
+                    <div class="w-16 h-16 bg-brand-100 rounded-2xl flex items-center justify-center mb-6 text-brand-500">
+                        <i data-lucide="zap" class="h-8 w-8"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-900 mb-4">方便快速</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        週一至週六皆有服務，無需再苦苦等待垃圾車。我們迅速、準時地為您清理，讓您擁有更多屬於自己的時間。
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-3xl p-10 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 reveal delay-100">
+                    <div class="w-16 h-16 bg-brand-100 rounded-2xl flex items-center justify-center mb-6 text-brand-500">
+                        <i data-lucide="leaf" class="h-8 w-8"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-900 mb-4">友善環保</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        我們重視環境永續，妥善處理一般垃圾與資源回收。透過專業的清運流程，確保每一份資源都能進入正確的循環體系。
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-3xl p-10 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 reveal delay-200">
+                    <div class="w-16 h-16 bg-brand-100 rounded-2xl flex items-center justify-center mb-6 text-brand-500">
+                        <i data-lucide="heart-handshake" class="h-8 w-8"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-900 mb-4">服務周到</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        以客為尊的服務態度，細心處理您的每一包廢棄物。簡約透明的收費方式，沒有隱藏費用，給您最安心的託付。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 bg-white relative overflow-hidden">
+        <!-- Decorative Background Element -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-50 opacity-50 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-brand-100 opacity-50 blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-brand-500 font-bold tracking-wide uppercase text-sm mb-2">Simple Pricing</h2>
+                <h3 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">透明簡約的收費方案</h3>
+                <p class="text-lg text-gray-600">一個方案搞定日常所需，沒有複雜的計算，只有最實在的服務。</p>
+            </div>
+
+            <div class="max-w-lg mx-auto reveal">
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-brand-100 hover:border-brand-400 transition-colors duration-300">
+                    <!-- Pricing Header -->
+                    <div class="bg-brand-500 p-8 text-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1604187351574-c75ca79f5807?q=80&w=2070&auto=format&fit=crop')] opacity-10 bg-cover bg-center"></div>
+                        <h4 class="relative z-10 text-white text-xl font-bold mb-2">輕鬆月繳方案</h4>
+                        <div class="relative z-10 flex justify-center items-baseline text-white">
+                            <span class="text-3xl font-bold">NT$</span>
+                            <span class="text-6xl font-black mx-2 tracking-tight">990</span>
+                            <span class="text-brand-100 text-lg">/ 月</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Pricing Body -->
+                    <div class="p-8">
+                        <ul class="space-y-6">
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle-2" class="h-6 w-6 text-brand-500 flex-shrink-0 mr-3"></i>
+                                <div>
+                                    <span class="font-bold text-gray-900 block text-lg">高頻率收取</span>
+                                    <span class="text-gray-600">每週收取 <span class="text-brand-600 font-bold">4</span> 次，常保居家整潔。</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle-2" class="h-6 w-6 text-brand-500 flex-shrink-0 mr-3"></i>
+                                <div>
+                                    <span class="font-bold text-gray-900 block text-lg">彈性服務時間</span>
+                                    <span class="text-gray-600">週一至週六皆有提供收件服務。</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle-2" class="h-6 w-6 text-brand-500 flex-shrink-0 mr-3"></i>
+                                <div>
+                                    <span class="font-bold text-gray-900 block text-lg">大容量額度</span>
+                                    <span class="text-gray-600">單次最多可收 <span class="text-brand-600 font-bold">60公升</span> (含一般垃圾與回收)。</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="mt-8 pt-6 border-t border-gray-100">
+                            <div class="flex items-center text-sm text-gray-500 bg-gray-50 p-4 rounded-xl">
+                                <i data-lucide="info" class="h-5 w-5 text-gray-400 mr-2 flex-shrink-0"></i>
+                                <p>超量說明：單次若超過 60 公升，僅需額外酌收 <strong class="text-gray-800">80元/次</strong> 的處理費用。</p>
+                            </div>
+                        </div>
+
+                        <a href="#contact" class="mt-8 w-full block text-center bg-gray-900 hover:bg-brand-600 text-white font-bold py-4 rounded-xl transition-all duration-300 hover:shadow-lg">
+                            選擇此方案
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Area Section -->
+    <section id="area" class="py-24 bg-brand-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 reveal">
+                    <h2 class="text-brand-500 font-bold tracking-wide uppercase text-sm mb-2">Service Area</h2>
+                    <h3 class="text-3xl md:text-4xl font-black text-gray-900 mb-6">大台北生活圈全覆蓋</h3>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        無論您身處繁華的商業區，還是寧靜的住宅巷弄，「哇來收」的服務車隊都能抵達。我們致力於為每一位雙北市民帶來最便利的生活體驗。
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-100 flex items-center">
+                            <div class="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 mr-4">
+                                <i data-lucide="map-pin" class="h-6 w-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900">台北市</h4>
+                                <p class="text-sm text-gray-500 mt-1">全區皆有服務</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-100 flex items-center">
+                            <div class="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 mr-4">
+                                <i data-lucide="map" class="h-6 w-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900">新北市</h4>
+                                <p class="text-sm text-gray-500 mt-1">全區皆有服務</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 reveal delay-200">
+                    <img src="https://images.unsplash.com/photo-1577977465355-6b5c391218eb?q=80&w=2070&auto=format&fit=crop" alt="台北城市風景" class="rounded-3xl shadow-2xl object-cover h-[400px] w-full border-4 border-white">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / CTA Section -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="bg-brand-500 rounded-3xl p-10 md:p-16 text-center text-white shadow-2xl relative overflow-hidden">
+                <!-- Decorative Circles -->
+                <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"></div>
+                <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"></div>
+                
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-5xl font-black mb-6">準備好告別追垃圾車的日子了嗎？</h2>
+                    <p class="text-brand-50 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                        留下您的聯絡資訊，我們的專員將會盡快與您聯繫，為您安排專屬的代收服務。
+                    </p>
+                    
+                    <!-- Simple Contact Form Placeholder -->
+                    <form class="max-w-md mx-auto space-y-4" onsubmit="event.preventDefault(); alert('感謝您的預約！專員將會盡快與您聯繫。');">
+                        <div>
+                            <input type="text" placeholder="您的姓名" required class="w-full px-5 py-4 rounded-xl text-gray-900 focus:outline-none focus:ring-4 focus:ring-brand-300 border-none">
+                        </div>
+                        <div>
+                            <input type="tel" placeholder="聯絡電話" required class="w-full px-5 py-4 rounded-xl text-gray-900 focus:outline-none focus:ring-4 focus:ring-brand-300 border-none">
+                        </div>
+                        <button type="submit" class="w-full bg-gray-900 text-white font-bold text-lg py-4 rounded-xl hover:bg-gray-800 transition-colors shadow-lg">
+                            送出預約資訊
+                        </button>
+                    </form>
+                    <p class="mt-6 text-sm text-brand-100">
+                        * 目前尚未開放線上直接付款，送出後將由專人為您服務。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <img class="h-10 w-auto object-contain rounded bg-white p-1" src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260325110015_0.png" alt="哇來收 Logo">
+                    <span class="ml-3 text-xl font-black text-white tracking-wider">哇來收</span>
+                </div>
+                
+                <div class="text-sm text-gray-400 text-center md:text-right">
+                    <p class="mb-2">雙北最省心的代收垃圾服務</p>
+                    <p>&copy; 2026 哇來收. All rights reserved.</p>
+                    <p class="mt-2 text-brand-500 font-medium">Made by Webomate</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+
+        // Typewriter Effect
+        const phrases =["方便快速", "友善環保", "服務周到"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterElement = document.getElementById('typewriter');
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 100 : 200;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                typeSpeed = 2000; // Pause at end
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500; // Pause before new word
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        // Start typewriter
+        setTimeout(type, 1000);
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger once on load
+    </script>
+</body>
+</html>
+```
