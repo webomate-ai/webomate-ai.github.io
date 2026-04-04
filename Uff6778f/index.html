@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KM Travel | 探索世界，品味文化</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#FFF0F0',
+                            100: '#FFDEDE',
+                            200: '#FFC2C2',
+                            300: '#FFA0A0',
+                            400: '#FF7A7A',
+                            500: '#FF5757', // 明亮活潑的主色 (珊瑚紅/橘紅)
+                            600: '#E63E3E',
+                            700: '#C22929',
+                            800: '#A32424',
+                            900: '#852222',
+                        },
+                        accent: {
+                            50: '#E6F8FB',
+                            100: '#C0EEF6',
+                            200: '#9AE4F0',
+                            300: '#73D9EB',
+                            400: '#4DCFE5',
+                            500: '#26C5E0', // 搭配的亮藍色
+                            600: '#1CA3BA',
+                            700: '#148093',
+                        }
+                    },
+                    fontFamily: {
+                        sans:['Nunito', 'Noto Sans TC', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Animations & Utilities -->
+    <style>
+        body {
+            font-family: 'Nunito', 'Noto Sans TC', sans-serif;
+        }
+        
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typewriter-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background-color: #FF5757;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+            margin-left: 4px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+        }
+
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(255, 87, 87, 0.2);
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800 bg-gray-50">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300 glass-nav" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 bg-brand-500 rounded-full flex items-center justify-center text-white group-hover:bg-brand-600 transition-colors">
+                        <i data-lucide="compass" class="w-6 h-6"></i>
+                    </div>
+                    <span class="font-black text-2xl tracking-tight text-gray-900">KM <span class="text-brand-500">Travel</span></span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-600 hover:text-brand-500 font-bold transition-colors">品牌理念</a>
+                    <a href="#features" class="text-gray-600 hover:text-brand-500 font-bold transition-colors">探索體驗</a>
+                    <a href="#articles" class="text-gray-600 hover:text-brand-500 font-bold transition-colors">精選專欄</a>
+                    <a href="mailto:contact@kmtravel.com" class="bg-brand-500 hover:bg-brand-600 text-white px-6 py-2.5 rounded-full font-bold transition-all hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2">
+                        <i data-lucide="mail" class="w-4 h-4"></i> 聯絡我們
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-600 hover:text-brand-500 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=2070&auto=format&fit=crop" alt="Vibrant Local Food Market" class="w-full h-full object-cover object-center transform scale-105 animate-[pulse_20s_ease-in-out_infinite_alternate]" />
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
+            <span class="inline-block py-1 px-3 rounded-full bg-brand-500/20 text-brand-300 font-bold tracking-wider text-sm mb-6 border border-brand-500/30 backdrop-blur-sm">
+                多元包容・深度探索
+            </span>
+            <h1 class="text-5xl md:text-7xl font-black text-white mb-6 leading-tight drop-shadow-lg">
+                探索世界，<br class="md:hidden" /><span class="text-brand-400">品味文化</span>
+            </h1>
+            <div class="text-xl md:text-2xl text-gray-200 font-medium mb-10 h-8 flex justify-center items-center">
+                <span id="typewriter-text"></span><span class="typewriter-cursor"></span>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#articles" class="bg-brand-500 hover:bg-brand-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2">
+                    開始探索 <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+                <a href="#about" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full font-bold text-lg transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
+                    了解品牌理念
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+            <i data-lucide="chevron-down" class="w-8 h-8 text-white/70"></i>
+        </div>
+    </section>
+
+    <!-- Social Proof / Stats Section -->
+    <section class="py-12 bg-white border-b border-gray-100 relative z-20 -mt-8 mx-4 md:mx-auto max-w-6xl rounded-2xl shadow-soft">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center gap-1 text-yellow-400 mb-2">
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                </div>
+                <div class="text-4xl font-black text-gray-900 mb-1"><span class="counter" data-target="4.9">0</span></div>
+                <div class="text-sm text-gray-500 font-bold">Google 網友評分</div>
+            </div>
+            <div class="text-center">
+                <div class="w-10 h-10 mx-auto bg-brand-50 text-brand-500 rounded-full flex items-center justify-center mb-2">
+                    <i data-lucide="users" class="w-5 h-5"></i>
+                </div>
+                <div class="text-4xl font-black text-gray-900 mb-1"><span class="counter" data-target="330">0</span>+</div>
+                <div class="text-sm text-gray-500 font-bold">真實好評回饋</div>
+            </div>
+            <div class="text-center">
+                <div class="w-10 h-10 mx-auto bg-accent-50 text-accent-500 rounded-full flex items-center justify-center mb-2">
+                    <i data-lucide="map" class="w-5 h-5"></i>
+                </div>
+                <div class="text-4xl font-black text-gray-900 mb-1"><span class="counter" data-target="50">0</span>+</div>
+                <div class="text-sm text-gray-500 font-bold">探索文化景點</div>
+            </div>
+            <div class="text-center">
+                <div class="w-10 h-10 mx-auto bg-brand-50 text-brand-500 rounded-full flex items-center justify-center mb-2">
+                    <i data-lucide="camera" class="w-5 h-5"></i>
+                </div>
+                <div class="text-4xl font-black text-gray-900 mb-1"><span class="counter" data-target="100">0</span>%</div>
+                <div class="text-sm text-gray-500 font-bold">原創影像紀錄</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Philosophy Section -->
+    <section id="about" class="py-24 bg-gray-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 reveal">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-100 text-brand-600 font-bold text-sm mb-6">
+                        <i data-lucide="heart" class="w-4 h-4 fill-current"></i> 品牌精神
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight">
+                        用味蕾與雙眼，<br>感受世界的<span class="text-brand-500">多元與包容</span>
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        在 KM Travel，我們相信最深刻的旅行記憶，往往來自於街角的一碗熱湯、市集裡的一抹微笑，以及那些承載著歷史重量的古老建築。
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        我們致力於打造一個充滿活力的旅遊分享平台。不只是提供實用資訊，更希望透過高質感的影像與真摯的文字，帶您跨越國界，體驗各地獨特的飲食文化與風土人情。
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-gray-800 font-bold">
+                            <div class="w-8 h-8 rounded-full bg-accent-100 text-accent-600 flex items-center justify-center"><i data-lucide="check" class="w-4 h-4"></i></div>
+                            挖掘隱藏版在地美食
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-800 font-bold">
+                            <div class="w-8 h-8 rounded-full bg-accent-100 text-accent-600 flex items-center justify-center"><i data-lucide="check" class="w-4 h-4"></i></div>
+                            捕捉最真實的文化影像
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-800 font-bold">
+                            <div class="w-8 h-8 rounded-full bg-accent-100 text-accent-600 flex items-center justify-center"><i data-lucide="check" class="w-4 h-4"></i></div>
+                            分享實用且深度的旅遊指南
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="lg:w-1/2 relative reveal">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1528605105345-5344ea20e269?q=80&w=800&auto=format&fit=crop" alt="Local Culture" class="rounded-2xl shadow-lg w-full h-64 object-cover transform translate-y-8 hover:scale-105 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1513639771504-aa3b8c581eb4?q=80&w=800&auto=format&fit=crop" alt="Street Food" class="rounded-2xl shadow-lg w-full h-80 object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <!-- Decorative element -->
+                    <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-accent-400 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-pulse"></div>
+                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-brand-400 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-pulse" style="animation-delay: 1s;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section id="features" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-4xl font-black text-gray-900 mb-4">探索我們的核心體驗</h2>
+                <p class="text-xl text-gray-600">明亮、活潑、充滿驚喜。KM Travel 為您精心策劃三大主題內容，讓每一趟旅程都充滿意義。</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Feature 1 -->
+                <div class="bg-gray-50 rounded-3xl p-8 hover-lift border border-gray-100 reveal">
+                    <div class="w-16 h-16 bg-brand-100 text-brand-500 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                        <i data-lucide="utensils-crossed" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-gray-900 mb-4">在地飲食探索</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        食物是了解一個文化最快的捷徑。我們帶您走進喧囂的傳統市場、品嚐街頭小吃，透過味蕾體驗每個城市獨有的性格與歷史。
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-gray-50 rounded-3xl p-8 hover-lift border border-gray-100 reveal" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 bg-accent-100 text-accent-600 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                        <i data-lucide="map-pin" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-gray-900 mb-4">經典與秘境景點</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        從宏偉的歷史遺跡到鮮為人知的自然秘境，透過高解析度的攝影作品與實用的交通指南，我們為您的行程規劃提供完美靈感。
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-gray-50 rounded-3xl p-8 hover-lift border border-gray-100 reveal" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                        <i data-lucide="globe-2" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-gray-900 mb-4">多元文化沉浸</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        擁抱包容與多元。我們紀錄當地的節慶、傳統工藝與在地人的生活哲學，讓旅行不再只是走馬看花，而是心靈的交流。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Articles (Cards) -->
+    <section id="articles" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12 reveal">
+                <div>
+                    <h2 class="text-4xl font-black text-gray-900 mb-4">精選專欄</h2>
+                    <p class="text-lg text-gray-600">跟著我們的鏡頭與文字，開啟下一段冒險。</p>
+                </div>
+                <a href="#" class="hidden md:flex items-center gap-2 text-brand-500 font-bold hover:text-brand-600 transition-colors">
+                    查看所有文章 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-soft hover-lift reveal">
+                    <div class="relative h-60 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&auto=format&fit=crop" alt="Food Feature" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                        <div class="absolute top-4 left-4 bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                            在地飲食
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-black text-gray-900 mb-2 line-clamp-2 hover:text-brand-500 transition-colors cursor-pointer">尋味東南亞：穿梭在煙火氣十足的夜市小吃</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-2 text-sm">酸、甜、辣的完美交織。帶您一探那些藏在巷弄裡，連在地人都排隊的隱藏版街頭美食，感受最直接的文化衝擊。</p>
+                        <div class="flex items-center justify-between mt-4 border-t border-gray-100 pt-4">
+                            <span class="text-xs text-gray-500 font-bold">5 分鐘閱讀</span>
+                            <a href="#" class="text-brand-500 font-bold text-sm flex items-center gap-1 hover:text-brand-600">
+                                閱讀更多 <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-soft hover-lift reveal" style="transition-delay: 100ms;">
+                    <div class="relative h-60 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?q=80&w=600&auto=format&fit=crop" alt="Landmark Feature" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                        <div class="absolute top-4 left-4 bg-accent-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                            景點導覽
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-black text-gray-900 mb-2 line-clamp-2 hover:text-brand-500 transition-colors cursor-pointer">漫步歐洲古城：那些凝固在時間裡的建築美學</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-2 text-sm">從哥德式教堂到文藝復興廣場，整理10個必訪的歷史遺跡，並附上最佳攝影機位與避開人潮的實用攻略。</p>
+                        <div class="flex items-center justify-between mt-4 border-t border-gray-100 pt-4">
+                            <span class="text-xs text-gray-500 font-bold">8 分鐘閱讀</span>
+                            <a href="#" class="text-brand-500 font-bold text-sm flex items-center gap-1 hover:text-brand-600">
+                                閱讀更多 <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-soft hover-lift reveal" style="transition-delay: 200ms;">
+                    <div class="relative h-60 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?q=80&w=600&auto=format&fit=crop" alt="Culture Feature" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                        <div class="absolute top-4 left-4 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                            文化體驗
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-black text-gray-900 mb-2 line-clamp-2 hover:text-brand-500 transition-colors cursor-pointer">走進部落：體驗最純粹的傳統慶典與工藝</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-2 text-sm">拋開觀光客的走馬看花，我們深入當地人家，記錄下那些代代相傳的傳統習俗，看見文化包容的真實樣貌。</p>
+                        <div class="flex items-center justify-between mt-4 border-t border-gray-100 pt-4">
+                            <span class="text-xs text-gray-500 font-bold">6 分鐘閱讀</span>
+                            <a href="#" class="text-brand-500 font-bold text-sm flex items-center gap-1 hover:text-brand-600">
+                                閱讀更多 <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center md:hidden">
+                <a href="#" class="inline-flex items-center gap-2 text-brand-500 font-bold hover:text-brand-600 transition-colors">
+                    查看所有文章 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust / Map Info Section (Based on Google Places Data) -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 text-center reveal">
+            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="thumbs-up" class="w-8 h-8 text-brand-500"></i>
+            </div>
+            <h2 class="text-3xl font-black text-gray-900 mb-6">備受旅人信賴的旅遊指標</h2>
+            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                KM Travel 致力於提供最真實、高品質的旅遊內容。我們的相關服務據點在 Google 上獲得了 <strong>4.9 星</strong> 的極高評價，深受全球超過 300 位旅人的肯定與喜愛。無論是尋找美食地圖還是文化深度遊，我們都是您的最佳夥伴。
+            </p>
+            <div class="inline-flex items-center gap-4 bg-gray-50 px-6 py-4 rounded-2xl border border-gray-200">
+                <div class="text-left">
+                    <div class="font-bold text-gray-900">KMH Boutique Travel</div>
+                    <div class="text-sm text-gray-500">Google 商家評分</div>
+                </div>
+                <div class="h-8 w-px bg-gray-300"></div>
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl font-black text-gray-900">4.9</span>
+                    <div class="flex text-yellow-400">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-brand-500"></div>
+        <!-- Decorative pattern -->
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center reveal">
+            <h2 class="text-4xl md:text-5xl font-black text-white mb-6">準備好開啟下一趟旅程了嗎？</h2>
+            <p class="text-xl text-brand-100 mb-10 max-w-2xl mx-auto">
+                無論是尋找當地獨特美食，還是規劃深度文化體驗，KM Travel 都能為您提供滿滿靈感。有任何合作想法或旅遊問題，歡迎隨時聯繫我們！
+            </p>
+            <a href="mailto:contact@kmtravel.com" class="inline-flex items-center gap-2 bg-white text-brand-600 px-8 py-4 rounded-full font-black text-lg transition-all hover:scale-105 hover:shadow-xl">
+                <i data-lucide="mail" class="w-5 h-5"></i> 聯絡信箱：contact@kmtravel.com
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <!-- Brand -->
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-brand-500 rounded-full flex items-center justify-center text-white">
+                        <i data-lucide="compass" class="w-4 h-4"></i>
+                    </div>
+                    <span class="font-black text-xl text-white">KM Travel</span>
+                </div>
+                
+                <!-- Links -->
+                <div class="flex flex-wrap justify-center gap-6 text-sm font-bold">
+                    <a href="#about" class="hover:text-brand-400 transition-colors">品牌理念</a>
+                    <a href="#features" class="hover:text-brand-400 transition-colors">探索體驗</a>
+                    <a href="#articles" class="hover:text-brand-400 transition-colors">精選專欄</a>
+                    <a href="mailto:contact@kmtravel.com" class="hover:text-brand-400 transition-colors">聯絡我們</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2026 KM Travel. All rights reserved.</p>
+                <p class="mt-2 md:mt-0 flex items-center gap-1">
+                    Made by <span class="text-white font-bold">Webomate</span> <i data-lucide="zap" class="w-4 h-4 text-brand-500"></i>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Typewriter Effect for Hero
+        const texts =["帶您感受最真實的在地魅力...", "用美食體驗世界各地的文化...", "分享實用且深度的旅遊指南..."];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeSpeed = 100;
+        const deleteSpeed = 50;
+        const delayBetweenTexts = 2000;
+
+        function typeWriter() {
+            const currentText = texts[textIndex];
+            const targetElement = document.getElementById("typewriter-text");
+            
+            if (isDeleting) {
+                targetElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                targetElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let speed = isDeleting ? deleteSpeed : typeSpeed;
+
+            if (!isDeleting && charIndex === currentText.length) {
+                speed = delayBetweenTexts;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                speed = 500;
+            }
+
+            setTimeout(typeWriter, speed);
+        }
+
+        // Start typewriter after a short delay
+        setTimeout(typeWriter, 1000);
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Trigger counter animation if inside the element
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        if (!counter.classList.contains('counted')) {
+                            animateCounter(counter);
+                            counter.classList.add('counted');
+                        }
+                    });
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Number Counter Animation
+        function animateCounter(counterElement) {
+            const target = parseFloat(counterElement.getAttribute('data-target'));
+            const duration = 2000; // 2 seconds
+            const steps = 60;
+            const stepTime = duration / steps;
+            const increment = target / steps;
+            let current = 0;
+            
+            // For decimal numbers (like 4.9)
+            const isDecimal = target % 1 !== 0;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    counterElement.textContent = isDecimal ? target.toFixed(1) : target;
+                    clearInterval(timer);
+                } else {
+                    counterElement.textContent = isDecimal ? current.toFixed(1) : Math.floor(current);
+                }
+            }, stepTime);
+        }
+
+        // Counter observer for the stats section specifically
+        const statsSection = document.querySelector('.counter').closest('section');
+        const statsObserver = new IntersectionObserver((entries) => {
+            if(entries[0].isIntersecting) {
+                document.querySelectorAll('.counter').forEach(counter => {
+                    if (!counter.classList.contains('counted')) {
+                        animateCounter(counter);
+                        counter.classList.add('counted');
+                    }
+                });
+                statsObserver.disconnect();
+            }
+        }, { threshold: 0.5 });
+        
+        if(statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                nav.classList.remove('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.85)';
+            }
+        });
+    </script>
+</body>
+</html>
+```
