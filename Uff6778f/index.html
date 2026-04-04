@@ -1,46 +1,56 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KM Travel | 多元文化與美食體驗的旅遊分享</title>
-    <meta name="description" content="KM Travel 帶您透過美食體驗各地文化特色，探索世界景點，感受多元與包容的旅遊氛圍。">
+    <title>KM Travel | Diverse Cultural & Culinary Experiences</title>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Outfit for a modern, warm, and friendly look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Tailwind Config -->
+    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
                     colors: {
-                        warm: {
-                            50: '#FDFBF7',  // 溫和米白背景
-                            100: '#F8F1E8',
-                            200: '#F0DFCB',
-                            300: '#E5C4A6',
-                            400: '#D9A37C',
-                            500: '#CE8255', // 主色調：暖橘/陶土色
-                            600: '#C26639',
-                            700: '#A24F2F',
-                            800: '#824129',
-                            900: '#683624',
+                        brand: {
+                            50: '#fff9f2',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c', // Primary warm orange
+                            500: '#f97316',
+                            600: '#ea580c',
+                            800: '#9a3412',
+                            900: '#7c2d12', // Dark warm text
                         },
-                        earth: {
-                            500: '#8A9A5B', // 點綴色：鼠尾草綠
+                        sand: {
+                            50: '#fdfdfc',
+                            100: '#fbfaf8',
+                            200: '#f5f4f0',
+                            300: '#ebe9e1',
                         }
                     },
-                    fontFamily: {
-                        sans: ['Urbanist', 'Noto Sans TC', 'sans-serif'],
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
                     }
                 }
             }
@@ -48,134 +58,183 @@
     </script>
 
     <style>
-        /* 基礎設定與平滑滾動 */
-        html { scroll-behavior: smooth; }
-        body { background-color: #FDFBF7; }
+        /* Custom Styles for Scroll Reveal and Typing Effect */
+        body {
+            background-color: #fff9f2; /* brand-50 */
+            color: #7c2d12; /* brand-900 */
+        }
         
-        /* 毛玻璃導覽列 */
         .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
-            background: rgba(253, 251, 247, 0.85);
-            border-bottom: 1px solid rgba(206, 130, 85, 0.1);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(253, 186, 116, 0.2);
         }
 
-        /* 滾動浮現動畫 */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
         }
+
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* 打字機游標閃爍 */
-        .cursor::after {
+        .typing-cursor::after {
             content: '|';
-            animation: blink 1s infinite;
-            color: #CE8255;
+            animation: blink 1s step-start infinite;
         }
+
         @keyframes blink {
-            0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
 
-        /* 圖片遮罩，增加暖色氛圍 */
-        .warm-overlay::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(104, 54, 36, 0.3), rgba(206, 130, 85, 0.2));
-            pointer-events: none;
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(255, 249, 242, 0.9) 0%, rgba(255, 249, 242, 0.4) 100%);
         }
     </style>
 </head>
-<body class="antialiased text-gray-800 font-sans selection:bg-warm-200 selection:text-warm-900">
+<body class="antialiased selection:bg-brand-300 selection:text-white">
 
     <!-- Navbar -->
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
-                <a href="#" class="flex items-center gap-2 group">
-                    <div class="w-10 h-10 rounded-full bg-warm-500 flex items-center justify-center text-white group-hover:bg-warm-600 transition-colors">
-                        <i data-lucide="globe-2" class="w-6 h-6"></i>
-                    </div>
-                    <span class="font-bold text-2xl tracking-wide text-warm-900">KM Travel</span>
-                </a>
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i data-lucide="compass" class="h-8 w-8 text-brand-500 mr-2"></i>
+                    <span class="font-bold text-2xl tracking-tight text-brand-900">KM Travel</span>
+                </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="text-gray-600 hover:text-warm-600 font-medium transition-colors" data-i18n="nav_about">品牌理念</a>
-                    <a href="#features" class="text-gray-600 hover:text-warm-600 font-medium transition-colors" data-i18n="nav_explore">探索體驗</a>
-                    <a href="#gallery" class="text-gray-600 hover:text-warm-600 font-medium transition-colors" data-i18n="nav_gallery">旅行紀實</a>
+                    <a href="#about" class="text-brand-800 hover:text-brand-500 font-medium transition-colors">Our Spirit</a>
+                    <a href="#experiences" class="text-brand-800 hover:text-brand-500 font-medium transition-colors">Experiences</a>
+                    <a href="#featured" class="text-brand-800 hover:text-brand-500 font-medium transition-colors">Featured</a>
                     
-                    <!-- Language Toggle Button -->
-                    <button id="langToggle" class="flex items-center gap-2 px-4 py-2 rounded-full border border-warm-300 text-warm-700 hover:bg-warm-50 hover:border-warm-500 transition-all duration-300">
-                        <i data-lucide="languages" class="w-4 h-4"></i>
-                        <span id="langText" class="font-medium text-sm">English</span>
-                    </button>
-                    
-                    <a href="#contact" class="bg-warm-500 text-white px-6 py-2.5 rounded-full font-medium hover:bg-warm-600 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300" data-i18n="nav_contact">聯絡我們</a>
+                    <!-- Language Switcher -->
+                    <div class="relative group">
+                        <button class="flex items-center space-x-1 text-brand-800 hover:text-brand-500 font-medium transition-colors">
+                            <i data-lucide="globe" class="h-4 w-4"></i>
+                            <span>EN</span>
+                            <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-32 bg-white rounded-xl shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-brand-100">
+                            <a href="#" class="block px-4 py-2 text-sm text-brand-500 bg-brand-50 font-medium">English</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 cursor-not-allowed" title="Coming soon">繁體中文</a>
+                        </div>
+                    </div>
+
+                    <a href="mailto:contact@kmtravel.com" class="bg-brand-400 hover:bg-brand-500 text-white px-6 py-2.5 rounded-full font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 flex items-center">
+                        <i data-lucide="mail" class="h-4 w-4 mr-2"></i>
+                        Contact Us
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 warm-overlay">
-            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1920&q=80" alt="Beautiful travel landscape" class="w-full h-full object-cover object-center" />
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden min-h-[90vh] flex items-center">
+        <!-- Background Image with Warm Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1920&q=80" alt="Warm Travel Destination" class="w-full h-full object-cover object-center" />
+            <div class="absolute inset-0 hero-overlay"></div>
         </div>
-        
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
-            <span class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-sm font-medium tracking-wider mb-6" data-i18n="hero_badge">多元包容的文化之旅</span>
-            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg leading-tight" data-i18n="hero_title">
-                透過味蕾與雙眼<br>探索世界的溫度
-            </h1>
-            <p class="text-xl md:text-2xl text-white/90 mb-10 font-light drop-shadow-md h-8">
-                <span id="typewriter" class="cursor"></span>
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#features" class="bg-warm-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-warm-600 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-i18n="hero_btn_start">展開旅程</a>
-                <a href="#about" class="bg-white/10 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all duration-300" data-i18n="hero_btn_more">了解更多</a>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-2xl reveal">
+                <span class="inline-block py-1 px-3 rounded-full bg-brand-100 text-brand-600 text-sm font-semibold tracking-wider mb-6">
+                    EMBRACE THE WORLD
+                </span>
+                <h1 class="text-5xl lg:text-7xl font-bold text-brand-900 leading-tight mb-6">
+                    Journey Beyond <br>
+                    <span class="text-brand-500">Boundaries.</span>
+                </h1>
+                <p class="text-xl text-brand-800 mb-8 h-16">
+                    <span id="typewriter" class="typing-cursor"></span>
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#experiences" class="bg-brand-500 hover:bg-brand-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex items-center">
+                        Start Exploring
+                        <i data-lucide="arrow-right" class="ml-2 h-5 w-5"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-24 bg-warm-50">
+    <!-- Brand Spirit / About Section -->
+    <section id="about" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="reveal">
-                    <h2 class="text-sm font-bold text-warm-600 tracking-widest uppercase mb-3" data-i18n="about_subtitle">關於 KM Travel</h2>
-                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight" data-i18n="about_title">品味多元文化，<br>擁抱世界的每一個角落</h3>
-                    <p class="text-lg text-gray-600 mb-6 leading-relaxed" data-i18n="about_desc_1">
-                        我們相信，旅行不僅僅是走訪著名的景點打卡，更是深入當地生活、感受不同文化脈動的過程。KM Travel 致力於分享具備「多元與包容」精神的旅遊體驗。
-                    </p>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed" data-i18n="about_desc_2">
-                        在這裡，我們特別強調**「透過美食體驗各地文化特色」**。每一道在地料理，都蘊含著當地的歷史、氣候與人文風情。跟著我們的腳步，用影像與文字，一起品嚐世界的故事。
-                    </p>
-                    
-                    <div class="grid grid-cols-2 gap-6 pt-6 border-t border-warm-200">
-                        <div>
-                            <div class="text-4xl font-bold text-warm-500 mb-2 counter" data-target="150">0</div>
-                            <div class="text-sm text-gray-500 font-medium" data-i18n="stat_food">品嚐在地美食</div>
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <i data-lucide="heart-handshake" class="h-12 w-12 text-brand-400 mx-auto mb-6"></i>
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-900 mb-6">Diverse & Inclusive Cultural Experiences</h2>
+                <p class="text-lg text-brand-800/80 leading-relaxed">
+                    At KM Travel, we believe that travel is more than just visiting places—it's about connecting with people, understanding diverse traditions, and breaking down cultural barriers. Our mission is to provide inclusive journeys that celebrate the unique heritage of every destination.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Experiences Grid -->
+    <section id="experiences" class="py-24 bg-brand-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-900 mb-4">Discover the Essence of Travel</h2>
+                <p class="text-brand-800/70 max-w-2xl mx-auto">Immerse yourself in authentic atmospheres, breathtaking landmarks, and the universal language of food.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Food -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group reveal">
+                    <div class="h-64 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-brand-900/20 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Culinary Travel" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-8">
+                        <div class="w-12 h-12 bg-brand-100 rounded-2xl flex items-center justify-center mb-6 text-brand-500">
+                            <i data-lucide="utensils-crossed" class="h-6 w-6"></i>
                         </div>
-                        <div>
-                            <div class="text-4xl font-bold text-warm-500 mb-2 counter" data-target="42">0</div>
-                            <div class="text-sm text-gray-500 font-medium" data-i18n="stat_culture">深度文化體驗</div>
-                        </div>
+                        <h3 class="text-2xl font-bold text-brand-900 mb-3">Culinary Journeys</h3>
+                        <p class="text-brand-800/70 leading-relaxed">
+                            Taste the soul of a city. We believe the best way to understand a culture is through its local cuisine and shared meals.
+                        </p>
                     </div>
                 </div>
-                <div class="relative reveal h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=1000&q=80" alt="Cultural market experience" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    <div class="absolute bottom-6 left-6 right-6">
-                        <p class="text-white font-medium text-lg flex items-center gap-2">
-                            <i data-lucide="map-pin" class="w-5 h-5 text-warm-300"></i>
-                            <span data-i18n="img_cap_market">走入當地市集，感受最真實的生活氣息</span>
+
+                <!-- Landmarks -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group reveal" style="transition-delay: 100ms;">
+                    <div class="h-64 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-brand-900/20 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1516483638261-f4085ee6b633?auto=format&fit=crop&w=800&q=80" alt="Iconic Landmarks" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-8">
+                        <div class="w-12 h-12 bg-brand-100 rounded-2xl flex items-center justify-center mb-6 text-brand-500">
+                            <i data-lucide="map-pin" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-900 mb-3">Iconic Landmarks</h3>
+                        <p class="text-brand-800/70 leading-relaxed">
+                            Explore breathtaking destinations. From world-renowned wonders to hidden local gems, every place has a story to tell.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Atmosphere -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group reveal" style="transition-delay: 200ms;">
+                    <div class="h-64 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-brand-900/20 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=800&q=80" alt="Travel Atmosphere" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-8">
+                        <div class="w-12 h-12 bg-brand-100 rounded-2xl flex items-center justify-center mb-6 text-brand-500">
+                            <i data-lucide="camera" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-900 mb-3">Visual Stories</h3>
+                        <p class="text-brand-800/70 leading-relaxed">
+                            Capture the vibrant atmosphere. We share practical insights and visual inspiration to help you feel the destination before you even arrive.
                         </p>
                     </div>
                 </div>
@@ -183,327 +242,196 @@
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-                <h2 class="text-sm font-bold text-warm-600 tracking-widest uppercase mb-3" data-i18n="feat_subtitle">核心體驗</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-i18n="feat_title">探索旅遊的三大維度</h3>
-                <p class="text-gray-600 text-lg" data-i18n="feat_desc">我們為您精心挑選與整理，讓每一次的閱讀與出發，都能獲得滿滿的感動與實用資訊。</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="group bg-warm-50 rounded-2xl p-8 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 reveal border border-warm-100">
-                    <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-warm-500 group-hover:text-white text-warm-500 transition-colors">
-                        <i data-lucide="utensils-crossed" class="w-7 h-7"></i>
+    <!-- Social Proof / Featured Partner Section (Injected Data) -->
+    <section id="featured" class="py-24 bg-white relative overflow-hidden">
+        <!-- Decorative background element -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-brand-50 opacity-50 blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-brand-50 rounded-[2.5rem] p-8 md:p-16 flex flex-col lg:flex-row items-center gap-12 reveal">
+                
+                <div class="lg:w-1/2">
+                    <div class="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-sm mb-6">
+                        <i data-lucide="star" class="h-5 w-5 text-yellow-400 fill-current"></i>
+                        <span class="font-bold text-brand-900">Featured Partner Experience</span>
                     </div>
-                    <h4 class="text-xl font-bold text-gray-900 mb-3" data-i18n="feat_1_title">在地飲食文化</h4>
-                    <p class="text-gray-600 leading-relaxed" data-i18n="feat_1_desc">從街頭小吃到米其林餐廳，我們相信味覺是記憶一座城市最深刻的方式。為您發掘隱藏版美食與其背後的文化意涵。</p>
+                    <h2 class="text-3xl md:text-5xl font-bold text-brand-900 mb-6 leading-tight">
+                        European Experiences
+                    </h2>
+                    <p class="text-lg text-brand-800/80 mb-8 leading-relaxed">
+                        Discover highly curated travel itineraries that embody our philosophy of cultural immersion. Highly rated by travelers, this specialized experience brings the charm of Europe to life.
+                    </p>
+                    
+                    <!-- Hardcoded Data Injection -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-brand-100 mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-3xl font-bold text-brand-900 counter" data-target="5.0">0.0</span>
+                                <div class="flex text-yellow-400">
+                                    <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                                    <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                                    <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                                    <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                                    <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                                </div>
+                            </div>
+                            <span class="text-brand-600 font-medium bg-brand-50 px-3 py-1 rounded-full text-sm">
+                                <span class="counter" data-target="97">0</span> Reviews
+                            </span>
+                        </div>
+                        <div class="flex items-start space-x-3 text-brand-800/70">
+                            <i data-lucide="map-pin" class="h-5 w-5 mt-0.5 flex-shrink-0 text-brand-400"></i>
+                            <p>945 Ethans Glen Dr, Knoxville, TN 37923, USA</p>
+                        </div>
+                    </div>
+
+                    <a href="https://www.google.com/maps/place/?q=place_id:ChIJiSO31-8vXIgRxNOAECc4LQ8" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-brand-900 hover:bg-brand-800 text-white px-8 py-4 rounded-full font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-1 w-full sm:w-auto">
+                        <i data-lucide="navigation" class="h-5 w-5 mr-2"></i>
+                        View on Google Maps
+                    </a>
                 </div>
 
-                <!-- Feature 2 -->
-                <div class="group bg-warm-50 rounded-2xl p-8 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 reveal border border-warm-100" style="transition-delay: 100ms;">
-                    <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-warm-500 group-hover:text-white text-warm-500 transition-colors">
-                        <i data-lucide="camera" class="w-7 h-7"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-gray-900 mb-3" data-i18n="feat_2_title">必訪經典景點</h4>
-                    <p class="text-gray-600 leading-relaxed" data-i18n="feat_2_desc">透過高質感的影像紀實，帶您預覽世界各地的壯麗地標與自然風光，並提供實用的交通與參觀建議。</p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="group bg-warm-50 rounded-2xl p-8 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 reveal border border-warm-100" style="transition-delay: 200ms;">
-                    <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-warm-500 group-hover:text-white text-warm-500 transition-colors">
-                        <i data-lucide="heart-handshake" class="w-7 h-7"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-gray-900 mb-3" data-i18n="feat_3_title">多元包容特色</h4>
-                    <p class="text-gray-600 leading-relaxed" data-i18n="feat_3_desc">尊重並體驗不同的信仰、節慶與生活方式。我們分享那些充滿人情味的故事，讓旅行充滿溫度與意義。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Visual Gallery Section -->
-    <section id="gallery" class="py-24 bg-warm-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal">
-                <div class="max-w-2xl">
-                    <h2 class="text-sm font-bold text-warm-300 tracking-widest uppercase mb-3" data-i18n="gal_subtitle">視覺饗宴</h2>
-                    <h3 class="text-3xl md:text-4xl font-bold mb-4" data-i18n="gal_title">用眼睛先去旅行</h3>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Image 1: Food -->
-                <div class="relative group h-80 rounded-xl overflow-hidden reveal">
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Local Food" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="absolute bottom-0 left-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <span class="text-warm-300 text-sm font-bold tracking-wider uppercase mb-1 block" data-i18n="tag_food">美食探索</span>
-                        <h4 class="text-xl font-bold" data-i18n="gal_1_title">道地香料市集的味覺衝擊</h4>
-                    </div>
-                </div>
-
-                <!-- Image 2: Landmark -->
-                <div class="relative group h-80 rounded-xl overflow-hidden reveal" style="transition-delay: 100ms;">
-                    <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80" alt="Landmark" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="absolute bottom-0 left-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <span class="text-warm-300 text-sm font-bold tracking-wider uppercase mb-1 block" data-i18n="tag_landmark">經典景點</span>
-                        <h4 class="text-xl font-bold" data-i18n="gal_2_title">漫步於歷史悠久的古城街道</h4>
-                    </div>
-                </div>
-
-                <!-- Image 3: Culture -->
-                <div class="relative group h-80 rounded-xl overflow-hidden reveal" style="transition-delay: 200ms;">
-                    <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=800&q=80" alt="Culture" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="absolute bottom-0 left-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <span class="text-warm-300 text-sm font-bold tracking-wider uppercase mb-1 block" data-i18n="tag_culture">多元文化</span>
-                        <h4 class="text-xl font-bold" data-i18n="gal_3_title">參與熱情奔放的地方節慶</h4>
-                    </div>
+                <div class="lg:w-1/2 w-full">
+                    <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1000&q=80" alt="European Travel Experience" class="rounded-3xl shadow-2xl w-full h-[400px] object-cover">
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 bg-warm-50 relative overflow-hidden">
-        <!-- Decorative background elements -->
-        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-warm-200 rounded-full opacity-50 blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-earth-500 rounded-full opacity-10 blur-3xl"></div>
-
-        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center reveal">
-            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-warm-100 text-warm-600 mb-6">
-                <i data-lucide="mail" class="w-8 h-8"></i>
-            </div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6" data-i18n="contact_title">準備好與我們分享您的旅程了嗎？</h2>
-            <p class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto" data-i18n="contact_desc">
-                無論是洽詢合作、分享您的私房景點與美食，或是對我們的內容有任何建議，都歡迎隨時來信與 KM Travel 團隊聯繫。
-            </p>
-            <a href="mailto:contact@kmtravel.com" class="inline-flex items-center gap-2 bg-warm-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-warm-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <i data-lucide="send" class="w-5 h-5"></i>
-                <span data-i18n="contact_btn">聯絡信箱：contact@kmtravel.com</span>
-            </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-2">
-                <i data-lucide="globe-2" class="w-6 h-6 text-warm-500"></i>
-                <span class="text-white font-bold text-xl tracking-wide">KM Travel</span>
+    <footer class="bg-brand-900 text-brand-50 py-16 border-t border-brand-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 lg:col-span-2">
+                    <div class="flex items-center mb-6">
+                        <i data-lucide="compass" class="h-8 w-8 text-brand-400 mr-2"></i>
+                        <span class="font-bold text-2xl tracking-tight text-white">KM Travel</span>
+                    </div>
+                    <p class="text-brand-200 leading-relaxed max-w-md mb-8">
+                        Inspiring your next journey with warm stories, diverse cultural insights, and the universal love for local food. Let's explore the world together.
+                    </p>
+                    <a href="mailto:contact@kmtravel.com" class="inline-flex items-center text-brand-300 hover:text-white transition-colors text-lg">
+                        <i data-lucide="mail" class="h-5 w-5 mr-2"></i>
+                        contact@kmtravel.com
+                    </a>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-6">Explore</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#about" class="text-brand-200 hover:text-white transition-colors">Our Spirit</a></li>
+                        <li><a href="#experiences" class="text-brand-200 hover:text-white transition-colors">Culinary Journeys</a></li>
+                        <li><a href="#experiences" class="text-brand-200 hover:text-white transition-colors">Iconic Landmarks</a></li>
+                        <li><a href="#featured" class="text-brand-200 hover:text-white transition-colors">Featured Partners</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-6">Language</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-brand-400 font-medium flex items-center"><i data-lucide="check" class="h-4 w-4 mr-2"></i> English</a></li>
+                        <li><span class="text-brand-200/50 cursor-not-allowed flex items-center">繁體中文 (Coming Soon)</span></li>
+                    </ul>
+                </div>
             </div>
             
-            <div class="text-sm text-center md:text-left">
-                <p data-i18n="footer_copy">&copy; 2026 KM Travel. 探索多元文化與美食. 版權所有.</p>
-            </div>
-
-            <div class="text-sm flex items-center gap-1">
-                Made by <span class="text-warm-400 font-medium">Webomate</span>
+            <div class="border-t border-brand-800/50 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-brand-300 text-sm mb-4 md:mb-0">
+                    &copy; 2026 KM Travel. All rights reserved.
+                </p>
+                <p class="text-brand-300 text-sm flex items-center">
+                    Made by <span class="text-white font-semibold ml-1">Webomate</span>
+                </p>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script>
-        // 初始化 Lucide Icons
+        // Initialize Lucide Icons
         lucide.createIcons();
 
-        // -----------------------------------------
-        // 1. 中英文切換 (i18n) 系統
-        // -----------------------------------------
-        const translations = {
-            zh: {
-                nav_about: "品牌理念", nav_explore: "探索體驗", nav_gallery: "旅行紀實", nav_contact: "聯絡我們",
-                hero_badge: "多元包容的文化之旅",
-                hero_title: "透過味蕾與雙眼<br>探索世界的溫度",
-                hero_btn_start: "展開旅程", hero_btn_more: "了解更多",
-                about_subtitle: "關於 KM Travel",
-                about_title: "品味多元文化，<br>擁抱世界的每一個角落",
-                about_desc_1: "我們相信，旅行不僅僅是走訪著名的景點打卡，更是深入當地生活、感受不同文化脈動的過程。KM Travel 致力於分享具備「多元與包容」精神的旅遊體驗。",
-                about_desc_2: "在這裡，我們特別強調<strong>「透過美食體驗各地文化特色」</strong>。每一道在地料理，都蘊含著當地的歷史、氣候與人文風情。跟著我們的腳步，用影像與文字，一起品嚐世界的故事。",
-                stat_food: "品嚐在地美食", stat_culture: "深度文化體驗", img_cap_market: "走入當地市集，感受最真實的生活氣息",
-                feat_subtitle: "核心體驗", feat_title: "探索旅遊的三大維度", feat_desc: "我們為您精心挑選與整理，讓每一次的閱讀與出發，都能獲得滿滿的感動與實用資訊。",
-                feat_1_title: "在地飲食文化", feat_1_desc: "從街頭小吃到米其林餐廳，我們相信味覺是記憶一座城市最深刻的方式。為您發掘隱藏版美食與其背後的文化意涵。",
-                feat_2_title: "必訪經典景點", feat_2_desc: "透過高質感的影像紀實，帶您預覽世界各地的壯麗地標與自然風光，並提供實用的交通與參觀建議。",
-                feat_3_title: "多元包容特色", feat_3_desc: "尊重並體驗不同的信仰、節慶與生活方式。我們分享那些充滿人情味的故事，讓旅行充滿溫度與意義。",
-                gal_subtitle: "視覺饗宴", gal_title: "用眼睛先去旅行",
-                tag_food: "美食探索", gal_1_title: "道地香料市集的味覺衝擊",
-                tag_landmark: "經典景點", gal_2_title: "漫步於歷史悠久的古城街道",
-                tag_culture: "多元文化", gal_3_title: "參與熱情奔放的地方節慶",
-                contact_title: "準備好與我們分享您的旅程了嗎？",
-                contact_desc: "無論是洽詢合作、分享您的私房景點與美食，或是對我們的內容有任何建議，都歡迎隨時來信與 KM Travel 團隊聯繫。",
-                contact_btn: "聯絡信箱：contact@kmtravel.com",
-                footer_copy: "&copy; 2026 KM Travel. 探索多元文化與美食. 版權所有."
-            },
-            en: {
-                nav_about: "Our Vision", nav_explore: "Experiences", nav_gallery: "Gallery", nav_contact: "Contact Us",
-                hero_badge: "A Journey of Diversity & Inclusion",
-                hero_title: "Discover the World<br>Through Taste & Sight",
-                hero_btn_start: "Start Journey", hero_btn_more: "Learn More",
-                about_subtitle: "About KM Travel",
-                about_title: "Savor Diverse Cultures,<br>Embrace Every Corner",
-                about_desc_1: "We believe travel is more than just ticking off landmarks. It's about diving deep into local life and feeling the pulse of different cultures. KM Travel is dedicated to sharing travel experiences rooted in diversity and inclusion.",
-                about_desc_2: "Here, we highly emphasize <strong>'Experiencing culture through local food'</strong>. Every authentic dish carries the history, climate, and spirit of its origin. Follow our visual and written stories to taste the world together.",
-                stat_food: "Local Dishes Tasted", stat_culture: "Cultural Experiences", img_cap_market: "Step into local markets to feel the authentic vibe of life.",
-                feat_subtitle: "Core Experiences", feat_title: "Three Dimensions of Travel", feat_desc: "Carefully curated and organized to bring you inspiration and practical information for every journey.",
-                feat_1_title: "Local Food Culture", feat_1_desc: "From street food to fine dining, taste is the most profound way to remember a city. We uncover hidden culinary gems and their cultural significance.",
-                feat_2_title: "Iconic Landmarks", feat_2_desc: "Through high-quality visual storytelling, preview magnificent landmarks and natural wonders worldwide, complete with practical travel tips.",
-                feat_3_title: "Diversity & Inclusion", feat_3_desc: "Respect and experience different beliefs, festivals, and lifestyles. We share heartwarming stories that make travel meaningful.",
-                gal_subtitle: "Visual Feast", gal_title: "Travel With Your Eyes",
-                tag_food: "Food Exploration", gal_1_title: "The Flavor Impact of Spice Markets",
-                tag_landmark: "Landmarks", gal_2_title: "Strolling Through Historic City Streets",
-                tag_culture: "Culture", gal_3_title: "Joining Passionate Local Festivals",
-                contact_title: "Ready to Share Your Journey With Us?",
-                contact_desc: "Whether for collaboration, sharing your secret spots and foods, or giving feedback, feel free to contact the KM Travel team anytime.",
-                contact_btn: "Email: contact@kmtravel.com",
-                footer_copy: "&copy; 2026 KM Travel. Exploring Diverse Cultures & Food. All rights reserved."
-            }
-        };
-
-        let currentLang = 'zh';
-        const langToggleBtn = document.getElementById('langToggle');
-        const langText = document.getElementById('langText');
-
-        // 打字機文字陣列
-        const typeTexts = {
-            zh:["品嚐在地美食，細嚼文化底蘊", "走訪經典景點，紀錄壯麗瞬間", "擁抱多元包容，感受人情溫度"],
-            en:["Taste local food, savor the culture", "Visit landmarks, capture the moments", "Embrace diversity, feel the warmth"]
-        };
-        let typeIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let typeTimeout;
-
-        function toggleLanguage() {
-            currentLang = currentLang === 'zh' ? 'en' : 'zh';
-            langText.innerText = currentLang === 'zh' ? 'English' : '中文';
-            document.documentElement.lang = currentLang === 'zh' ? 'zh-TW' : 'en';
-            
-            // 更新所有帶有 data-i18n 的元素
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[currentLang][key]) {
-                    el.innerHTML = translations[currentLang][key];
-                }
-            });
-
-            // 重置打字機效果
-            clearTimeout(typeTimeout);
-            typeIndex = 0;
-            charIndex = 0;
-            isDeleting = false;
-            document.getElementById('typewriter').innerHTML = '';
-            typeWriterEffect();
-        }
-
-        langToggleBtn.addEventListener('click', toggleLanguage);
-
-        // -----------------------------------------
-        // 2. 打字機效果 (Hero Section)
-        // -----------------------------------------
-        function typeWriterEffect() {
-            const currentTextArray = typeTexts[currentLang];
-            const currentString = currentTextArray[typeIndex];
-            const typeElement = document.getElementById('typewriter');
-            
-            if (isDeleting) {
-                typeElement.innerHTML = currentString.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typeElement.innerHTML = currentString.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentString.length) {
-                typeSpeed = 2000; // 停頓時間
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                typeIndex = (typeIndex + 1) % currentTextArray.length;
-                typeSpeed = 500; // 切換下一句前的停頓
-            }
-
-            typeTimeout = setTimeout(typeWriterEffect, typeSpeed);
-        }
-        
-        // 啟動打字機
-        typeWriterEffect();
-
-        // -----------------------------------------
-        // 3. 滾動動畫 (Scroll Reveal)
-        // -----------------------------------------
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal(); // 初始檢查
-
-        // -----------------------------------------
-        // 4. 數字跳動動畫 (Counter)
-        // -----------------------------------------
-        const counters = document.querySelectorAll('.counter');
-        const counterObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    const target = +entry.target.getAttribute('data-target');
-                    const duration = 2000; // 2秒
-                    const increment = target / (duration / 16); // 60fps
-                    
-                    let current = 0;
-                    const updateCounter = () => {
-                        current += increment;
-                        if(current < target) {
-                            entry.target.innerText = Math.ceil(current) + '+';
-                            requestAnimationFrame(updateCounter);
-                        } else {
-                            entry.target.innerText = target + '+';
-                        }
-                    };
-                    updateCounter();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        counters.forEach(counter => {
-            counterObserver.observe(counter);
-        });
-
-        // -----------------------------------------
-        // 5. 導覽列滾動背景變化
-        // -----------------------------------------
-        const navbar = document.getElementById('navbar');
+        // Navbar Scroll Effect
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('shadow-sm');
-                navbar.style.background = 'rgba(253, 251, 247, 0.95)';
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
             } else {
-                navbar.classList.remove('shadow-sm');
-                navbar.style.background = 'rgba(253, 251, 247, 0.85)';
+                nav.classList.remove('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.85)';
             }
         });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target);
+                    
+                    // Trigger counter animation if it contains counters
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        if (!counter.classList.contains('counted')) {
+                            animateCounter(counter);
+                            counter.classList.add('counted');
+                        }
+                    });
+                }
+            });
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, {
+            root: null,
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Typing Effect for Hero Subtitle
+        const textToType = "Experience diverse cultures through authentic flavors and breathtaking destinations.";
+        const typeContainer = document.getElementById('typewriter');
+        let typeIndex = 0;
+
+        function type() {
+            if (typeIndex < textToType.length) {
+                typeContainer.innerHTML += textToType.charAt(typeIndex);
+                typeIndex++;
+                setTimeout(type, 40); // typing speed
+            }
+        }
+
+        // Start typing after a short delay
+        setTimeout(type, 500);
+
+        // Counter Animation Function
+        function animateCounter(element) {
+            const target = parseFloat(element.getAttribute('data-target'));
+            const duration = 2000; // 2 seconds
+            const stepTime = 20;
+            const steps = duration / stepTime;
+            const increment = target / steps;
+            let current = 0;
+            
+            // Check if it's a decimal (like 5.0)
+            const isDecimal = target % 1 !== 0 || element.getAttribute('data-target').includes('.');
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.innerText = isDecimal ? target.toFixed(1) : Math.round(target);
+                    clearInterval(timer);
+                } else {
+                    element.innerText = isDecimal ? current.toFixed(1) : Math.round(current);
+                }
+            }, stepTime);
+        }
     </script>
 </body>
 </html>
 ```
-
-### 💡 設計亮點與功能說明：
-1. **溫和暖色調 (Warm Palette)**：使用自訂的 `warm-500` (陶土橘) 作為主色，搭配 `warm-50` (米白) 的背景，呼應食物的溫度與旅遊的人情味。
-2. **中英文切換功能 (i18n)**：在導覽列右上角加入了 `English / 中文` 的切換按鈕。點擊後會透過原生 JavaScript 即時替換全站包含標題、內文、按鈕等所有文字，無須重新載入頁面。
-3. **動態打字機效果**：首圖區塊 (Hero) 的副標題加入了打字機效果，並且**支援雙語切換**，會根據您選擇的語言顯示對應的動態文案（如：品嚐在地美食 / Taste local food...）。
-4. **高質感視覺與留白**：圖片皆採用高畫質商用圖庫，並加上了微暖色的遮罩(`warm-overlay`)，讓文字在圖片上能清晰閱讀，同時保持整體色調的一致性。
-
-您可以直接將這段程式碼貼到 HTML 檔案中開啟，測試看看語言切換與滾動的順暢效果喔！
