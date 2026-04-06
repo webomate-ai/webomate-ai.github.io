@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>藝伎工坊 Geisha Tufting | 手作地毯・油畫棒・編織包</title>
+    <title>藝伎工坊 Geisha Tufting | 高雄手作地毯・油畫棒肌理畫</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Tailwind Config -->
@@ -18,62 +18,35 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['"Noto Sans TC"', 'sans-serif'],
-                        cute: ['"Fredoka"', '"Noto Sans TC"', 'sans-serif'],
-                    },
                     colors: {
                         brand: {
-                            50: '#FFF9F5',
-                            100: '#FFEFE5',
-                            200: '#FFDDC7',
-                            300: '#FFC2A0',
-                            400: '#FFA070',
-                            500: '#FF8243', // 主色：溫暖橘
-                            600: '#F0631D',
-                            700: '#C84811',
-                            800: '#9E3813',
-                            900: '#7F3114',
+                            50: '#FFF5F0',
+                            100: '#FFE4D6',
+                            200: '#FFCDB3',
+                            300: '#FFB08A',
+                            400: '#FF8A5C',
+                            500: '#FF6B2B', // 主色調：溫暖活潑的橘紅色
+                            600: '#E65319',
                         },
-                        accent: {
-                            pink: '#FF9EBB', // 點綴色：可愛粉
-                            blue: '#88D4CE', // 點綴色：清新藍
-                            yellow: '#FFD166' // 點綴色：活潑黃
-                        },
-                        text: {
-                            main: '#4A3F35', // 溫和的深咖啡色取代純黑
-                            light: '#8A7E73'
+                        warm: {
+                            bg: '#FFFBF7', // 柔和米白背景
+                            card: '#FFFFFF',
                         }
                     },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                        en:['"Nunito"', 'sans-serif'],
+                    },
                     boxShadow: {
-                        'soft': '0 10px 40px -10px rgba(255, 130, 67, 0.15)',
-                        'float': '0 20px 40px -5px rgba(255, 130, 67, 0.2)',
+                        'soft': '0 10px 40px -10px rgba(255,107,43,0.15)',
                     }
                 }
             }
         }
     </script>
 
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- Custom CSS -->
+    <!-- Custom CSS for Animations -->
     <style>
-        body {
-            color: #4A3F35;
-            background-color: #FFF9F5;
-        }
-
-        /* Typewriter Cursor */
-        .cursor-blink {
-            animation: blink 1s step-end infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* Scroll Reveal Utility */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -83,370 +56,328 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* Blob Animation for Background */
-        .blob {
-            animation: move 10s infinite alternate;
+        .typewriter-cursor {
+            animation: blink 1s step-end infinite;
         }
-        @keyframes move {
-            from { transform: translate(0, 0) scale(1); }
-            to { transform: translate(20px, -20px) scale(1.05); }
+        @keyframes blink {
+            50% { opacity: 0; }
         }
-
-        /* Custom Rounded Shapes for Images */
-        .shape-blob {
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        .blob-shape {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: morph 8s ease-in-out infinite;
+        }
+        @keyframes morph {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
         }
     </style>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="antialiased selection:bg-brand-300 selection:text-white">
+<body class="bg-warm-bg text-gray-800 antialiased font-sans overflow-x-hidden">
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
-        <div class="absolute inset-0 bg-white/80 backdrop-blur-md border-b border-brand-100 shadow-sm"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar" style="backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.85);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <a href="#" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 bg-brand-500 rounded-full flex items-center justify-center text-white group-hover:scale-110 transition-transform shadow-md">
-                        <i data-lucide="paw-print" class="w-6 h-6"></i>
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-brand-500 rounded-full flex items-center justify-center text-white shadow-soft">
+                        <i data-lucide="palette" class="w-6 h-6"></i>
                     </div>
-                    <span class="font-cute font-bold text-2xl tracking-wide text-brand-600">藝伎工坊</span>
-                </a>
-
-                <!-- Desktop Menu -->
+                    <span class="font-black text-xl tracking-wider text-gray-900">藝伎工坊 <span class="font-en text-brand-500">Geisha Tufting</span></span>
+                </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="font-medium text-text-main hover:text-brand-500 transition-colors">品牌精神</a>
-                    <a href="#services" class="font-medium text-text-main hover:text-brand-500 transition-colors">特色課程</a>
-                    <a href="#contact" class="font-medium text-text-main hover:text-brand-500 transition-colors">聯絡我們</a>
-                    <a href="https://www.instagram.com/99art1999?igsh=MTI0dGZ2MWdsMmRsdA%3D%3D" target="_blank" class="flex items-center gap-2 bg-gradient-to-r from-brand-400 to-brand-500 text-white px-5 py-2.5 rounded-full font-medium hover:shadow-float hover:-translate-y-0.5 transition-all">
+                    <a href="#about" class="font-medium text-gray-600 hover:text-brand-500 transition-colors">品牌精神</a>
+                    <a href="#services" class="font-medium text-gray-600 hover:text-brand-500 transition-colors">手作課程</a>
+                    <a href="#location" class="font-medium text-gray-600 hover:text-brand-500 transition-colors">聯絡我們</a>
+                    <a href="https://www.instagram.com/99art1999?igsh=MTI0dGZ2MWdsMmRsdA%3D%3D" target="_blank" class="bg-brand-500 text-white px-6 py-2.5 rounded-full font-medium hover:bg-brand-600 hover:shadow-soft transition-all duration-300 hover:-translate-y-1 flex items-center gap-2">
                         <i data-lucide="instagram" class="w-4 h-4"></i>
                         立即預約
                     </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center relative">
-                    <button class="text-text-main hover:text-brand-500" id="mobile-menu-btn">
-                        <i data-lucide="menu" class="w-7 h-7"></i>
-                    </button>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <!-- Decorative Blobs -->
-        <div class="absolute top-20 -left-20 w-72 h-72 bg-accent-pink/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 blob"></div>
-        <div class="absolute top-40 -right-20 w-72 h-72 bg-accent-yellow/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 blob" style="animation-delay: 2s;"></div>
-        <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-accent-blue/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 blob" style="animation-delay: 4s;"></div>
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Image (Cozy Craft Studio Vibe with warm lighting) -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1615486171448-4af69c45bfbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Cozy Craft Studio" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30"></div>
+        </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-                <!-- Text Content -->
-                <div class="w-full lg:w-1/2 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border border-brand-100 mb-6 text-brand-600 font-medium text-sm">
-                        <i data-lucide="sparkles" class="w-4 h-4 text-accent-yellow"></i>
-                        高雄文化幣特約商家
-                    </div>
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-cute leading-tight mb-6 text-text-main">
-                        <span id="typewriter" class="text-brand-500"></span><span class="cursor-blink text-brand-500">|</span>
-                    </h1>
-                    <p class="text-lg md:text-xl text-text-light mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                        將「寵物情感」、「生活美學」與「多元媒材」完美融合的創意空間。在這裡，每一束毛線、每一抹色彩，都是對毛孩與生活最溫暖的告白。
-                    </p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                        <a href="#services" class="w-full sm:w-auto px-8 py-4 bg-brand-500 text-white rounded-full font-medium text-lg hover:bg-brand-600 hover:shadow-float hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                            探索課程
-                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                        </a>
-                        <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-white text-brand-600 border-2 border-brand-100 rounded-full font-medium text-lg hover:border-brand-500 hover:bg-brand-50 transition-all duration-300 flex items-center justify-center">
-                            查看位置
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Hero Image -->
-                <div class="w-full lg:w-1/2 relative reveal">
-                    <div class="relative w-full aspect-square max-w-md mx-auto">
-                        <!-- Main Image -->
-                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-300 to-accent-yellow rounded-[40px] rotate-3 scale-105 opacity-50"></div>
-                        <img src="https://images.unsplash.com/photo-1584448141569-69f342da535c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="色彩繽紛的毛線與手作環境" class="absolute inset-0 w-full h-full object-cover rounded-[40px] shadow-soft z-10 border-4 border-white">
-                        
-                        <!-- Floating Badge -->
-                        <div class="absolute -bottom-6 -left-6 z-20 bg-white p-4 rounded-2xl shadow-float flex items-center gap-4 border border-brand-50 animate-bounce" style="animation-duration: 3s;">
-                            <div class="w-12 h-12 bg-accent-pink/20 rounded-full flex items-center justify-center text-accent-pink">
-                                <i data-lucide="heart" class="w-6 h-6 fill-current"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-text-light font-medium">客製化專屬</p>
-                                <p class="text-sm font-bold text-text-main">寵物肖像藝術</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white mb-6 reveal">
+                <i data-lucide="sparkles" class="w-4 h-4 text-brand-300"></i>
+                <span class="text-sm font-medium tracking-wider">高雄前金區・寵物友善手作空間</span>
             </div>
+            
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight drop-shadow-lg h-24 md:h-32 flex items-center justify-center flex-col">
+                <span id="typewriter" class="text-transparent bg-clip-text bg-gradient-to-r from-white to-brand-100"></span><span class="typewriter-cursor text-brand-400">|</span>
+            </h1>
+            
+            <p class="mt-4 text-lg md:text-2xl text-gray-100 font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-md reveal" style="transition-delay: 200ms;">
+                將「寵物情感」、「生活美學」與「多元媒材」完美融合。<br class="hidden md:block"/>
+                在這裡，每一束毛線、每一筆色彩，都是對毛孩最溫暖的告白。
+            </p>
+            
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 reveal" style="transition-delay: 400ms;">
+                <a href="#services" class="w-full sm:w-auto px-8 py-4 bg-brand-500 text-white rounded-full font-bold text-lg hover:bg-brand-600 hover:shadow-soft transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2">
+                    探索手作課程
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+                <a href="https://www.google.com/maps/place/?q=place_id:ChIJW8jl7BsFbjQREL7S3ZfyOOw" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-white text-gray-900 rounded-full font-bold text-lg hover:bg-gray-50 transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2">
+                    <i data-lucide="map-pin" class="w-5 h-5 text-brand-500"></i>
+                    查看門市導航
+                </a>
+            </div>
+        </div>
+
+        <!-- Decorative Bottom Wave -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
+            <svg class="relative block w-full h-[50px] md:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,123.82,198.39,109.38,241.14,100.12,282.8,80.6,321.39,56.44Z" fill="#FFFBF7"></path>
+            </svg>
         </div>
     </section>
 
     <!-- Social Proof Section -->
-    <section class="py-10 bg-white border-y border-brand-50">
+    <section class="py-12 bg-warm-bg relative z-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
-                <div class="flex items-center gap-4 reveal">
-                    <div class="flex -space-x-2">
-                        <img class="w-12 h-12 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="User">
-                        <img class="w-12 h-12 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="User">
-                        <img class="w-12 h-12 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="User">
-                        <div class="w-12 h-12 rounded-full border-2 border-white bg-brand-100 flex items-center justify-center text-brand-600 font-bold text-sm">+</div>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-1 text-accent-yellow mb-1">
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            <span class="text-text-main font-bold ml-1">5.0</span>
-                        </div>
-                        <p class="text-sm text-text-light font-medium">Google <span id="review-counter" class="font-bold text-brand-500">0</span> 則真實好評</p>
-                    </div>
+            <div class="bg-white rounded-3xl shadow-xl shadow-brand-100/50 p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 reveal transform -translate-y-16">
+                <div class="flex-1 text-center md:text-left">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">深受在地顧客與毛孩家長喜愛</h3>
+                    <p class="text-gray-500">位於高雄市前金區，為您提供最溫馨的創作空間</p>
                 </div>
-                <div class="hidden md:block w-px h-12 bg-brand-100"></div>
-                <div class="text-center md:text-left reveal" style="transition-delay: 200ms;">
-                    <p class="text-lg font-medium text-text-main">「高雄前金區手作首選，將對寵物的愛轉化為實體藝術品！」</p>
-                    <p class="text-sm text-text-light mt-1 flex items-center justify-center md:justify-start gap-1">
-                        <i data-lucide="map-pin" class="w-4 h-4 text-brand-400"></i>
-                        深受在地與旅客喜愛的溫暖手作空間
-                    </p>
+                <div class="flex items-center gap-6">
+                    <div class="text-center">
+                        <div class="flex items-center justify-center gap-1 text-yellow-400 mb-1">
+                            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                        </div>
+                        <div class="text-3xl font-en font-black text-gray-900"><span class="counter" data-target="5.0">0</span></div>
+                        <div class="text-sm text-gray-500 mt-1">Google 真實評分</div>
+                    </div>
+                    <div class="w-px h-16 bg-gray-200"></div>
+                    <div class="text-center">
+                        <div class="text-3xl font-en font-black text-brand-500 mb-1"><span class="counter" data-target="110">0</span>+</div>
+                        <div class="text-sm text-gray-500 mt-1">則五星好評</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-24 relative overflow-hidden">
+    <!-- Core Spirit (About) -->
+    <section id="about" class="py-20 bg-warm-bg overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row items-center gap-16">
-                <div class="w-full lg:w-1/2 reveal">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="可愛寵物與藝術結合" class="shape-blob w-full h-[500px] object-cover shadow-soft border-8 border-white relative z-10">
-                        <div class="absolute -top-6 -right-6 w-32 h-32 bg-accent-yellow rounded-full mix-blend-multiply opacity-50 z-0"></div>
-                        <div class="absolute -bottom-8 -left-8 w-40 h-40 bg-accent-blue rounded-full mix-blend-multiply opacity-30 z-0"></div>
+                <div class="flex-1 relative reveal">
+                    <!-- Cute pet art representation -->
+                    <div class="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white">
+                        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="可愛寵物陪伴手作" class="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-700">
                     </div>
+                    <!-- Decorative blob -->
+                    <div class="absolute -top-10 -left-10 w-64 h-64 bg-brand-200/50 blob-shape z-0"></div>
+                    <div class="absolute -bottom-10 -right-10 w-72 h-72 bg-yellow-200/50 blob-shape z-0" style="animation-delay: -4s;"></div>
                 </div>
-                <div class="w-full lg:w-1/2 reveal">
-                    <div class="inline-flex items-center gap-2 text-brand-500 font-bold mb-4 tracking-wider">
-                        <i data-lucide="heart-handshake" class="w-5 h-5"></i>
-                        品牌精神
+                <div class="flex-1 reveal" style="transition-delay: 200ms;">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 text-brand-600 mb-6">
+                        <i data-lucide="heart" class="w-4 h-4 fill-current"></i>
+                        <span class="text-sm font-bold tracking-wider">核心精神</span>
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-bold font-cute text-text-main mb-6 leading-snug">
-                        把愛變成可以<span class="text-brand-500 relative inline-block">觸摸的溫度
-                            <svg class="absolute w-full h-3 -bottom-1 left-0 text-brand-200 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none"/></svg>
-                        </span>
-                    </h2>
-                    <p class="text-lg text-text-light mb-6 leading-relaxed">
-                        這家店之所以特別，是因為它不僅僅是一個手作教室，更是一個將<strong>「寵物情感」</strong>、<strong>「生活美學」</strong>與<strong>「多元媒材」</strong>完美融合的創意空間。
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight">把愛變成可以<br><span class="text-brand-500">觸摸的溫度</span></h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        藝伎工坊不只是一個手作教室，更是將「寵物情感」與「生活美學」交織的創意空間。我們深知每隻毛孩都是家人，因此 <strong class="text-brand-500">「寵物客製化」</strong> 是我們的靈魂所在。
                     </p>
-                    <p class="text-lg text-text-light mb-8 leading-relaxed">
-                        從我們的作品集可以看出，<strong>「寵物客製化」</strong>是靈魂所在。無論是陶瓷蠟筆畫上的狗狗肖像，還是油畫棒呈現的毛孩神態，我們致力於讓顧客透過親手製作，將對寵物的愛轉化為實體藝術品。這種「親手賦予意義」的過程，讓每一件作品都具備無可取代的情感價值。
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        無論是陶瓷蠟筆畫上的狗狗肖像，還是油畫棒呈現的毛孩神態，我們陪伴您透過親手製作，將對寵物的愛轉化為實體藝術品。這種「親手賦予意義」的過程，讓每一件作品都具備無可取代的情感價值。
                     </p>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-brand-50 flex items-start gap-4">
-                            <div class="bg-brand-100 p-2 rounded-xl text-brand-600"><i data-lucide="dog" class="w-6 h-6"></i></div>
-                            <div>
-                                <h4 class="font-bold text-text-main">寵物專屬</h4>
-                                <p class="text-sm text-text-light mt-1">客製化毛孩神態</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-gray-800 font-medium">
+                            <div class="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center text-brand-500">
+                                <i data-lucide="check" class="w-4 h-4"></i>
                             </div>
-                        </div>
-                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-brand-50 flex items-start gap-4">
-                            <div class="bg-accent-blue/20 p-2 rounded-xl text-accent-blue"><i data-lucide="palette" class="w-6 h-6"></i></div>
-                            <div>
-                                <h4 class="font-bold text-text-main">生活美學</h4>
-                                <p class="text-sm text-text-light mt-1">兼具藝術與實用</p>
+                            高度客製化，還原毛孩可愛神態
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-800 font-medium">
+                            <div class="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center text-brand-500">
+                                <i data-lucide="check" class="w-4 h-4"></i>
                             </div>
-                        </div>
-                    </div>
+                            零基礎友善，專業老師全程指導
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-800 font-medium">
+                            <div class="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center text-brand-500">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            結合實用性，讓藝術融入居家生活
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-24 bg-brand-50 relative">
+    <section id="services" class="py-24 bg-white relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-                <h2 class="text-3xl md:text-4xl font-bold font-cute text-text-main mb-4">特色手作課程</h2>
-                <p class="text-lg text-text-light">無論是療癒的「噠噠」聲，還是畫筆的堆疊，在這裡找到屬於你的藝術時光。</p>
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-black text-gray-900 mb-4">探索多元媒材的樂趣</h2>
+                <p class="text-lg text-gray-500 max-w-2xl mx-auto">從解壓的簇絨地毯到療癒的陶瓷彩繪，找到最適合您的藝術表達方式。</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Card 1: Tufting -->
-                <div class="bg-white rounded-[32px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group border border-brand-100 reveal">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1622340579685-64e5287e0a29?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="手作地毯 Tufting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 right-4 bg-accent-pink text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1">
-                            <i data-lucide="flame" class="w-3 h-3"></i> 人氣 NO.1
-                        </div>
+                <!-- Service 1 -->
+                <div class="group bg-warm-bg rounded-[2rem] overflow-hidden shadow-lg border-2 border-transparent hover:border-brand-300 hover:shadow-soft transition-all duration-300 hover:-translate-y-2 reveal">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1528372444006-1bf81138cbaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="手作地毯" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 left-4 bg-brand-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-md">人氣 NO.1</div>
                     </div>
                     <div class="p-8">
                         <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center">
-                                <i data-lucide="scissors" class="w-5 h-5"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-text-main font-cute">手作地毯 <span class="text-lg text-text-light font-normal">Tufting</span></h3>
+                            <div class="p-2 bg-brand-100 text-brand-600 rounded-lg"><i data-lucide="scissors" class="w-6 h-6"></i></div>
+                            <h3 class="text-2xl font-bold text-gray-900">手作地毯 (Tufting)</h3>
                         </div>
-                        <p class="text-text-light mb-6 leading-relaxed">
-                            店內最受歡迎的課程！使用簇絨槍在畫布上「噠噠噠」地織入毛線，過程極具解壓感。可高度客製化家中寵物大頭或動漫角色。
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-brand-50 text-brand-600 text-sm px-3 py-1 rounded-full font-medium">升級抱枕</span>
-                            <span class="bg-brand-50 text-brand-600 text-sm px-3 py-1 rounded-full font-medium">裝飾掛畫</span>
-                            <span class="bg-brand-50 text-brand-600 text-sm px-3 py-1 rounded-full font-medium">全身鏡邊框</span>
+                        <p class="text-gray-600 mb-6 line-clamp-3">店內最受歡迎的課程！使用簇絨槍在畫布上「噠噠噠」地織入毛線，過程極具解壓感。可高度客製化家中寵物大頭或經典動漫角色。</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-white text-gray-600 text-sm rounded-full border border-gray-200">客製化造型</span>
+                            <span class="px-3 py-1 bg-white text-gray-600 text-sm rounded-full border border-gray-200">抱枕/掛畫升級</span>
+                            <span class="px-3 py-1 bg-white text-gray-600 text-sm rounded-full border border-gray-200">全身鏡裝飾</span>
                         </div>
+                        <a href="https://www.instagram.com/99art1999" target="_blank" class="inline-flex items-center gap-2 text-brand-500 font-bold hover:text-brand-600 transition-colors">
+                            了解詳情 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Card 2: Oil Pastel -->
-                <div class="bg-white rounded-[32px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group border border-brand-100 reveal" style="transition-delay: 100ms;">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="油畫棒肌理畫 Oil Pastel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <!-- Service 2 -->
+                <div class="group bg-warm-bg rounded-[2rem] overflow-hidden shadow-lg border-2 border-transparent hover:border-brand-300 hover:shadow-soft transition-all duration-300 hover:-translate-y-2 reveal" style="transition-delay: 100ms;">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="油畫棒肌理畫" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     </div>
                     <div class="p-8">
                         <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-accent-blue/20 text-accent-blue rounded-full flex items-center justify-center">
-                                <i data-lucide="brush" class="w-5 h-5"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-text-main font-cute">油畫棒肌理畫 <span class="text-lg text-text-light font-normal">Oil Pastel</span></h3>
+                            <div class="p-2 bg-brand-100 text-brand-600 rounded-lg"><i data-lucide="brush" class="w-6 h-6"></i></div>
+                            <h3 class="text-2xl font-bold text-gray-900">油畫棒肌理畫 (Oil Pastel)</h3>
                         </div>
-                        <p class="text-text-light mb-6 leading-relaxed">
-                            使用蠟筆質地的油畫棒，透過堆疊與刮擦創造立體「厚塗感」。技巧門檻相對低，但成品藝術感極強，短時間完成大師級作品！
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full font-medium">名畫臨摹</span>
-                            <span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full font-medium">立體厚塗</span>
-                            <span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full font-medium">零基礎友善</span>
+                        <p class="text-gray-600 mb-6 line-clamp-3">使用質地如蠟筆的油畫棒，透過堆疊與刮擦創造立體「厚塗感」。技巧門檻低但藝術感極強，短時間內就能完成大師級作品。</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-white text-gray-600 text-sm rounded-full border border-gray-200">零基礎友善</span>
+                            <span class="px-3 py-1 bg-white text-gray-600 text-sm rounded-full border border-gray-200">立體厚塗感</span>
+                            <span class="px-3 py-1 bg-white text-gray-600 text-sm rounded-full border border-gray-200">名畫臨摹</span>
                         </div>
+                        <a href="https://www.instagram.com/99art1999" target="_blank" class="inline-flex items-center gap-2 text-brand-500 font-bold hover:text-brand-600 transition-colors">
+                            了解詳情 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Card 3: Ceramics -->
-                <div class="bg-white rounded-[32px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group border border-brand-100 reveal">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="陶瓷蠟筆畫 / 繪盤" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <!-- Service 3 -->
+                <div class="group bg-warm-bg rounded-[2rem] overflow-hidden shadow-lg border-2 border-transparent hover:border-brand-300 hover:shadow-soft transition-all duration-300 hover:-translate-y-2 reveal">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="陶瓷蠟筆畫" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     </div>
                     <div class="p-8">
                         <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-accent-yellow/20 text-yellow-600 rounded-full flex items-center justify-center">
-                                <i data-lucide="coffee" class="w-5 h-5"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-text-main font-cute">陶瓷蠟筆畫 / 繪盤</h3>
+                            <div class="p-2 bg-brand-100 text-brand-600 rounded-lg"><i data-lucide="coffee" class="w-6 h-6"></i></div>
+                            <h3 class="text-2xl font-bold text-gray-900">陶瓷蠟筆畫 / 繪盤</h3>
                         </div>
-                        <p class="text-text-light mb-6 leading-relaxed">
-                            將可愛的插畫（如黃金獵犬圖案）繪製在陶瓷盤上，並寫上「好好吃飯」等暖心字樣。作品不僅是裝飾，更是具備實用功能的餐具。
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-yellow-50 text-yellow-700 text-sm px-3 py-1 rounded-full font-medium">實用器皿</span>
-                            <span class="bg-yellow-50 text-yellow-700 text-sm px-3 py-1 rounded-full font-medium">暖心字句</span>
-                            <span class="bg-yellow-50 text-yellow-700 text-sm px-3 py-1 rounded-full font-medium">寵物插畫</span>
+                        <p class="text-gray-600 mb-6 line-clamp-3">在陶瓷盤上繪製可愛插畫（如黃金獵犬圖案），並寫上暖心字樣。成品不僅是溫馨的裝飾品，更是具有實用功能的餐具。</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-white text-gray-600 text-sm rounded-full border border-gray-200">實用餐具</span>
+                            <span class="px-3 py-1 bg-white text-gray-600 text-sm rounded-full border border-gray-200">寵物插畫</span>
+                            <span class="px-3 py-1 bg-white text-gray-600 text-sm rounded-full border border-gray-200">暖心禮物</span>
                         </div>
+                        <a href="https://www.instagram.com/99art1999" target="_blank" class="inline-flex items-center gap-2 text-brand-500 font-bold hover:text-brand-600 transition-colors">
+                            了解詳情 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Card 4: Woven bags & Lamps -->
-                <div class="bg-white rounded-[32px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group border border-brand-100 reveal" style="transition-delay: 100ms;">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1605335029302-184bb2d1921f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="編織包 & 毛線燈" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <!-- Service 4 -->
+                <div class="group bg-warm-bg rounded-[2rem] overflow-hidden shadow-lg border-2 border-transparent hover:border-brand-300 hover:shadow-soft transition-all duration-300 hover:-translate-y-2 reveal" style="transition-delay: 100ms;">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1584992236310-6edddc08acff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="編織包與毛線燈" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     </div>
                     <div class="p-8">
                         <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center">
-                                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-text-main font-cute">編織包 & 毛線燈</h3>
+                            <div class="p-2 bg-brand-100 text-brand-600 rounded-lg"><i data-lucide="sun" class="w-6 h-6"></i></div>
+                            <h3 class="text-2xl font-bold text-gray-900">編織包 & 毛線燈</h3>
                         </div>
-                        <p class="text-text-light mb-6 leading-relaxed">
-                            製作近期流行的胖胖棉繩包或鉤針包，風格清新文青。或結合光影與纖維藝術，製作溫馨的居家裝飾毛線燈，非常適合送禮。
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-emerald-50 text-emerald-700 text-sm px-3 py-1 rounded-full font-medium">胖胖棉繩包</span>
-                            <span class="bg-emerald-50 text-emerald-700 text-sm px-3 py-1 rounded-full font-medium">光影藝術</span>
-                            <span class="bg-emerald-50 text-emerald-700 text-sm px-3 py-1 rounded-full font-medium">質感送禮</span>
+                        <p class="text-gray-600 mb-6 line-clamp-3">製作近期流行的胖胖棉繩包、清新文青鉤針包；或是結合光影與纖維藝術，製作出溫馨的居家裝飾毛線燈，送禮自用兩相宜。</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-white text-gray-600 text-sm rounded-full border border-gray-200">胖胖棉繩包</span>
+                            <span class="px-3 py-1 bg-white text-gray-600 text-sm rounded-full border border-gray-200">居家光影藝術</span>
+                            <span class="px-3 py-1 bg-white text-gray-600 text-sm rounded-full border border-gray-200">文青風格</span>
                         </div>
+                        <a href="https://www.instagram.com/99art1999" target="_blank" class="inline-flex items-center gap-2 text-brand-500 font-bold hover:text-brand-600 transition-colors">
+                            了解詳情 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
                     </div>
                 </div>
-            </div>
-            
-            <div class="mt-16 text-center reveal">
-                <a href="https://www.instagram.com/99art1999?igsh=MTI0dGZ2MWdsMmRsdA%3D%3D" target="_blank" class="inline-flex items-center gap-2 bg-text-main text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-500 hover:shadow-float hover:-translate-y-1 transition-all duration-300">
-                    <i data-lucide="calendar-heart" class="w-5 h-5"></i>
-                    前往 IG 預約專屬課程
-                </a>
             </div>
         </div>
     </section>
 
-    <!-- Location & Contact Section -->
-    <section id="contact" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-brand-50 rounded-[40px] p-8 md:p-12 lg:p-16 relative overflow-hidden reveal">
-                <!-- BG Decor -->
-                <div class="absolute -right-20 -top-20 w-64 h-64 bg-white rounded-full opacity-50"></div>
-                <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-accent-yellow/20 rounded-full"></div>
-
-                <div class="relative z-10 flex flex-col lg:flex-row gap-12 items-center">
-                    <div class="w-full lg:w-1/2">
-                        <h2 class="text-3xl md:text-4xl font-bold font-cute text-text-main mb-8">來到充滿溫度的空間</h2>
-                        
-                        <div class="space-y-6">
-                            <div class="flex items-start gap-4 group">
-                                <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-brand-500 shadow-sm group-hover:scale-110 transition-transform shrink-0">
-                                    <i data-lucide="map-pin" class="w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-text-main text-lg">工作室地址</h4>
-                                    <p class="text-text-light mt-1">801高雄市前金區五福三路98號2樓</p>
-                                    <a href="https://www.google.com/maps/search/?api=1&query=22.6215924,120.2958244" target="_blank" class="inline-block mt-2 text-sm text-brand-600 font-medium hover:underline">
-                                        Google 導航 →
-                                    </a>
-                                </div>
+    <!-- CTA & Contact Section -->
+    <section id="location" class="py-24 bg-brand-500 text-white relative overflow-hidden">
+        <!-- Decorative background elements -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-2xl transform -translate-x-1/2 translate-y-1/2"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <h2 class="text-4xl md:text-5xl font-black mb-6">準備好創造專屬的溫暖了嗎？</h2>
+                    <p class="text-brand-50 text-lg mb-10 leading-relaxed max-w-lg">
+                        無論是想為心愛的毛孩留作紀念，還是單純想享受一段療癒的手作時光，藝伎工坊都歡迎您的到來。
+                    </p>
+                    
+                    <div class="space-y-6 mb-10">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm"><i data-lucide="map-pin" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">工作室地址</h4>
+                                <p class="text-brand-100">801高雄市前金區五福三路98號2樓</p>
                             </div>
-
-                            <div class="flex items-start gap-4 group">
-                                <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-brand-500 shadow-sm group-hover:scale-110 transition-transform shrink-0">
-                                    <i data-lucide="clock" class="w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-text-main text-lg">營業時間</h4>
-                                    <p class="text-text-light mt-1">每天 09:00 - 21:00</p>
-                                    <p class="text-xs text-brand-400 mt-1">*採預約制，請先透過IG聯繫</p>
-                                </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm"><i data-lucide="clock" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">營業時間</h4>
+                                <p class="text-brand-100">週一至週日 09:00 - 21:00</p>
                             </div>
-
-                            <div class="flex items-start gap-4 group">
-                                <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-brand-500 shadow-sm group-hover:scale-110 transition-transform shrink-0">
-                                    <i data-lucide="phone" class="w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-text-main text-lg">聯絡電話</h4>
-                                    <p class="text-text-light mt-1">0983 986 895</p>
-                                </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm"><i data-lucide="phone" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">聯絡電話</h4>
+                                <p class="text-brand-100">0983-986-895</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="w-full lg:w-1/2">
-                        <!-- Simple Map Placeholder / Image -->
-                        <div class="w-full h-80 bg-white rounded-[32px] p-2 shadow-md border border-brand-100 relative overflow-hidden group">
-                            <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="工作室環境" class="w-full h-full object-cover rounded-[24px] group-hover:scale-105 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-black/20 rounded-[24px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="https://www.google.com/maps/search/?api=1&query=22.6215924,120.2958244" target="_blank" class="bg-white text-text-main px-6 py-3 rounded-full font-bold flex items-center gap-2 hover:bg-brand-500 hover:text-white transition-colors">
-                                    <i data-lucide="map" class="w-5 h-5"></i>
-                                    開啟地圖
-                                </a>
-                            </div>
-                        </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://www.instagram.com/99art1999?igsh=MTI0dGZ2MWdsMmRsdA%3D%3D" target="_blank" class="px-8 py-4 bg-white text-brand-600 rounded-full font-bold text-lg hover:bg-brand-50 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                            IG 私訊預約
+                        </a>
+                        <a href="https://www.google.com/maps/place/?q=place_id:ChIJW8jl7BsFbjQREL7S3ZfyOOw" target="_blank" class="px-8 py-4 bg-brand-600 text-white border border-white/30 rounded-full font-bold text-lg hover:bg-brand-700 transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2">
+                            <i data-lucide="navigation" class="w-5 h-5"></i>
+                            Google 導航
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="reveal" style="transition-delay: 200ms;">
+                    <div class="bg-white p-2 rounded-[2rem] shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="手作環境" class="w-full h-[400px] object-cover rounded-[1.8rem]">
                     </div>
                 </div>
             </div>
@@ -454,39 +385,17 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-text-main pt-16 pb-8 border-t-4 border-brand-500 relative overflow-hidden">
-        <!-- Cute foot prints pattern bg -->
-        <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(#FF8243 2px, transparent 2px); background-size: 30px 30px;"></div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12 border-b border-white/10 pb-12">
-                <div class="text-center md:text-left">
-                    <a href="#" class="flex items-center justify-center md:justify-start gap-3 mb-4">
-                        <div class="w-10 h-10 bg-brand-500 rounded-full flex items-center justify-center text-white">
-                            <i data-lucide="paw-print" class="w-6 h-6"></i>
-                        </div>
-                        <span class="font-cute font-bold text-2xl tracking-wide text-white">藝伎工坊</span>
-                    </a>
-                    <p class="text-gray-400 max-w-sm">
-                        指尖上的溫度，生活中的藝術。<br>將寵物情感完美融合的創意手作空間。
-                    </p>
-                </div>
-                
-                <div class="flex flex-col items-center md:items-end gap-4">
-                    <h4 class="text-white font-bold tracking-wider">追蹤我們</h4>
-                    <div class="flex gap-4">
-                        <a href="https://www.instagram.com/99art1999?igsh=MTI0dGZ2MWdsMmRsdA%3D%3D" target="_blank" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-gradient-to-tr hover:from-brand-400 hover:to-accent-pink hover:scale-110 transition-all duration-300">
-                            <i data-lucide="instagram" class="w-6 h-6"></i>
-                        </a>
-                    </div>
-                </div>
+    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2 text-white">
+                <i data-lucide="palette" class="w-6 h-6 text-brand-500"></i>
+                <span class="font-black text-xl tracking-wider">藝伎工坊</span>
             </div>
-            
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-                <p>&copy; 2026 藝伎工坊 Geisha Tufting. All rights reserved.</p>
-                <p class="flex items-center gap-1">
-                    Made with <i data-lucide="heart" class="w-4 h-4 text-brand-500 fill-current"></i> by Webomate
-                </p>
+            <div class="text-sm text-center md:text-left">
+                &copy; 2026 藝伎工坊 Geisha Tufting. All rights reserved.
+            </div>
+            <div class="text-sm flex items-center gap-1">
+                Made by <span class="text-white font-bold tracking-wide">Webomate</span>
             </div>
         </div>
     </footer>
@@ -496,78 +405,90 @@
         // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Navbar Scroll Effect
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 20) {
-                nav.classList.add('shadow-sm');
-                nav.querySelector('.absolute').classList.replace('bg-white/80', 'bg-white/95');
-            } else {
-                nav.classList.remove('shadow-sm');
-                nav.querySelector('.absolute').classList.replace('bg-white/95', 'bg-white/80');
-            }
-        });
-
         // Typewriter Effect
         const text = "指尖上的溫度，生活中的藝術";
-        const typingSpeed = 150;
-        let charIndex = 0;
-        const typewriterElement = document.getElementById('typewriter');
-
-        function type() {
-            if (charIndex < text.length) {
-                typewriterElement.textContent += text.charAt(charIndex);
-                charIndex++;
-                setTimeout(type, typingSpeed);
+        const typewriterElement = document.getElementById("typewriter");
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < text.length) {
+                typewriterElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 150); // typing speed
             }
         }
         
         // Start typing after a short delay
-        setTimeout(type, 500);
-
-        // Counter Animation for Reviews
-        const counterElement = document.getElementById('review-counter');
-        const targetNumber = 110;
-        const duration = 2000; // 2 seconds
-        const steps = 50;
-        const stepTime = duration / steps;
-        let currentNumber = 0;
-
-        const counterObserver = new IntersectionObserver((entries) => {
-            if(entries[0].isIntersecting) {
-                const timer = setInterval(() => {
-                    currentNumber += Math.ceil(targetNumber / steps);
-                    if (currentNumber >= targetNumber) {
-                        counterElement.innerText = targetNumber;
-                        clearInterval(timer);
-                    } else {
-                        counterElement.innerText = currentNumber;
-                    }
-                }, stepTime);
-                counterObserver.disconnect();
-            }
-        });
-        counterObserver.observe(counterElement);
+        setTimeout(typeWriter, 500);
 
         // Scroll Reveal Animation
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    revealObserver.unobserve(entry.target); // Only animate once
+                    
+                    // Trigger counter animation if it has counters
+                    const counters = entry.target.querySelectorAll('.counter');
+                    if(counters.length > 0) {
+                        animateCounters(counters);
+                    }
+                    
+                    observer.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.15,
-            rootMargin: "0px 0px -50px 0px"
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
         });
 
-        revealElements.forEach(el => revealObserver.observe(el));
-        
-        // Mobile menu toggle (simple alert for demo, ideally opens a modal or dropdown)
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-            alert('請向下滾動查看更多精彩內容，或點擊上方「立即預約」前往 Instagram！');
+        // Counter Animation
+        function animateCounters(counters) {
+            counters.forEach(counter => {
+                const target = parseFloat(counter.getAttribute('data-target'));
+                const duration = 2000; // 2 seconds
+                const frameDuration = 1000 / 60;
+                const totalFrames = Math.round(duration / frameDuration);
+                let frame = 0;
+                
+                const isFloat = target % 1 !== 0;
+
+                const counterInterval = setInterval(() => {
+                    frame++;
+                    const progress = frame / totalFrames;
+                    // Easing out cubic
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    
+                    let current = target * easeOut;
+                    
+                    if(isFloat) {
+                        counter.innerText = current.toFixed(1);
+                    } else {
+                        counter.innerText = Math.round(current);
+                    }
+
+                    if (frame === totalFrames) {
+                        clearInterval(counterInterval);
+                        counter.innerText = isFloat ? target.toFixed(1) : target;
+                    }
+                }, frameDuration);
+            });
+        }
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
         });
     </script>
 </body>
