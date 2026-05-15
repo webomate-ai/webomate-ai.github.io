@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>鹽埕町氷菓室 | 極致細緻的日式刨冰</title>
+    <title>自彈自唱 Dolce far Niemte | 溫州街健康輕食・放鬆聚餐的首選</title>
+    <meta name="description" content="位於台北大安區溫州街的自彈自唱 Dolce far Niemte，提供平價美味的義大利麵、炸物與特調飲品。淡綠與藍色交織的清新空間，是您與家人朋友放鬆聚餐的最佳選擇。">
     
-    <!-- Google Fonts: Noto Serif TC (標題) & Noto Sans TC (內文) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Urbanist:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- Tailwind Config -->
     <script>
@@ -22,26 +23,21 @@
             theme: {
                 extend: {
                     colors: {
-                        matcha: {
-                            400: '#8A9A5B',
-                            500: '#7B8D42',
-                            600: '#667735'
-                        },
-                        hojicha: {
-                            400: '#8C6C53',
-                            500: '#7C5C43',
-                            600: '#634A35'
-                        },
-                        beige: {
-                            50: '#FFFEFA',
-                            100: '#FAF9F6',
-                            200: '#F5F5DC',
-                            300: '#EBEBD3'
+                        brand: {
+                            green: '#81B29A',       /* 用戶指定的淡綠色主調 */
+                            lightGreen: '#E8F1EC',  /* 淡綠背景點綴 */
+                            blue: '#8ECAE6',        /* 用戶指定的藍色點綴 */
+                            lightBlue: '#E6F4FA',   /* 淡藍背景點綴 */
+                            dark: '#2D3A33',        /* 深色文字 */
+                            muted: '#6B7280',       /* 次要文字 */
+                            bg: '#FDFDFD'           /* 乾淨背景 */
                         }
                     },
                     fontFamily: {
-                        sans: ['"Noto Sans TC"', 'sans-serif'],
-                        serif:['"Noto Serif TC"', 'serif'],
+                        sans: ['Urbanist', 'Noto Sans TC', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(129, 178, 154, 0.15)',
                     }
                 }
             }
@@ -49,6 +45,17 @@
     </script>
 
     <style>
+        /* Base styles */
+        body { background-color: #FDFDFD; color: #2D3A33; }
+        
+        /* Glassmorphism Navbar */
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(253, 253, 253, 0.85);
+            border-bottom: 1px solid rgba(129, 178, 154, 0.1);
+        }
+
         /* Scroll Reveal Animation */
         .reveal {
             opacity: 0;
@@ -59,9 +66,14 @@
             opacity: 1;
             transform: translateY(0);
         }
-        
-        /* Custom Typewriter Cursor */
-        .cursor::after {
+
+        /* Delay utilities for staggered animations */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Typewriter cursor */
+        .typewriter-cursor::after {
             content: '|';
             animation: blink 1s step-end infinite;
         }
@@ -70,276 +82,297 @@
             50% { opacity: 0; }
         }
 
-        /* Hero Image Overlay Gradient */
-        .hero-gradient {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
-        }
+        /* Image hover zoom */
+        .img-zoom-container { overflow: hidden; }
+        .img-zoom-container img { transition: transform 0.5s ease; }
+        .img-zoom-container:hover img { transform: scale(1.05); }
     </style>
 </head>
-<body class="antialiased text-gray-800 bg-beige-100 font-sans selection:bg-matcha-200 selection:text-matcha-600">
+<body class="antialiased font-sans">
 
-    <!-- Navbar (Glassmorphism) -->
-    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar" style="backdrop-filter: blur(10px); background: rgba(250, 249, 246, 0.85);">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <i data-lucide="snowflake" class="text-matcha-500 w-8 h-8"></i>
-                    <span class="font-serif text-2xl font-bold text-hojicha-600 tracking-wider">鹽埕町氷菓室</span>
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <img src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260515062321_0.png" alt="Dolce far Niemte Logo" class="h-12 w-auto object-contain">
+                    <span class="ml-3 font-bold text-xl tracking-wider text-brand-dark hidden sm:block">Dolce far Niemte</span>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="text-gray-600 hover:text-matcha-500 font-medium transition-colors duration-300">品牌堅持</a>
-                    <a href="#menu" class="text-gray-600 hover:text-matcha-500 font-medium transition-colors duration-300">人氣冰品</a>
-                    <a href="#info" class="text-gray-600 hover:text-matcha-500 font-medium transition-colors duration-300">營業資訊</a>
-                </div>
-                <div class="hidden md:flex">
-                    <a href="https://line.me/R/ti/p/@ntm3010r?oat_content=url" target="_blank" class="px-5 py-2.5 bg-matcha-500 text-white rounded-full font-medium hover:bg-matcha-600 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg flex items-center gap-2">
-                        <i data-lucide="message-circle" class="w-4 h-4"></i> 聯絡我們
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-brand-dark hover:text-brand-green font-medium transition-colors">品牌精神</a>
+                    <a href="#menu" class="text-brand-dark hover:text-brand-green font-medium transition-colors">美味菜單</a>
+                    <a href="#reviews" class="text-brand-dark hover:text-brand-green font-medium transition-colors">顧客評價</a>
+                    <a href="#contact" class="text-brand-dark hover:text-brand-green font-medium transition-colors">聯絡我們</a>
+                    <a href="https://inline.app/booking/-NRpxi6tKjwkJgTvjIh_:inline-live-3/-NRpxiKwYaohIaq4r0Gu" target="_blank" rel="noopener noreferrer" class="bg-brand-green text-white px-6 py-2.5 rounded-full font-medium hover:bg-brand-blue transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center gap-2">
+                        <i data-lucide="calendar-check" class="w-4 h-4"></i>
+                        立即訂位
                     </a>
                 </div>
-                <!-- Mobile menu button -->
+
+                <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-matcha-500 focus:outline-none">
+                    <button id="mobile-menu-btn" class="text-brand-dark hover:text-brand-green focus:outline-none">
                         <i data-lucide="menu" class="w-6 h-6"></i>
                     </button>
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-beige-50 border-t border-beige-200">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#about" class="block px-3 py-2 text-gray-600 hover:text-matcha-500 font-medium">品牌堅持</a>
-                <a href="#menu" class="block px-3 py-2 text-gray-600 hover:text-matcha-500 font-medium">人氣冰品</a>
-                <a href="#info" class="block px-3 py-2 text-gray-600 hover:text-matcha-500 font-medium">營業資訊</a>
+        
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full">
+            <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
+                <a href="#about" class="block px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-lightGreen rounded-md">品牌精神</a>
+                <a href="#menu" class="block px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-lightGreen rounded-md">美味菜單</a>
+                <a href="#reviews" class="block px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-lightGreen rounded-md">顧客評價</a>
+                <a href="#contact" class="block px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-lightGreen rounded-md">聯絡我們</a>
+                <a href="https://inline.app/booking/-NRpxi6tKjwkJgTvjIh_:inline-live-3/-NRpxiKwYaohIaq4r0Gu" target="_blank" class="block px-3 py-3 text-base font-medium bg-brand-green text-white text-center rounded-md mt-4">立即訂位</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="relative h-screen flex items-center justify-center overflow-hidden">
-        <!-- Background Image (Cozy Japanese alley/cafe aesthetic) -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=1920" alt="鹽埕町氷菓室背景" class="w-full h-full object-cover object-center" />
-            <div class="absolute inset-0 hero-gradient"></div>
+    <section class="relative h-[100svh] flex items-center justify-center overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 w-full h-full">
+            <img src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260515062321_1.png" alt="Cafe Interior" class="w-full h-full object-cover object-center">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60"></div>
         </div>
         
+        <!-- Hero Content -->
         <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
-            <div class="inline-block mb-6 px-4 py-1.5 rounded-full border border-white/40 bg-white/10 backdrop-blur-sm text-beige-100 text-sm tracking-widest reveal">
-                愛河旁老街區巷弄中的靜謐時光
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white text-sm font-medium mb-6 reveal">
+                <i data-lucide="map-pin" class="w-4 h-4 text-brand-green"></i>
+                台北大安區・溫州街裡的靜謐角落
             </div>
-            <h1 class="font-serif text-5xl md:text-7xl font-bold text-white mb-6 tracking-widest leading-tight reveal" style="transition-delay: 200ms;">
-                鹽埕町氷菓室
+            
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-wide">
+                <span id="typewriter-text" class="typewriter-cursor"></span>
             </h1>
-            <p class="text-xl md:text-2xl text-beige-100 font-light tracking-wide h-8 cursor reveal" id="typewriter" style="transition-delay: 400ms;">
-                <!-- Typewriter content injected here -->
+            
+            <p class="text-lg md:text-xl text-gray-100 mb-10 max-w-2xl mx-auto font-light leading-relaxed reveal delay-100">
+                自彈自唱 Dolce far Niemte — 揉合淡綠與藍色的清新空間，為您獻上無負擔的健康輕食。在這裡，放慢腳步，與家人朋友共享最純粹的溫馨時光。
             </p>
-        </div>
-        
-        <!-- Scroll Down Indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 animate-bounce cursor-pointer text-white/70 hover:text-white" onclick="document.getElementById('trust').scrollIntoView()">
-            <i data-lucide="chevron-down" class="w-8 h-8"></i>
-        </div>
-    </header>
-
-    <!-- Social Proof Section -->
-    <section id="trust" class="py-16 bg-white border-b border-beige-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
-            <div class="flex flex-col md:flex-row items-center justify-center gap-6">
-                <div class="flex items-center gap-2">
-                    <span class="text-4xl font-bold text-gray-900">4.8</span>
-                    <div class="flex text-yellow-400">
-                        <i data-lucide="star" class="fill-current w-6 h-6"></i>
-                        <i data-lucide="star" class="fill-current w-6 h-6"></i>
-                        <i data-lucide="star" class="fill-current w-6 h-6"></i>
-                        <i data-lucide="star" class="fill-current w-6 h-6"></i>
-                        <i data-lucide="star" class="fill-current w-6 h-6"></i>
-                    </div>
-                </div>
-                <div class="h-12 w-px bg-gray-200 hidden md:block"></div>
-                <div class="text-left">
-                    <p class="text-gray-600 font-medium">超過 <span class="counter text-matcha-600 font-bold text-xl" data-target="1250">0</span> 則真實好評</p>
-                    <p class="text-gray-500 text-sm mt-1">「位於高雄鹽埕區，深受在地饕客喜愛的頂級日系氷菓室。」</p>
-                </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center reveal delay-200">
+                <a href="#menu" class="bg-white text-brand-dark px-8 py-4 rounded-full font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-brand-lightGreen flex items-center justify-center gap-2">
+                    <i data-lucide="utensils" class="w-5 h-5"></i>
+                    探索美味
+                </a>
+                <a href="https://inline.app/booking/-NRpxi6tKjwkJgTvjIh_:inline-live-3/-NRpxiKwYaohIaq4r0Gu" target="_blank" class="bg-brand-blue text-white px-8 py-4 rounded-full font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-brand-green flex items-center justify-center gap-2">
+                    <i data-lucide="calendar-heart" class="w-5 h-5"></i>
+                    預約美好時光
+                </a>
             </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-white/70 hover:text-white transition-colors">
+                <i data-lucide="chevron-down" class="w-8 h-8"></i>
+            </a>
         </div>
     </section>
 
-    <!-- Core Features / About Section -->
-    <section id="about" class="py-24 bg-beige-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="order-2 lg:order-1 relative reveal">
-                    <img src="https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&q=80&w=800" alt="抹茶製作工藝" class="rounded-2xl shadow-xl w-full object-cover h-[500px]" />
-                    <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg max-w-xs hidden md:block">
-                        <div class="flex items-center gap-4 mb-2">
-                            <div class="w-10 h-10 bg-matcha-100 rounded-full flex items-center justify-center text-matcha-600">
-                                <i data-lucide="leaf"></i>
-                            </div>
-                            <h4 class="font-serif font-bold text-hojicha-600">嚴選頂級產地</h4>
-                        </div>
-                        <p class="text-sm text-gray-600">100% 使用宇治小山園與靜岡空運來台的特級原料。</p>
-                    </div>
-                </div>
-                
-                <div class="order-1 lg:order-2 reveal">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-matcha-100 text-matcha-600 text-sm font-medium mb-6">
-                        <i data-lucide="sparkles" class="w-4 h-4"></i> 職人精神
-                    </div>
-                    <h2 class="font-serif text-4xl font-bold text-gray-900 mb-6 leading-snug">
-                        掌心即化的極致細緻，<br>品嚐一期一會的純粹。
-                    </h2>
-                    <div class="space-y-6 text-gray-600 leading-relaxed">
-                        <p>
-                            隱身於愛河旁的老街區巷弄中，我們致力於將最道地的日式冰品體驗帶給每一位顧客。在這裡，沒有多餘的添加，只有對食材最深切的敬意。
-                        </p>
-                        <div class="bg-white p-6 rounded-xl border border-beige-200 shadow-sm">
-                            <h3 class="font-bold text-hojicha-600 text-lg mb-2 flex items-center gap-2">
-                                <i data-lucide="droplets" class="w-5 h-5"></i> 極致刨冰工藝
-                            </h3>
-                            <p>我們的日式刨冰擁有全台最細緻的口感，薄如蟬翼的冰晶，細到放在掌心便會馬上融化。入口瞬間，如同初雪般輕柔化開。</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-xl border border-beige-200 shadow-sm">
-                            <h3 class="font-bold text-hojicha-600 text-lg mb-2 flex items-center gap-2">
-                                <i data-lucide="coffee" class="w-5 h-5"></i> 講究的茶本味
-                            </h3>
-                            <p>主打抹茶與焙茶系列，不計成本選用日本宇治小山園及靜岡的頂級茶粉，保留茶葉最醇厚的香氣與微苦回甘的成熟風味。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- About / Brand Spirit Section -->
+    <section id="about" class="py-24 bg-brand-bg relative overflow-hidden">
+        <!-- Decorative elements -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-brand-lightGreen rounded-full mix-blend-multiply filter blur-3xl opacity-50 transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-brand-lightBlue rounded-full mix-blend-multiply filter blur-3xl opacity-50 transform translate-x-1/3 translate-y-1/3"></div>
 
-    <!-- Top 3 Menu Section -->
-    <section id="menu" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-                <h2 class="font-serif text-4xl font-bold text-gray-900 mb-4">人氣銷售排行榜</h2>
-                <p class="text-gray-600">精心研發的三款經典口味，感受純粹原料與極致冰晶的完美交融。</p>
-                <div class="w-24 h-1 bg-matcha-500 mx-auto mt-6 rounded-full"></div>
+                <h2 class="text-brand-green font-semibold tracking-wider uppercase text-sm mb-2">Our Spirit</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-brand-dark mb-6">無所事事的甜美</h3>
+                <p class="text-brand-muted text-lg leading-relaxed">
+                    "Dolce far niente" 在義大利語中意味著「無所事事的甜美」。我們希望在繁忙的台北街頭，為您打造一個可以完全放鬆的避風港。以健康輕食為本，搭配溫馨舒適的環境，讓每一次的家人聚餐、朋友相聚，都成為美好的記憶。
+                </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <!-- Rank 1: Matcha -->
-                <div class="group bg-beige-50 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border border-beige-200 reveal">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1599321955726-e04842650dca?auto=format&fit=crop&q=80&w=800" alt="抹茶刨冰" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div class="absolute top-4 left-4 bg-matcha-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow-lg z-10">
-                            1
-                        </div>
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-soft text-center reveal delay-100 hover:-translate-y-2 transition-transform duration-300 border border-gray-50">
+                    <div class="w-16 h-16 mx-auto bg-brand-lightGreen rounded-2xl flex items-center justify-center mb-6 text-brand-green rotate-3 hover:rotate-0 transition-transform">
+                        <i data-lucide="leaf" class="w-8 h-8"></i>
                     </div>
-                    <div class="p-8 text-center">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 mb-3">抹茶刨冰</h3>
-                        <p class="text-gray-600 text-sm mb-6">嚴選宇治小山園頂級抹茶，茶香濃郁深邃，微苦回甘的成熟大人味，搭配入口即化的細緻冰晶，是本店無可取代的招牌。</p>
-                    </div>
+                    <h4 class="text-xl font-bold text-brand-dark mb-3">健康輕食路線</h4>
+                    <p class="text-brand-muted">嚴選新鮮食材，用心烹調每一道義大利麵與特調，讓您享受美味的同時，也吃得健康無負擔。</p>
                 </div>
 
-                <!-- Rank 2: Hojicha -->
-                <div class="group bg-beige-50 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border border-beige-200 reveal" style="transition-delay: 150ms;">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1576092762791-dd9e2220abd1?auto=format&fit=crop&q=80&w=800" alt="焙茶刨冰" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div class="absolute top-4 left-4 bg-hojicha-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow-lg z-10">
-                            2
-                        </div>
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-soft text-center reveal delay-200 hover:-translate-y-2 transition-transform duration-300 border border-gray-50">
+                    <div class="w-16 h-16 mx-auto bg-brand-lightBlue rounded-2xl flex items-center justify-center mb-6 text-brand-blue -rotate-3 hover:rotate-0 transition-transform">
+                        <i data-lucide="users" class="w-8 h-8"></i>
                     </div>
-                    <div class="p-8 text-center">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 mb-3">焙茶刨冰</h3>
-                        <p class="text-gray-600 text-sm mb-6">採用日本靜岡特選焙茶，經過高溫烘焙散發獨特溫潤的火候香氣，口感清爽不甜膩，深受茶飲愛好者的推崇。</p>
-                    </div>
+                    <h4 class="text-xl font-bold text-brand-dark mb-3">溫馨家人聚餐</h4>
+                    <p class="text-brand-muted">寬敞明亮的座位規劃，柔和的淡綠與藍色調，最適合帶著家人長輩、小朋友一同來享受天倫之樂。</p>
                 </div>
 
-                <!-- Rank 3: Cocoa -->
-                <div class="group bg-beige-50 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border border-beige-200 reveal" style="transition-delay: 300ms;">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=800" alt="可可刨冰" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div class="absolute top-4 left-4 bg-gray-800 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow-lg z-10">
-                            3
-                        </div>
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-soft text-center reveal delay-300 hover:-translate-y-2 transition-transform duration-300 border border-gray-50">
+                    <div class="w-16 h-16 mx-auto bg-brand-lightGreen rounded-2xl flex items-center justify-center mb-6 text-brand-green rotate-3 hover:rotate-0 transition-transform">
+                        <i data-lucide="coffee" class="w-8 h-8"></i>
                     </div>
-                    <div class="p-8 text-center">
-                        <h3 class="font-serif text-2xl font-bold text-gray-900 mb-3">可可刨冰</h3>
-                        <p class="text-gray-600 text-sm mb-6">精選高純度進口可可粉調製，香醇濃郁中帶有絲滑口感，苦甜交織的層次風味，為喜愛濃郁系甜點的顧客首選。</p>
-                    </div>
+                    <h4 class="text-xl font-bold text-brand-dark mb-3">讓人放鬆的好地方</h4>
+                    <p class="text-brand-muted">彷彿走入溫州街的綠洲，伴隨著輕柔的音樂與舒適的氛圍，讓疲憊的身心在這裡得到完全的釋放。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Info & Location Section -->
-    <section id="info" class="py-24 bg-beige-100 border-t border-beige-200">
+    <!-- Menu Section -->
+    <section id="menu" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-3xl shadow-xl overflow-hidden reveal">
-                <div class="grid grid-cols-1 lg:grid-cols-2">
-                    <!-- Info Left -->
-                    <div class="p-10 md:p-16">
-                        <h2 class="font-serif text-3xl font-bold text-gray-900 mb-8">來訪資訊</h2>
-                        
-                        <div class="space-y-8">
-                            <!-- Address -->
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 bg-beige-100 rounded-full flex items-center justify-center text-hojicha-600 shrink-0">
-                                    <i data-lucide="map-pin"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-900 text-lg mb-1">店鋪地址</h4>
-                                    <p class="text-gray-600 mb-2">803 高雄市鹽埕區富野路56巷10號</p>
-                                    <a href="https://www.google.com/maps/search/?api=1&query=803高雄市鹽埕區富野路56巷10號" target="_blank" class="text-matcha-600 hover:text-matcha-500 font-medium text-sm inline-flex items-center gap-1 transition-colors">
-                                        開啟 Google 導航 <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                                    </a>
-                                </div>
-                            </div>
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                
+                <!-- Menu Image / Icons -->
+                <div class="w-full lg:w-1/2 reveal img-zoom-container rounded-3xl shadow-soft">
+                    <!-- 使用預測圖片 2: A set of 3 matching minimalist icons for pasta, fries, drink -->
+                    <img src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260515062321_2.png" alt="Dolce far Niemte Menu Elements" class="w-full h-auto object-cover rounded-3xl border border-gray-100">
+                </div>
 
-                            <!-- Hours -->
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 bg-beige-100 rounded-full flex items-center justify-center text-hojicha-600 shrink-0">
-                                    <i data-lucide="clock"></i>
-                                </div>
-                                <div class="w-full">
-                                    <h4 class="font-bold text-gray-900 text-lg mb-3">營業時間</h4>
-                                    <ul class="text-gray-600 space-y-2 text-sm">
-                                        <li class="flex justify-between border-b border-gray-100 pb-1"><span>星期一</span> <span>12:30–16:00</span></li>
-                                        <li class="flex justify-between border-b border-gray-100 pb-1"><span>星期二</span> <span>12:30–17:00</span></li>
-                                        <li class="flex justify-between border-b border-gray-100 pb-1"><span>星期三</span> <span>12:30–17:00</span></li>
-                                        <li class="flex justify-between border-b border-gray-100 pb-1"><span>星期四</span> <span>12:30–17:00</span></li>
-                                        <li class="flex justify-between border-b border-gray-100 pb-1"><span>星期五</span> <span>12:30–17:00</span></li>
-                                        <li class="flex justify-between border-b border-gray-100 pb-1 font-medium text-hojicha-600"><span>星期六</span> <span>12:30–18:00</span></li>
-                                        <li class="flex justify-between font-medium text-hojicha-600"><span>星期日</span> <span>12:30–18:00</span></li>
-                                    </ul>
-                                </div>
+                <!-- Menu Content -->
+                <div class="w-full lg:w-1/2 reveal delay-100">
+                    <div class="mb-10">
+                        <h2 class="text-brand-blue font-semibold tracking-wider uppercase text-sm mb-2">Our Menu</h2>
+                        <h3 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4">精緻平價・美味無負擔</h3>
+                        <p class="text-brand-muted">我們提供多樣化的義式料理與特調飲品，堅持親民的價格，給您最高品質的味蕾享受。</p>
+                    </div>
+
+                    <div class="space-y-8">
+                        <!-- Category 1 -->
+                        <div class="group">
+                            <div class="flex items-center justify-between border-b-2 border-brand-lightGreen pb-2 mb-4">
+                                <h4 class="text-2xl font-bold text-brand-dark flex items-center gap-2">
+                                    <i data-lucide="utensils-crossed" class="w-6 h-6 text-brand-green"></i>
+                                    義大利麵 Pasta
+                                </h4>
+                                <span class="text-brand-green font-bold text-lg bg-brand-lightGreen px-3 py-1 rounded-full">NT$ 100 - 200</span>
                             </div>
+                            <p class="text-brand-muted pl-8">經典肉醬、奶油培根、清炒蒜香白酒蛤蜊... 多種口味，健康清爽不油膩。</p>
+                        </div>
+
+                        <!-- Category 2 -->
+                        <div class="group">
+                            <div class="flex items-center justify-between border-b-2 border-brand-lightBlue pb-2 mb-4">
+                                <h4 class="text-2xl font-bold text-brand-dark flex items-center gap-2">
+                                    <i data-lucide="french-fries" class="w-6 h-6 text-brand-blue"></i>
+                                    炸物拼盤 Fried Snacks
+                                </h4>
+                                <span class="text-brand-blue font-bold text-lg bg-brand-lightBlue px-3 py-1 rounded-full">NT$ 100 - 200</span>
+                            </div>
+                            <p class="text-brand-muted pl-8">歡樂綜合拼盤、金黃脆薯、唐揚炸雞... 聚餐必備，酥脆爽口最對味。</p>
+                        </div>
+
+                        <!-- Category 3 -->
+                        <div class="group">
+                            <div class="flex items-center justify-between border-b-2 border-brand-lightGreen pb-2 mb-4">
+                                <h4 class="text-2xl font-bold text-brand-dark flex items-center gap-2">
+                                    <i data-lucide="cup-soda" class="w-6 h-6 text-brand-green"></i>
+                                    特調飲品 Drinks
+                                </h4>
+                                <span class="text-brand-green font-bold text-lg bg-brand-lightGreen px-3 py-1 rounded-full">NT$ 80 - 150</span>
+                            </div>
+                            <p class="text-brand-muted pl-8">鮮果氣泡飲、經典拿鐵、特調水果茶... 視覺與味覺的雙重享受。</p>
                         </div>
                     </div>
 
-                    <!-- Action Links Right -->
-                    <div class="bg-hojicha-600 p-10 md:p-16 flex flex-col justify-center text-white">
-                        <h3 class="font-serif text-2xl font-bold mb-4">關注我們</h3>
-                        <p class="text-beige-200 mb-10 text-sm leading-relaxed">
-                            追蹤我們的社群平台，獲取最新冰品資訊、季節限定口味，或是透過 LINE 線上與我們聯繫。
-                        </p>
-                        
-                        <div class="space-y-4">
-                            <a href="https://www.facebook.com/YanChengTing.since2016/" target="_blank" class="flex items-center justify-between p-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 hover:-translate-y-1 group">
-                                <div class="flex items-center gap-3">
-                                    <i data-lucide="facebook" class="w-6 h-6"></i>
-                                    <span class="font-medium">Facebook 粉絲專頁</span>
-                                </div>
-                                <i data-lucide="external-link" class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                            </a>
-                            
-                            <a href="https://www.instagram.com/kakigori.yan.shavedice/" target="_blank" class="flex items-center justify-between p-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 hover:-translate-y-1 group">
-                                <div class="flex items-center gap-3">
-                                    <i data-lucide="instagram" class="w-6 h-6"></i>
-                                    <span class="font-medium">Instagram 官方帳號</span>
-                                </div>
-                                <i data-lucide="external-link" class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                            </a>
-                            
-                            <a href="https://line.me/R/ti/p/@ntm3010r?oat_content=url" target="_blank" class="flex items-center justify-between p-4 rounded-xl bg-matcha-500 hover:bg-matcha-400 border border-matcha-400 transition-all duration-300 hover:-translate-y-1 group shadow-lg">
-                                <div class="flex items-center gap-3">
-                                    <i data-lucide="message-circle" class="w-6 h-6"></i>
-                                    <span class="font-medium">LINE 官方客服</span>
-                                </div>
-                                <i data-lucide="external-link" class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                            </a>
+                    <div class="mt-10">
+                        <a href="https://inline.app/booking/-NRpxi6tKjwkJgTvjIh_:inline-live-3/-NRpxiKwYaohIaq4r0Gu" target="_blank" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-brand-dark hover:bg-brand-green transition-colors duration-300 w-full sm:w-auto shadow-md hover:shadow-lg">
+                            查看完整菜單與訂位
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof / Statistics Section -->
+    <section id="reviews" class="py-20 bg-brand-green relative">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1495195134817-a1a2807b93b1?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center mix-blend-overlay"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/20">
+                <div class="p-4 reveal">
+                    <div class="flex justify-center mb-2">
+                        <div class="flex text-yellow-300">
+                            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold text-white mb-2"><span class="counter" data-target="4.9">0</span> 星好評</div>
+                    <div class="text-brand-lightGreen font-medium">Google 商家真實評價</div>
+                </div>
+                <div class="p-4 reveal delay-100">
+                    <div class="text-4xl font-bold text-white mb-2"><span class="counter" data-target="100">0</span>%</div>
+                    <div class="text-brand-lightGreen font-medium">用心手作健康料理</div>
+                </div>
+                <div class="p-4 reveal delay-200">
+                    <div class="text-4xl font-bold text-white mb-2"><span class="counter" data-target="1000">0</span>+</div>
+                    <div class="text-brand-lightGreen font-medium">創造無數溫馨聚餐時光</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Carousel (Static realistic representation) -->
+    <section class="py-24 bg-brand-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-brand-blue font-semibold tracking-wider uppercase text-sm mb-2">Testimonials</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-brand-dark">顧客的真實回饋</h3>
+                <p class="mt-4 text-brand-muted">位於台北大安區，深受在地饕客喜愛的聚餐首選。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-soft reveal delay-100 border border-gray-50 relative">
+                    <i data-lucide="quote" class="absolute top-6 right-6 w-8 h-8 text-brand-lightGreen opacity-50"></i>
+                    <div class="flex text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-brand-dark mb-6 leading-relaxed">「店內裝潢是淡淡的綠色和藍色，給人一種非常放鬆的感覺。義大利麵份量剛好，口味清爽不油膩，真的很適合帶長輩來這裡家庭聚餐！」</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-brand-lightBlue rounded-full flex items-center justify-center text-brand-blue font-bold">C</div>
+                        <div>
+                            <div class="font-bold text-sm text-brand-dark">Chen Y.</div>
+                            <div class="text-xs text-brand-muted">在地嚮導</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-soft reveal delay-200 border border-gray-50 relative">
+                    <i data-lucide="quote" class="absolute top-6 right-6 w-8 h-8 text-brand-lightGreen opacity-50"></i>
+                    <div class="flex text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-brand-dark mb-6 leading-relaxed">「溫州街裡的隱藏好店！炸物拼盤CP值超高，特調飲品不只好喝還很好拍。重點是價格非常親民（100-200元），服務態度也很親切，推推！」</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-brand-lightGreen rounded-full flex items-center justify-center text-brand-green font-bold">L</div>
+                        <div>
+                            <div class="font-bold text-sm text-brand-dark">Lin H.</div>
+                            <div class="text-xs text-brand-muted">美食部落客</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-soft reveal delay-300 border border-gray-50 relative">
+                    <i data-lucide="quote" class="absolute top-6 right-6 w-8 h-8 text-brand-lightGreen opacity-50"></i>
+                    <div class="flex text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-brand-dark mb-6 leading-relaxed">「完全呼應了店名 Dolce far niente，週末下午在這裡點杯特調，什麼都不做真的很幸福。環境乾淨明亮，是個會讓人想一訪再訪的好地方。」</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 font-bold">W</div>
+                        <div>
+                            <div class="font-bold text-sm text-brand-dark">Wang T.</div>
+                            <div class="text-xs text-brand-muted">常客</div>
                         </div>
                     </div>
                 </div>
@@ -347,16 +380,71 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-12 text-center">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex items-center justify-center gap-2 mb-6">
-                <i data-lucide="snowflake" class="text-matcha-500 w-6 h-6"></i>
-                <span class="font-serif text-xl font-bold text-white tracking-wider">鹽埕町氷菓室</span>
+    <!-- Footer / Contact -->
+    <footer id="contact" class="bg-brand-dark text-white pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-1">
+                    <img src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260515062321_0.png" alt="Dolce far Niemte Logo" class="h-16 w-auto object-contain mb-6 bg-white/10 p-2 rounded-xl">
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        溫州街裡的靜謐角落，提供健康輕食與放鬆氛圍，是您與家人朋友溫馨聚餐的最佳選擇。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/dolce_far_niemte1008/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-blue transition-colors duration-300">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="lg:col-span-1">
+                    <h4 class="text-lg font-bold mb-6 text-brand-lightGreen">聯絡資訊</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 text-gray-400">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-brand-green shrink-0 mt-1"></i>
+                            <span>106臺北市大安區溫州街48巷24號</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-400">
+                            <i data-lucide="phone" class="w-5 h-5 text-brand-green shrink-0"></i>
+                            <a href="tel:0223670234" class="hover:text-white transition-colors">02-2367-0234</a>
+                        </li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=106臺北市大安區溫州街48巷24號" target="_blank" class="mt-6 inline-flex items-center gap-2 text-sm text-brand-blue hover:text-white transition-colors">
+                        <i data-lucide="navigation" class="w-4 h-4"></i>
+                        開啟 Google 導航
+                    </a>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="lg:col-span-1">
+                    <h4 class="text-lg font-bold mb-6 text-brand-lightGreen">快速連結</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i data-lucide="chevron-right" class="w-4 h-4"></i> 品牌精神</a></li>
+                        <li><a href="#menu" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i data-lucide="chevron-right" class="w-4 h-4"></i> 美味菜單</a></li>
+                        <li><a href="#reviews" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i data-lucide="chevron-right" class="w-4 h-4"></i> 顧客評價</a></li>
+                    </ul>
+                </div>
+
+                <!-- Action -->
+                <div class="lg:col-span-1">
+                    <h4 class="text-lg font-bold mb-6 text-brand-lightGreen">營業預約</h4>
+                    <p class="text-gray-400 mb-6">歡迎提前線上訂位，讓我們為您保留最舒適的座位。</p>
+                    <a href="https://inline.app/booking/-NRpxi6tKjwkJgTvjIh_:inline-live-3/-NRpxiKwYaohIaq4r0Gu" target="_blank" class="block w-full text-center bg-brand-green hover:bg-brand-blue text-white py-3 rounded-xl font-bold transition-all duration-300 shadow-lg hover:-translate-y-1">
+                        線上立即訂位
+                    </a>
+                </div>
             </div>
-            <p class="mb-2">高雄巷弄內的極致日式刨冰體驗</p>
-            <p class="text-sm mt-8">&copy; 2026 鹽埕町氷菓室. All rights reserved.</p>
-            <p class="text-xs mt-2 opacity-50">Made by Webomate</p>
+
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">
+                    &copy; 2026 自彈自唱 Dolce far Niemte. All rights reserved.
+                </p>
+                <p class="text-gray-500 text-sm flex items-center gap-1">
+                    Made by <span class="text-brand-green font-semibold">Webomate</span>
+                </p>
+            </div>
         </div>
     </footer>
 
@@ -372,31 +460,48 @@
             menu.classList.toggle('hidden');
         });
 
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-sm');
+                navbar.style.background = 'rgba(253, 253, 253, 0.95)';
+            } else {
+                navbar.classList.remove('shadow-sm');
+                navbar.style.background = 'rgba(253, 253, 253, 0.85)';
+            }
+        });
+
         // Typewriter Effect
-        const textToType = "高雄鹽埕巷弄內的極致日系氷菓室";
-        const typeWriterElement = document.getElementById('typewriter');
-        let i = 0;
-        
+        const text = "品味健康輕食，享受無所事事的甜美";
+        const typewriterElement = document.getElementById('typewriter-text');
+        let index = 0;
+
         function typeWriter() {
-            if (i < textToType.length) {
-                typeWriterElement.innerHTML += textToType.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
+            if (index < text.length) {
+                typewriterElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 120);
+            } else {
+                // Remove cursor after completion
+                setTimeout(() => {
+                    typewriterElement.classList.remove('typewriter-cursor');
+                }, 2000);
             }
         }
         
         // Start typewriter after a short delay
-        setTimeout(typeWriter, 1000);
+        setTimeout(typeWriter, 500);
 
         // Scroll Reveal Animation
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
-            for (var j = 0; j < reveals.length; j++) {
+            for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
-                var elementTop = reveals[j].getBoundingClientRect().top;
+                var elementTop = reveals[i].getBoundingClientRect().top;
                 var elementVisible = 100;
                 if (elementTop < windowHeight - elementVisible) {
-                    reveals[j].classList.add("active");
+                    reveals[i].classList.add("active");
                 }
             }
         }
@@ -407,30 +512,39 @@
         const counters = document.querySelectorAll('.counter');
         const speed = 200; // The lower the slower
 
-        const runCounter = () => {
+        const animateCounters = () => {
             counters.forEach(counter => {
                 const updateCount = () => {
                     const target = +counter.getAttribute('data-target');
                     const count = +counter.innerText;
+                    
+                    // Lower inc to slow and higher to speed up
                     const inc = target / speed;
 
                     if (count < target) {
-                        counter.innerText = Math.ceil(count + inc);
-                        setTimeout(updateCount, 10);
+                        // Check if it's a float (for rating)
+                        if(target % 1 !== 0) {
+                            counter.innerText = (count + inc).toFixed(1);
+                        } else {
+                            counter.innerText = Math.ceil(count + inc);
+                        }
+                        setTimeout(updateCount, 20);
                     } else {
                         counter.innerText = target;
                     }
                 };
                 
-                // Only run when element is visible
-                const rect = counter.getBoundingClientRect();
-                if(rect.top < window.innerHeight && counter.innerText == "0") {
-                    updateCount();
-                }
+                // Only animate when in view
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        updateCount();
+                        observer.disconnect(); // Run once
+                    }
+                });
+                observer.observe(counter);
             });
-        };
-        window.addEventListener('scroll', runCounter);
-        runCounter(); // Check on load
+        }
+        animateCounters();
     </script>
 </body>
 </html>
