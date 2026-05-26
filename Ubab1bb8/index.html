@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台北水晶 手工水餃 | 晶瑩剔透，純粹美味</title>
+    
+    <!-- Google Fonts: Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-offwhite': '#FDFBF7', // 米白
+                        'brand-wood': '#D4B895',     // 淺木色
+                        'brand-wood-light': '#F5EFE6', // 更淺的木色背景
+                        'brand-aqua': '#48B5A3',     // 湖水綠
+                        'brand-aqua-light': '#E5F4F2', 
+                        'brand-blue': '#89C2D9',     // 淡藍色
+                        'brand-dark': '#4A4A4A',     // 深灰字體
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Animations */
+        body {
+            background-color: #FDFBF7;
+            color: #4A4A4A;
+        }
+        
+        .glass-nav {
+            backdrop-filter: blur(10px);
+            background: rgba(253, 251, 247, 0.85);
+            border-bottom: 1px solid rgba(212, 184, 149, 0.2);
+        }
+
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: #48B5A3;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Image Overlay Gradient */
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(253, 251, 247, 0.9) 0%, rgba(253, 251, 247, 0.4) 100%);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-aqua selection:text-white flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <img src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260526145409_0.png" alt="台北水晶 Logo" class="h-12 w-12 object-cover rounded-full border-2 border-brand-wood">
+                    <span class="font-bold text-2xl tracking-wider text-brand-dark">台北水晶</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#about" class="text-brand-dark hover:text-brand-aqua transition-colors duration-300 font-medium">品牌精神</a>
+                    <a href="#menu" class="text-brand-dark hover:text-brand-aqua transition-colors duration-300 font-medium">招牌口味</a>
+                    <a href="#reviews" class="text-brand-dark hover:text-brand-aqua transition-colors duration-300 font-medium">顧客見證</a>
+                    <a href="#contact" class="bg-brand-aqua text-white px-6 py-2 rounded-full hover:bg-teal-500 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-medium">
+                        線上預約
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-brand-dark hover:text-brand-aqua focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-20 pb-32 lg:pt-32 lg:pb-48 min-h-[90vh] flex items-center">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1496116218417-1a781b1c416c?q=80&w=2070&auto=format&fit=crop" alt="手工水餃" class="w-full h-full object-cover object-center">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-2xl reveal-up">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-aqua-light text-brand-aqua font-medium mb-6">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>堅持手工・新鮮食材・家的味道</span>
+                </div>
+                <h1 class="text-5xl lg:text-6xl font-bold text-brand-dark leading-tight mb-4">
+                    晶瑩剔透<br>
+                    <span class="text-brand-wood">純粹美味</span>
+                </h1>
+                <div class="text-xl lg:text-2xl text-gray-600 mb-8 h-8">
+                    <span id="typewriter-text"></span><span class="typewriter-cursor"></span>
+                </div>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#menu" class="bg-brand-aqua text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-teal-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        查看菜單
+                    </a>
+                    <a href="#about" class="bg-white text-brand-dark border border-brand-wood px-8 py-3 rounded-full text-lg font-medium hover:bg-brand-wood-light hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        了解我們
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Spirit (About) -->
+    <section id="about" class="py-24 bg-brand-offwhite">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal-up">
+                <h2 class="text-3xl lg:text-4xl font-bold text-brand-dark mb-4">每一顆，都是用心的結晶</h2>
+                <div class="w-24 h-1 bg-brand-wood mx-auto rounded-full"></div>
+                <p class="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
+                    台北水晶以米白與淺木色為基底，點綴清新的湖水綠，就像我們對待每一顆水餃的態度：純粹、自然、充滿生機。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal-up text-center border border-gray-50">
+                    <div class="w-16 h-16 bg-brand-aqua-light rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="chef-hat" class="w-8 h-8 text-brand-aqua"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3">堅持手工 匠心獨具</h3>
+                    <p class="text-gray-600">從揉麵、桿皮到包餡，純手工製作，保留麵皮的Q彈與手作的溫度，每一口都是職人精神的展現。</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal-up text-center border border-gray-50" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="leaf" class="w-8 h-8 text-brand-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3">新鮮食材 清爽美味</h3>
+                    <p class="text-gray-600">嚴選在地小農蔬菜與當日溫體豬肉，不添加多餘人工調味，呈現食材最原始的清甜與純粹。</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal-up text-center border border-gray-50" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 bg-brand-wood-light rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="heart-handshake" class="w-8 h-8 text-brand-wood"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3">家的味道 溫暖傳承</h3>
+                    <p class="text-gray-600">記憶中阿嬤包的水餃滋味，我們用心保留。讓您在繁忙的都市中，也能品嚐到家的溫暖感受。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-24 bg-brand-wood-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal-up">
+                <h2 class="text-3xl lg:text-4xl font-bold text-brand-dark mb-4">招牌口味</h2>
+                <div class="w-24 h-1 bg-brand-aqua mx-auto rounded-full"></div>
+                <p class="mt-6 text-lg text-gray-600">顆顆飽滿，口口滿足，為您獻上四款經典美味。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Item 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 reveal-up group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?q=80&w=800&auto=format&fit=crop" alt="經典高麗菜豬肉水餃" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-brand-aqua font-bold text-sm">熱銷 NO.1</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-brand-dark">經典高麗菜豬肉</h3>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">嚴選梨山高麗菜的清甜，搭配完美比例溫體豬肉，最受歡迎的家常口味。</p>
+                        <div class="flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
+                            <span class="text-brand-wood font-bold text-lg">NT$ 100</span>
+                            <span class="text-gray-400 text-sm">/ 10顆</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 reveal-up group" style="transition-delay: 100ms;">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?q=80&w=800&auto=format&fit=crop" alt="鮮蝦韭黃豬肉水餃" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-brand-dark">鮮蝦韭黃豬肉</h3>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">豪邁包入整尾鮮甜白蝦，佐以特選韭黃提味，海陸雙重享受在口中爆發。</p>
+                        <div class="flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
+                            <span class="text-brand-wood font-bold text-lg">NT$ 150</span>
+                            <span class="text-gray-400 text-sm">/ 10顆</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 reveal-up group" style="transition-delay: 200ms;">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cb438?q=80&w=800&auto=format&fit=crop" alt="玉米鮮肉水餃" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-brand-dark">玉米鮮肉</h3>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">飽滿多汁的非基改甜玉米粒，與鮮肉完美融合，大人小孩都無法抗拒的甜脆滋味。</p>
+                        <div class="flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
+                            <span class="text-brand-wood font-bold text-lg">NT$ 120</span>
+                            <span class="text-gray-400 text-sm">/ 10顆</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 reveal-up group" style="transition-delay: 300ms;">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1628240410651-787037bdcd84?q=80&w=800&auto=format&fit=crop" alt="香菇瓜仔雞肉水餃" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-brand-dark">香菇瓜仔雞肉</h3>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">特選低脂雞肉搭配新社香菇與甘甜脆瓜，清爽不油膩，獨家懷舊風味。</p>
+                        <div class="flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
+                            <span class="text-brand-wood font-bold text-lg">NT$ 130</span>
+                            <span class="text-gray-400 text-sm">/ 10顆</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof / Trust Section -->
+    <section id="reviews" class="py-24 bg-white relative overflow-hidden">
+        <!-- Decorative elements -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-aqua-light rounded-full mix-blend-multiply filter blur-3xl opacity-50 transform translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-brand-wood-light rounded-full mix-blend-multiply filter blur-3xl opacity-50 transform -translate-x-1/2 translate-y-1/2"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Stats & Text -->
+                <div class="reveal-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-50 text-yellow-600 font-medium mb-6">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <span>Google 評分 4.8 顆星高分推薦</span>
+                    </div>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-brand-dark mb-6">
+                        位於台北市，深受在地饕客喜愛的頂級手工水餃。
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-10">
+                        「台北水晶」秉持著呈現純粹美味的初心，每一口都能吃得出食材的新鮮與手作的溫度。感謝無數顧客的真實好評與支持，讓我們持續將這份家的味道傳遞下去。
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <div class="text-4xl font-bold text-brand-aqua mb-2 flex items-center">
+                                <span class="counter" data-target="150000">0</span>
+                                <span>+</span>
+                            </div>
+                            <div class="text-gray-500 font-medium">累積售出水餃 (顆)</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold text-brand-wood mb-2 flex items-center">
+                                <span class="counter" data-target="2800">0</span>
+                                <span>+</span>
+                            </div>
+                            <div class="text-gray-500 font-medium">滿意顧客好評</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Cards -->
+                <div class="space-y-6 reveal-up" style="transition-delay: 200ms;">
+                    <!-- Card 1 -->
+                    <div class="bg-brand-offwhite p-6 rounded-2xl shadow-sm border border-gray-100 relative">
+                        <i data-lucide="quote" class="absolute top-6 right-6 w-8 h-8 text-brand-wood opacity-20"></i>
+                        <div class="flex items-center gap-1 mb-3 text-yellow-400">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-gray-700 mb-4">「真的是吃過最晶瑩剔透的水餃！皮Q餡多，高麗菜豬肉吃得出食材的新鮮，就像小時候媽媽包的味道一樣溫暖。」</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-brand-aqua rounded-full flex items-center justify-center text-white font-bold">陳</div>
+                            <div>
+                                <div class="font-bold text-brand-dark text-sm">陳小姐</div>
+                                <div class="text-gray-400 text-xs">在地顧客</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-brand-offwhite p-6 rounded-2xl shadow-sm border border-gray-100 relative transform lg:-translate-x-8">
+                        <i data-lucide="quote" class="absolute top-6 right-6 w-8 h-8 text-brand-blue opacity-20"></i>
+                        <div class="flex items-center gap-1 mb-3 text-yellow-400">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-gray-700 mb-4">「鮮蝦韭黃太讓人驚豔了！裡面有一整隻蝦子，咬下去滿滿的海味與肉汁，絕對會再回購！」</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-brand-wood rounded-full flex items-center justify-center text-white font-bold">林</div>
+                            <div>
+                                <div class="font-bold text-brand-dark text-sm">林先生</div>
+                                <div class="text-gray-400 text-xs">美食愛好者</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="bg-brand-dark text-white pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260526145409_0.png" alt="台北水晶 Logo" class="h-10 w-10 object-cover rounded-full border border-white">
+                        <span class="font-bold text-xl tracking-wider text-white">台北水晶</span>
+                    </div>
+                    <p class="text-gray-400 mb-6 line-clamp-3">
+                        堅持手工、新鮮食材、家的味道。為您獻上晶瑩剔透、純粹美味的手工水餃。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-aqua transition-colors duration-300">
+                            <i data-lucide="facebook" class="w-5 h-5 text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-aqua transition-colors duration-300">
+                            <i data-lucide="instagram" class="w-5 h-5 text-white"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 border-b border-white/20 pb-2 inline-block">快速連結</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="text-gray-400 hover:text-brand-aqua transition-colors duration-300">品牌精神</a></li>
+                        <li><a href="#menu" class="text-gray-400 hover:text-brand-aqua transition-colors duration-300">招牌口味</a></li>
+                        <li><a href="#reviews" class="text-gray-400 hover:text-brand-aqua transition-colors duration-300">顧客見證</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="lg:col-span-2">
+                    <h4 class="text-lg font-bold mb-6 border-b border-white/20 pb-2 inline-block">聯絡我們</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-brand-aqua mt-1 flex-shrink-0"></i>
+                            <div>
+                                <span class="block text-gray-300">台北市大安區 (近捷運站)</span>
+                                <a href="https://maps.google.com/?q=台北市大安區" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-sm text-brand-wood hover:text-white mt-1 transition-colors">
+                                    <span>開啟 Google 導航</span>
+                                    <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="phone" class="w-5 h-5 text-brand-aqua flex-shrink-0"></i>
+                            <span class="text-gray-300">02-2345-6789 (預約專線)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="clock" class="w-5 h-5 text-brand-aqua mt-1 flex-shrink-0"></i>
+                            <div class="text-gray-300">
+                                營業時間：<br>
+                                週一至週六 11:00 - 20:00<br>
+                                <span class="text-sm text-gray-500">(每週日公休)</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">
+                    &copy; 2026 台北水晶 手工水餃. All rights reserved.
+                </p>
+                <p class="text-gray-500 text-sm flex items-center gap-1">
+                    Made by <span class="text-brand-aqua font-medium">Webomate</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Typewriter Effect
+        const phrases = [
+            "台北老饕一致推薦的手工水餃",
+            "堅持每日新鮮手作的溫度",
+            "口口爆汁的純粹美味"
+        ];
+        let i = 0;
+        let j = 0;
+        let currentPhrase = [];
+        let isDeleting = false;
+        let isEnd = false;
+        const textDisplay = document.getElementById('typewriter-text');
+
+        function loop() {
+            isEnd = false;
+            textDisplay.innerHTML = currentPhrase.join('');
+
+            if (i < phrases.length) {
+                if (!isDeleting && j <= phrases[i].length) {
+                    currentPhrase.push(phrases[i][j]);
+                    j++;
+                    textDisplay.innerHTML = currentPhrase.join('');
+                }
+
+                if (isDeleting && j <= phrases[i].length) {
+                    currentPhrase.pop(phrases[i][j]);
+                    j--;
+                    textDisplay.innerHTML = currentPhrase.join('');
+                }
+
+                if (j == phrases[i].length) {
+                    isEnd = true;
+                    isDeleting = true;
+                }
+
+                if (isDeleting && j === 0) {
+                    currentPhrase = [];
+                    isDeleting = false;
+                    i++;
+                    if (i === phrases.length) {
+                        i = 0;
+                    }
+                }
+            }
+            const spedUp = Math.random() * (80 - 50) + 50;
+            const normalSpeed = Math.random() * (150 - 100) + 100;
+            const time = isEnd ? 2000 : isDeleting ? spedUp : normalSpeed;
+            setTimeout(loop, time);
+        }
+        
+        // Start typewriter
+        setTimeout(loop, 500);
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal-up');
+        
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+        
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        let hasCounted = false;
+
+        const counterCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasCounted) {
+                    hasCounted = true;
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        if(target === 0) return; // Do not animate if 0
+                        
+                        const duration = 2000; // 2 seconds
+                        const increment = target / (duration / 16); // 60fps
+                        
+                        let current = 0;
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current < target) {
+                                counter.innerText = Math.ceil(current).toLocaleString();
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.innerText = target.toLocaleString();
+                            }
+                        };
+                        updateCounter();
+                    });
+                }
+            });
+        };
+
+        const counterObserver = new IntersectionObserver(counterCallback, { threshold: 0.5 });
+        const reviewSection = document.getElementById('reviews');
+        if(reviewSection) {
+            counterObserver.observe(reviewSection);
+        }
+
+        // Navbar blur on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-sm');
+                navbar.style.background = 'rgba(253, 251, 247, 0.95)';
+            } else {
+                navbar.classList.remove('shadow-sm');
+                navbar.style.background = 'rgba(253, 251, 247, 0.85)';
+            }
+        });
+    </script>
+</body>
+</html>
+```
