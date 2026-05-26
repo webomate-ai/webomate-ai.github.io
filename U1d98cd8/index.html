@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORIS 穩腳石 | 專業、溫暖、可信任的浴室防跌專家</title>
+    <meta name="description" content="ORIS 穩腳石提供專利微奈米多孔無機板材，利用真空吸附原理，有效解決浴室濕滑問題，守護智齡長者的每一步。">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7f9',
+                            100: '#dcecf1',
+                            300: '#a3cddc',
+                            500: '#5b9eb5', // 主色：柔和安定藍
+                            600: '#4a859c',
+                            800: '#2f5a6b',
+                            900: '#1e3d4a',
+                        },
+                        warm: {
+                            50: '#fdfbf7', // 溫暖米白背景
+                            100: '#f7f2e8',
+                            500: '#d4c1a5',
+                            800: '#8c7b66',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(91, 158, 181, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom Styles */
+        body { background-color: #fdfbf7; }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .page-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+        .page-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #5b9eb5;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active-link::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300 py-3" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="switchPage('home')">
+                    <img class="h-12 w-auto object-contain" src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260526160718_0.png" alt="ORIS 穩腳石 Logo">
+                    <span class="ml-3 text-xl font-bold text-brand-900 tracking-wider">ORIS 穩腳石</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <button onclick="switchPage('home')" class="nav-link active-link text-gray-600 hover:text-brand-600 font-medium transition-colors">首頁</button>
+                    <button onclick="switchPage('hospitality')" class="nav-link text-gray-600 hover:text-brand-600 font-medium transition-colors">旅宿合作</button>
+                    <button onclick="switchPage('medical')" class="nav-link text-gray-600 hover:text-brand-600 font-medium transition-colors">醫療長照提案</button>
+                    <button onclick="switchPage('article')" class="nav-link text-gray-600 hover:text-brand-600 font-medium transition-colors">專欄文章</button>
+                    <a href="#contact-section" class="bg-brand-500 hover:bg-brand-600 text-white px-6 py-2.5 rounded-full font-medium transition-all duration-300 hover:-translate-y-0.5 shadow-md hover:shadow-lg flex items-center">
+                        <i data-lucide="phone" class="w-4 h-4 mr-2"></i> 聯絡我們
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brand-600 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <button onclick="switchPage('home'); closeMobileMenu()" class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50 rounded-md">首頁</button>
+                <button onclick="switchPage('hospitality'); closeMobileMenu()" class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50 rounded-md">旅宿合作</button>
+                <button onclick="switchPage('medical'); closeMobileMenu()" class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50 rounded-md">醫療長照提案</button>
+                <button onclick="switchPage('article'); closeMobileMenu()" class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50 rounded-md">專欄文章</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="pt-20">
+
+        <!-- ==========================================
+             PAGE 1: 首頁 (Home)
+             ========================================== -->
+        <div id="home" class="page-section active">
+            
+            <!-- Hero Section -->
+            <section class="relative bg-warm-100 py-20 lg:py-32 overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=1920" alt="溫暖安全的浴室空間" class="w-full h-full object-cover opacity-20">
+                    <div class="absolute inset-0 bg-gradient-to-r from-warm-50/90 to-warm-50/60"></div>
+                </div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div class="reveal">
+                            <span class="inline-block py-1 px-3 rounded-full bg-brand-100 text-brand-800 text-sm font-semibold mb-6">
+                                守護智齡長者的每一步
+                            </span>
+                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                                浴室防跌，<br><span class="text-brand-600">空間行走更安心</span>
+                            </h1>
+                            <p class="text-xl text-gray-600 mb-8 h-16 md:h-auto" id="hero-typing-container">
+                                <span id="hero-typing" class="typing-cursor"></span>
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <a href="#product-section" class="bg-brand-500 hover:bg-brand-600 text-white text-center px-8 py-4 rounded-full font-medium transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl text-lg">
+                                    了解穩腳石
+                                </a>
+                                <a href="#contact-section" class="bg-white text-brand-600 border border-brand-200 hover:bg-brand-50 text-center px-8 py-4 rounded-full font-medium transition-all duration-300 hover:-translate-y-1 shadow-sm text-lg">
+                                    立即諮詢
+                                </a>
+                            </div>
+                        </div>
+                        <div class="reveal relative hidden lg:block">
+                            <div class="absolute inset-0 bg-brand-200 rounded-full blur-3xl opacity-30 transform translate-x-10 translate-y-10"></div>
+                            <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=800" alt="長者安心生活" class="relative z-10 rounded-2xl shadow-2xl object-cover h-[500px] w-full">
+                            
+                            <!-- Trust Badge -->
+                            <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl z-20 flex items-center gap-4 animate-bounce" style="animation-duration: 3s;">
+                                <div class="bg-green-100 p-3 rounded-full text-green-600">
+                                    <i data-lucide="shield-check" class="w-8 h-8"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500 font-medium">獨家防跌科技</p>
+                                    <p class="text-xl font-bold text-gray-900">專利無機板材</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 品牌故事 / 關於我們 -->
+            <section class="py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">關於我們：源自對家人的愛</h2>
+                        <div class="w-20 h-1 bg-brand-500 mx-auto rounded-full mb-8"></div>
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            「長者跌倒，是高齡社會最大的隱憂，也是家庭照護最沉重的負擔。」<br><br>
+                            ORIS 穩腳石的誕生，源自於對家中長輩的深切關懷。我們深知浴室濕滑帶來的恐懼與危險，因此致力於研發真正能「主動防跌」的科技。我們相信，給予長者一個安全、自信的行走空間，就是給予整個家庭最溫暖的安定感。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 客戶痛點 -->
+            <section class="py-20 bg-warm-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-2xl shadow-soft reveal hover:-translate-y-2 transition-all duration-300 text-center">
+                            <div class="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i data-lucide="alert-triangle" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">浴室濕滑危機</h3>
+                            <p class="text-gray-600">傳統止滑墊容易積水發霉，甚至在濕滑地面上滑動，反而成為隱形殺手。</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-soft reveal hover:-translate-y-2 transition-all duration-300 text-center delay-100">
+                            <div class="w-16 h-16 bg-orange-50 text-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i data-lucide="heart-crack" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">長者的心理恐懼</h3>
+                            <p class="text-gray-600">曾經滑倒的陰影，讓長輩在洗澡時步步驚心，失去了獨立自主的尊嚴與安心。</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-soft reveal hover:-translate-y-2 transition-all duration-300 text-center delay-200">
+                            <div class="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i data-lucide="users" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">家庭照護負擔</h3>
+                            <p class="text-gray-600">一次跌倒可能造成難以挽回的傷害，龐大的醫療與照護成本，壓垮許多家庭。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 核心產品 (Core Product) -->
+            <section id="product-section" class="py-24 bg-white overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid lg:grid-cols-2 gap-16 items-center">
+                        <div class="order-2 lg:order-1 reveal">
+                            <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&q=80&w=800" alt="微奈米多孔無機板材紋理" class="rounded-2xl shadow-2xl object-cover h-[600px] w-full">
+                        </div>
+                        <div class="order-1 lg:order-2 reveal">
+                            <h2 class="text-sm font-bold text-brand-600 tracking-widest uppercase mb-2">核心專利科技</h2>
+                            <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">穩腳石：微奈米多孔「無機」板材</h3>
+                            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                                打破傳統「表面粗糙=止滑」的迷思。穩腳石採用專利無機材質，當放置於濕滑的浴室地面且受到踩踏時，腳底皮膚會將板材微奈米孔洞內的水分和空氣排掉。
+                            </p>
+                            
+                            <ul class="space-y-6 mb-10">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-12 h-12 bg-brand-50 rounded-full flex items-center justify-center text-brand-600 mt-1">
+                                        <i data-lucide="droplets" class="w-6 h-6"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-bold text-gray-900">仿生真空吸附</h4>
+                                        <p class="text-gray-600 mt-1">原理如同章魚或青蛙的腳趾，在濕滑表面形成強大真空吸附力，行動自如不打滑。</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-12 h-12 bg-brand-50 rounded-full flex items-center justify-center text-brand-600 mt-1">
+                                        <i data-lucide="footprints" class="w-6 h-6"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-bold text-gray-900">穩定身體重心</h4>
+                                        <p class="text-gray-600 mt-1">紮實的踩踏回饋感，幫助平衡長者在浴室濕滑環境中的身體穩定度。</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-12 h-12 bg-brand-50 rounded-full flex items-center justify-center text-brand-600 mt-1">
+                                        <i data-lucide="tag" class="w-6 h-6"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-bold text-gray-900">經典款規格</h4>
+                                        <p class="text-gray-600 mt-1">尺寸 <span class="font-bold text-brand-600">60 x 48 cm</span>，完美契合淋浴空間。建議售價區間 NT$3,000 ~ 4,000。</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 適用場景 (Scenarios) -->
+            <section class="py-24 bg-brand-900 text-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16 reveal">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">全方位的居家行走守護</h2>
+                        <p class="text-brand-100 text-lg">從極度濕滑的浴室，到夜晚昏暗的臥室，我們都在。</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <!-- 浴室場景 -->
+                        <div class="group relative rounded-2xl overflow-hidden reveal">
+                            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800" alt="浴室淋浴空間" class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-8">
+                                <span class="bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">現正熱賣</span>
+                                <h3 class="text-2xl font-bold mb-2">浴室淋浴防跌</h3>
+                                <p class="text-gray-200">在沖水、充滿泡沫的最危險時刻，提供最穩固的足底支撐，徹底告別滑倒恐懼。</p>
+                            </div>
+                        </div>
+
+                        <!-- 臥室場景 (未來) -->
+                        <div class="group relative rounded-2xl overflow-hidden reveal delay-100">
+                            <img src="https://images.unsplash.com/photo-1615876234886-fd9a39fda97f?auto=format&fit=crop&q=80&w=800" alt="臥室夜間空間" class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-8">
+                                <span class="bg-warm-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">第二階段推出</span>
+                                <h3 class="text-2xl font-bold mb-2">臥室夜間引導</h3>
+                                <p class="text-gray-200">鑲嵌感應式LED燈。夜晚長者起床站上穩腳石瞬間點亮，穩定腳步指引方向。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="py-24 bg-warm-50">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16 reveal">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">常見問題 FAQ</h2>
+                        <div class="w-20 h-1 bg-brand-500 mx-auto rounded-full"></div>
+                    </div>
+
+                    <div class="space-y-6 reveal">
+                        <!-- FAQ Item 1 -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                            <button class="w-full text-left px-6 py-5 font-bold text-gray-900 flex justify-between items-center focus:outline-none" onclick="toggleFaq(this)">
+                                <span>穩腳石的無機板材和一般塑膠止滑墊有什麼不同？</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform duration-300"></i>
+                            </button>
+                            <div class="px-6 pb-5 text-gray-600 hidden">
+                                一般塑膠墊僅靠表面紋路摩擦，遇水或泡沫容易失效甚至整片滑動。穩腳石採用專利微奈米多孔「無機」材質，遇水踩踏時會排出孔洞空氣，產生如章魚吸盤般的「真空吸附」效應，越濕反而越穩。
+                            </div>
+                        </div>
+                        <!-- FAQ Item 2 -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                            <button class="w-full text-left px-6 py-5 font-bold text-gray-900 flex justify-between items-center focus:outline-none" onclick="toggleFaq(this)">
+                                <span>穩腳石需要施工安裝嗎？</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform duration-300"></i>
+                            </button>
+                            <div class="px-6 pb-5 text-gray-600 hidden">
+                                完全不需要！經典款穩腳石（60x48cm）買回家後，直接平放於淋浴間或浴缸外的平整地面即可使用，隨放隨用，非常方便。
+                            </div>
+                        </div>
+                        <!-- FAQ Item 3 -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                            <button class="w-full text-left px-6 py-5 font-bold text-gray-900 flex justify-between items-center focus:outline-none" onclick="toggleFaq(this)">
+                                <span>平常該如何清潔保養？</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform duration-300"></i>
+                            </button>
+                            <div class="px-6 pb-5 text-gray-600 hidden">
+                                無機板材不易發霉。日常使用後只需用清水沖洗表面殘留的皂垢即可。若使用一段時間感覺吸附力下降，可用微濕海綿輕刷表面，讓微奈米孔洞保持暢通。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div> <!-- End Home Page -->
+
+
+        <!-- ==========================================
+             PAGE 2: 旅宿合作頁 (Hospitality B2B)
+             ========================================== -->
+        <div id="hospitality" class="page-section">
+            <section class="relative bg-brand-900 py-32 overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1920" alt="頂級飯店浴室" class="w-full h-full object-cover opacity-30">
+                </div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                    <span class="inline-block py-1 px-3 rounded-full bg-brand-800 text-brand-100 border border-brand-500 text-sm font-semibold mb-6 reveal">
+                        飯店 / 民宿 / 溫泉旅館 專屬方案
+                    </span>
+                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 reveal delay-100">
+                        提升住客體驗，打造<span class="text-brand-300">零客訴</span>的安心旅宿
+                    </h1>
+                    <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-10 reveal delay-200">
+                        浴室滑倒是旅宿業最擔憂的風險。導入 ORIS 穩腳石，不僅保障各年齡層旅客的安全，更能創造額外的導購收益。
+                    </p>
+                </div>
+            </section>
+
+            <section class="py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid md:grid-cols-3 gap-10">
+                        <div class="text-center reveal">
+                            <div class="w-20 h-20 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto mb-6 transform rotate-3 hover:rotate-0 transition-transform">
+                                <i data-lucide="shield-alert" class="w-10 h-10 text-brand-600"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">大幅降低客訴與風險</h3>
+                            <p class="text-gray-600">取代傳統易滑動的防滑墊，給予長輩與孕婦最穩固的淋浴環境，將意外風險降至最低。</p>
+                        </div>
+                        <div class="text-center reveal delay-100">
+                            <div class="w-20 h-20 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto mb-6 transform -rotate-3 hover:rotate-0 transition-transform">
+                                <i data-lucide="star" class="w-10 h-10 text-brand-600"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">品牌形象與體驗升級</h3>
+                            <p class="text-gray-600">展現對細節與旅客安全的極致用心，提升 Google 與訂房網的好評率，打造高齡友善旅宿。</p>
+                        </div>
+                        <div class="text-center reveal delay-200">
+                            <div class="w-20 h-20 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto mb-6 transform rotate-3 hover:rotate-0 transition-transform">
+                                <i data-lucide="qr-code" class="w-10 h-10 text-brand-600"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">體驗區與 QR Code 導流</h3>
+                            <p class="text-gray-600">在客房浴室設置專屬體驗區。旅客感受安全後，可直接掃描專屬 QR Code 購買，為旅宿創造分潤收益。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ==========================================
+             PAGE 3: 醫療長照提案頁 (Medical B2B)
+             ========================================== -->
+        <div id="medical" class="page-section">
+            <section class="relative bg-warm-100 py-32 overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&q=80&w=1920" alt="現代化明亮長照空間" class="w-full h-full object-cover opacity-20">
+                </div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="max-w-3xl reveal">
+                        <span class="inline-block py-1 px-3 rounded-full bg-warm-200 text-warm-800 text-sm font-semibold mb-6">
+                            醫院 / 診所 / 長照中心 / 復健空間
+                        </span>
+                        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                            高齡友善空間的<br><span class="text-brand-600">最後一塊安全拼圖</span>
+                        </h1>
+                        <p class="text-xl text-gray-600 mb-10">
+                            我們不宣稱醫療療效，我們專注於打造「絕對安全的物理環境」。透過無機板材的特殊物理特性，輔助長者與復健者找回行走的自信。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid lg:grid-cols-2 gap-16 items-center">
+                        <div class="grid grid-cols-2 gap-4 reveal">
+                            <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=400" alt="長照關懷" class="rounded-2xl w-full h-64 object-cover">
+                            <img src="https://images.unsplash.com/photo-1504439468489-c8920d786a2b?auto=format&fit=crop&q=80&w=400" alt="安全行走" class="rounded-2xl w-full h-64 object-cover mt-8">
+                        </div>
+                        <div class="reveal">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-8">專業空間的三大防護指標</h2>
+                            <div class="space-y-8">
+                                <div>
+                                    <h3 class="text-xl font-bold text-brand-600 flex items-center mb-2">
+                                        <i data-lucide="check-circle" class="w-6 h-6 mr-2"></i> 基礎環境安全
+                                    </h3>
+                                    <p class="text-gray-600">在潮濕的洗浴輔助區或水療空間，提供不位移、不積水的穩固立足點，保護受照護者，也保護照護人員的工作安全。</p>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-brand-600 flex items-center mb-2">
+                                        <i data-lucide="check-circle" class="w-6 h-6 mr-2"></i> 足底感覺回饋
+                                    </h3>
+                                    <p class="text-gray-600">無機板材堅實微孔的表面質地，能給予足底神經清晰的觸覺回饋，讓大腦更明確感知地面的狀態。</p>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-brand-600 flex items-center mb-2">
+                                        <i data-lucide="check-circle" class="w-6 h-6 mr-2"></i> 輔助步態穩定
+                                    </h3>
+                                    <p class="text-gray-600">透過真空吸附抓地力，減少腳底滑動產生的代償動作，讓長者在站立與跨步時，身體重心更加穩定。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ==========================================
+             PAGE 4: 專欄文章 (Article)
+             ========================================== -->
+        <div id="article" class="page-section">
+            <article class="py-24 bg-white">
+                <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="mb-10 reveal">
+                        <span class="text-brand-600 font-semibold mb-2 block">衛教專欄</span>
+                        <h1 class="text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+                            為什麼浴室安全不只是「止滑」，而是「行走安心」？
+                        </h1>
+                        <div class="flex items-center text-gray-500 text-sm">
+                            <span>ORIS 編輯部</span>
+                            <span class="mx-2">•</span>
+                            <span>閱讀時間 3 分鐘</span>
+                        </div>
+                    </div>
+
+                    <img src="https://images.unsplash.com/photo-1507652313656-b1480407ddbf?auto=format&fit=crop&q=80&w=1200" alt="踏實的腳步" class="w-full h-80 object-cover rounded-2xl mb-12 reveal">
+
+                    <div class="prose prose-lg text-gray-600 space-y-6 reveal">
+                        <p>
+                            說到浴室防跌，很多人的第一直覺就是去大賣場買一塊「塑膠止滑墊」鋪在地上。但你是否曾遇過這樣的情況：止滑墊表面雖然粗糙，但底部卻因為積水和皂垢，整塊墊子像滑板一樣在浴室地板上滑動？
+                        </p>
+                        <p>
+                            對於年輕人來說，滑了一下或許還能靠敏捷的反應穩住身體；但對於高齡長者來說，這零點幾秒的滑動，往往就是造成嚴重跌倒骨折的元凶。
+                        </p>
+                        <h3 class="text-2xl font-bold text-gray-900 mt-8 mb-4">止滑不等於防跌，關鍵在於「吸附力」</h3>
+                        <p>
+                            真正的浴室安全，不能只靠表面的摩擦力。當地面充滿水和沐浴乳的泡沫時，傳統的摩擦力會瞬間失效。這就是為什麼 ORIS 穩腳石選擇了「微奈米多孔無機板材」。
+                        </p>
+                        <p>
+                            這個聽起來很科技的名詞，其實原理就藏在大自然裡——就像青蛙或章魚的吸盤。當長輩的腳踩在穩腳石上，板材內的微小孔洞會將水和空氣擠出，在腳底和板材、板材和地板之間形成微小的「真空狀態」。這種主動的吸附力，讓地面越濕，腳步反而越穩固。
+                        </p>
+                        <h3 class="text-2xl font-bold text-gray-900 mt-8 mb-4">重建長者洗浴的尊嚴與自信</h3>
+                        <p>
+                            跌倒不僅是生理的創傷，更是心理的陰影。很多曾經在浴室滑倒的長輩，從此對洗澡充滿恐懼，甚至抗拒洗澡，這對照護者來說也是極大的壓力。
+                        </p>
+                        <p>
+                            「行走安心」的意義在於：當長輩知道腳下踩的是一塊絕對不會滑動、能穩穩托住他們的「穩腳石」時，那種踏實的觸覺回饋，能瞬間消除心理的恐懼。洗澡不再是一場冒險，而是能夠放鬆享受的日常。
+                        </p>
+                        
+                        <!-- Article CTA -->
+                        <div class="bg-brand-50 rounded-2xl p-8 mt-12 text-center border border-brand-100">
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">為家中的長輩，換上一塊真正的穩腳石吧！</h4>
+                            <p class="text-gray-600 mb-6">告別無效的塑膠止滑墊，給家人最安定的守護。</p>
+                            <a href="#contact-section" onclick="switchPage('home'); setTimeout(() => document.getElementById('contact-section').scrollIntoView(), 100);" class="inline-block bg-brand-500 hover:bg-brand-600 text-white px-8 py-3 rounded-full font-medium transition-all shadow-md">
+                                了解 ORIS 穩腳石
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+
+        <!-- ==========================================
+             共用區塊：聯絡表單 (Contact Form)
+             ========================================== -->
+        <section id="contact-section" class="py-24 bg-gray-900 text-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-16">
+                    <div class="reveal">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6">與我們聯繫</h2>
+                        <p class="text-gray-400 mb-10 text-lg">
+                            無論您是一般消費者想為家人添購，或是旅宿、醫療機構尋求大量採購合作，都歡迎隨時與我們聯繫。
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-brand-400 mr-4">
+                                    <i data-lucide="phone" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-400">客服專線</p>
+                                    <p class="text-xl font-bold">04-22230268</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-brand-400 mr-4">
+                                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-400">銷售通路</p>
+                                    <p class="text-lg">網路購物 (目前無實體店面)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-brand-400 mr-4">
+                                    <i data-lucide="clock" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-400">服務時間</p>
+                                    <p class="text-lg">週一至週五 09:00 - 18:00</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Trust Stats -->
+                        <div class="grid grid-cols-2 gap-6 mt-12 pt-12 border-t border-gray-800">
+                            <div>
+                                <p class="text-3xl font-bold text-brand-400 mb-1"><span class="counter" data-target="100">0</span>%</p>
+                                <p class="text-sm text-gray-400">專注於防跌安全</p>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-bold text-brand-400 mb-1"><span class="counter" data-target="3000">0</span>+</p>
+                                <p class="text-sm text-gray-400">經典款建議售價起</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-8 shadow-2xl text-gray-800 reveal delay-100">
+                        <h3 class="text-2xl font-bold mb-6">線上諮詢表單</h3>
+                        <form onsubmit="event.preventDefault(); alert('感謝您的詢問，我們將盡快與您聯繫！');">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">您的身分</label>
+                                    <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all bg-white">
+                                        <option>一般消費者 (居家防跌)</option>
+                                        <option>旅宿業者 (飯店/民宿)</option>
+                                        <option>醫療長照機構</option>
+                                        <option>其他合作提案</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">姓名 / 單位名稱</label>
+                                    <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">聯絡電話</label>
+                                    <input type="tel" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">需求說明</label>
+                                    <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all"></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300">
+                                    送出諮詢
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <img class="h-8 w-auto object-contain grayscale opacity-70" src="https://raw.githubusercontent.com/howard0338/Webomate-images/main/images/ai_img_20260526160718_0.png" alt="ORIS Logo">
+                    <span class="ml-2 text-lg font-bold text-gray-300">ORIS 穩腳石</span>
+                </div>
+                <div class="text-sm text-center md:text-right">
+                    <p>&copy; 2026 ORIS 穩腳石. All rights reserved.</p>
+                    <p class="mt-1">Made by Webomate</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // -----------------------------
+        // Navigation & Page Switching
+        // -----------------------------
+        function switchPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show target page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update nav active states
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active-link', 'text-brand-600');
+                link.classList.add('text-gray-600');
+            });
+            
+            // Find and activate the clicked link (basic matching)
+            const links = document.querySelectorAll(`.nav-link[onclick="switchPage('${pageId}')"]`);
+            links.forEach(link => {
+                link.classList.add('active-link', 'text-brand-600');
+                link.classList.remove('text-gray-600');
+            });
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Re-trigger animations
+            setTimeout(initScrollReveal, 100);
+        }
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // Navbar Glass Effect on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-md');
+                nav.classList.remove('py-3');
+                nav.classList.add('py-2');
+            } else {
+                nav.classList.remove('shadow-md');
+                nav.classList.remove('py-2');
+                nav.classList.add('py-3');
+            }
+        });
+
+        // -----------------------------
+        // Typing Effect (Hero Section)
+        // -----------------------------
+        const textToType = "專利微奈米多孔無機板材，為長者打造極致防跌的安心空間。";
+        const typingElement = document.getElementById('hero-typing');
+        let typeIndex = 0;
+
+        function typeWriter() {
+            if (typeIndex < textToType.length) {
+                typingElement.innerHTML += textToType.charAt(typeIndex);
+                typeIndex++;
+                setTimeout(typeWriter, 100);
+            } else {
+                // Remove cursor after typing finishes
+                setTimeout(() => {
+                    typingElement.classList.remove('typing-cursor');
+                }, 2000);
+            }
+        }
+        
+        // Start typing effect on load
+        setTimeout(typeWriter, 500);
+
+        // -----------------------------
+        // Scroll Reveal Animation
+        // -----------------------------
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+            
+            reveals.forEach(reveal => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                const elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', initScrollReveal);
+        // Initial trigger
+        initScrollReveal();
+
+        // -----------------------------
+        // Counter Animation
+        // -----------------------------
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200; // The lower the slower
+
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    
+                    const updateCount = () => {
+                        const count = +counter.innerText;
+                        const inc = target / speed;
+                        
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 15);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    
+                    updateCount();
+                    observer.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => {
+            counterObserver.observe(counter);
+        });
+
+        // -----------------------------
+        // FAQ Accordion Toggle
+        // -----------------------------
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+                button.classList.add('text-brand-600');
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+                button.classList.remove('text-brand-600');
+            }
+        }
+    </script>
+</body>
+</html>
+```
