@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>立法防偽印刷公司 | 專屬您的美好紀念</title>
+    <title>立法防偽印刷公司 | 專屬禮贈品平台</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Urbanist:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,36 +16,37 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Tailwind Configuration -->
+    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Noto Sans TC"', 'sans-serif'],
-                        heading: ['Urbanist', '"Noto Sans TC"', 'sans-serif'],
+                        sans: ['Quicksand', 'Noto Sans TC', 'sans-serif'],
                     },
                     colors: {
                         brand: {
-                            50: '#fff0f0',
-                            100: '#ffdede',
-                            200: '#ffc2c2',
-                            300: '#ff9797',
-                            400: '#ff6b6b', // 主色：溫暖明亮的珊瑚紅
-                            500: '#fa4343',
-                            600: '#e52424',
-                            700: '#c01818',
-                            800: '#9f1818',
-                            900: '#841b1b',
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#FF7E67', /* 主色：活潑明亮的珊瑚橘 */
+                            600: '#ea580c',
+                            700: '#c2410c',
                         },
                         accent: {
-                            400: '#FFD93D', // 點綴色：活潑的陽光黃
-                        },
-                        warmbg: '#FFF9F0', // 溫暖的背景色
+                            400: '#FFC837', /* 點綴色：溫暖活力黃 */
+                            500: '#4EABF8', /* 點綴色：清新天空藍 */
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                        'hover': '0 20px 40px -10px rgba(255, 126, 103, 0.25)',
                     },
                     animation: {
                         'float': 'float 3s ease-in-out infinite',
-                        'bounce-slow': 'bounce 3s infinite',
+                        'bounce-slow': 'bounce 2s infinite',
                     },
                     keyframes: {
                         float: {
@@ -59,73 +60,64 @@
     </script>
 
     <style>
-        /* Custom Styles for Animations & Utilities */
-        body {
-            background-color: #FFF9F0;
-            overflow-x: hidden;
+        /* Scroll Reveal Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
-
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         /* Glassmorphism */
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.8);
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(135deg, #FF7E67, #FFC837);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         /* Typewriter Cursor */
         .cursor::after {
             content: '|';
             animation: blink 1s step-start infinite;
-            color: #FF6B6B;
         }
         @keyframes blink {
             50% { opacity: 0; }
         }
-
-        /* Scroll Reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Blob Background */
-        .blob-shape {
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            animation: morph 8s ease-in-out infinite;
-        }
-        @keyframes morph {
-            0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-            34% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
-            67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
-        }
     </style>
 </head>
-<body class="antialiased text-gray-800">
+<body class="antialiased text-gray-800 bg-brand-50 overflow-x-hidden selection:bg-brand-200 selection:text-brand-700">
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 glass-nav transition-all duration-300 py-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-            <div class="flex items-center gap-3 cursor-pointer group">
-                <div class="bg-brand-400 p-2 rounded-xl text-white group-hover:rotate-12 transition-transform duration-300">
-                    <i data-lucide="gift" class="w-6 h-6"></i>
-                </div>
-                <span class="font-heading font-extrabold text-2xl tracking-tight text-gray-900 group-hover:text-brand-500 transition-colors">
-                    立法防偽印刷公司
-                </span>
-            </div>
-            <div class="hidden md:flex items-center gap-6">
-                <a href="#spirit" class="font-medium text-gray-600 hover:text-brand-500 transition-colors">品牌精神</a>
-                <a href="#products" class="font-medium text-gray-600 hover:text-brand-500 transition-colors">精選禮品</a>
-                <a href="#features" class="font-medium text-gray-600 hover:text-brand-500 transition-colors">平台特色</a>
-                <div class="flex items-center gap-2 bg-accent-400 text-gray-900 px-4 py-2 rounded-full font-bold shadow-sm">
-                    <i data-lucide="clock" class="w-4 h-4"></i>
-                    24H 線上營業
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-400 to-accent-400 flex items-center justify-center text-white shadow-lg group-hover:rotate-12 transition-transform duration-300">
+                        <i data-lucide="gift" class="w-6 h-6"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-wide text-gray-800">立法防偽<span class="text-brand-500">禮贈品</span></span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-medium text-gray-600">
+                    <a href="#about" class="hover:text-brand-500 transition-colors">品牌精神</a>
+                    <a href="#products" class="hover:text-brand-500 transition-colors">精選禮品</a>
+                    <a href="#trust" class="hover:text-brand-500 transition-colors">顧客評價</a>
+                    <a href="#products" class="px-6 py-2.5 rounded-full bg-brand-500 text-white hover:bg-brand-600 hover:shadow-hover transition-all duration-300 transform hover:-translate-y-0.5">
+                        開始挑選
+                    </a>
                 </div>
             </div>
         </div>
@@ -133,152 +125,244 @@
 
     <!-- Hero Section -->
     <section class="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden">
-        <!-- Decorative Background Elements -->
-        <div class="absolute top-20 left-10 w-64 h-64 bg-brand-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
-        <div class="absolute top-40 right-10 w-72 h-72 bg-accent-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-        <div class="absolute -bottom-8 left-40 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob animation-delay-4000"></div>
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1920&auto=format&fit=crop" alt="學生畢業歡樂場景" class="w-full h-full object-cover object-center opacity-30">
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-50/80 via-white/60 to-white"></div>
+        </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid md:grid-cols-2 gap-12 items-center">
-            <div class="text-center md:text-left reveal">
-                <div class="inline-block bg-white/80 backdrop-blur-sm border border-brand-100 text-brand-600 font-bold px-4 py-1.5 rounded-full mb-6 text-sm shadow-sm">
-                    ✨ 專屬學生的質感禮贈品平台
-                </div>
-                <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 leading-tight mb-6">
-                    重要的日子<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-accent-400">只有一次</span>
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-600 font-medium mb-8 h-8">
-                    <span id="typewriter" class="cursor"></span>
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                    <a href="#products" class="bg-brand-400 hover:bg-brand-500 text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-brand-400/50 transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2">
-                        探索紀念品
-                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </a>
-                    <div class="flex items-center justify-center gap-2 text-gray-500 font-medium px-6 py-4">
-                        <i data-lucide="tag" class="w-5 h-5 text-accent-400"></i>
-                        全館 300 元以下
-                    </div>
-                </div>
+        <!-- Floating Elements (Decoration) -->
+        <div class="absolute top-1/4 left-10 animate-float text-accent-400 opacity-50 hidden md:block">
+            <i data-lucide="sparkles" class="w-12 h-12"></i>
+        </div>
+        <div class="absolute bottom-1/4 right-10 animate-float text-brand-400 opacity-50 hidden md:block" style="animation-delay: 1.5s;">
+            <i data-lucide="star" class="w-10 h-10"></i>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 shadow-sm border border-brand-100 text-brand-600 font-medium mb-6 reveal">
+                <i data-lucide="clock" class="w-4 h-4"></i>
+                <span>24小時為您服務，隨時創造驚喜</span>
             </div>
-            <div class="relative reveal delay-200 hidden md:block">
-                <div class="relative w-full aspect-square max-w-md mx-auto">
-                    <!-- Main Image with Blob mask -->
-                    <div class="absolute inset-0 bg-brand-100 blob-shape transform rotate-6"></div>
-                    <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80" alt="歡樂畢業禮物" class="absolute inset-0 w-full h-full object-cover blob-shape shadow-xl border-4 border-white">
-                    
-                    <!-- Floating Badges -->
-                    <div class="absolute -right-4 top-10 bg-white p-3 rounded-2xl shadow-lg animate-float">
-                        <i data-lucide="graduation-cap" class="w-8 h-8 text-brand-400"></i>
-                    </div>
-                    <div class="absolute -left-8 bottom-20 bg-white p-3 rounded-2xl shadow-lg animate-float" style="animation-delay: 1.5s;">
-                        <i data-lucide="sparkles" class="w-8 h-8 text-accent-400"></i>
-                    </div>
-                </div>
+            
+            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-gray-900 reveal" style="transition-delay: 100ms;">
+                重要的日子只有一次<br>
+                <span class="text-gradient">留下最美好的紀念</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-600 mb-10 h-8 reveal cursor" id="typewriter" style="transition-delay: 200ms;">
+                <!-- Typewriter content will be injected here -->
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="transition-delay: 300ms;">
+                <a href="#products" class="px-8 py-4 rounded-full bg-brand-500 text-white font-bold text-lg hover:bg-brand-600 hover:shadow-hover transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    探索300元以下好禮
+                </a>
+                <a href="#about" class="px-8 py-4 rounded-full bg-white text-gray-700 font-bold text-lg hover:bg-gray-50 shadow-soft transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
+                    了解品牌精神
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Brand Spirit Section -->
-    <section id="spirit" class="py-24 bg-white relative">
+    <!-- Social Proof / Trust Section -->
+    <section id="trust" class="py-16 bg-white relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto reveal">
-                <i data-lucide="heart-handshake" class="w-16 h-16 text-brand-400 mx-auto mb-6 animate-bounce-slow"></i>
-                <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-6">留下最美好的紀念</h2>
-                <p class="text-lg text-gray-600 leading-relaxed">
-                    我們是<strong class="text-brand-500">立法防偽印刷公司</strong>。雖然名字聽起來很嚴肅，但我們擁有一顆最活潑、最懂你的心！我們深知青春裡的每一個畢業典禮、每一次交換禮物都是無可取代的。因此，我們致力於提供高質感、充滿趣味且價格親民的禮贈品，讓您的心意完美傳達。
-                </p>
+            <div class="bg-brand-50 rounded-3xl p-8 md:p-12 shadow-soft reveal flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="flex-1">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">在地深耕，深受好評的選擇</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        我們是位於新北市新莊區的<strong class="text-brand-600">立法防偽印刷公司</strong>，憑藉專業的印刷技術與用心的服務，為無數畢業生與老師打造專屬的紀念禮品。
+                    </p>
+                    <div class="flex items-center gap-2 text-gray-500 text-sm bg-white inline-flex px-4 py-2 rounded-full shadow-sm">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-brand-500"></i>
+                        242新北市新莊區營盤里中正路544號
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-8 bg-white p-6 rounded-2xl shadow-sm border border-brand-100">
+                    <div class="text-center">
+                        <div class="flex items-center justify-center gap-1 text-accent-400 mb-1">
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        </div>
+                        <div class="text-4xl font-black text-gray-800 flex items-baseline justify-center gap-1">
+                            <span class="counter" data-target="4.8">0</span>
+                        </div>
+                        <div class="text-sm text-gray-500 font-medium">Google 評分</div>
+                    </div>
+                    <div class="w-px h-16 bg-gray-200"></div>
+                    <div class="text-center">
+                        <div class="text-4xl font-black text-brand-500 mb-1 flex items-baseline justify-center gap-1">
+                            <span class="counter" data-target="24">0</span><span class="text-xl">+</span>
+                        </div>
+                        <div class="text-sm text-gray-500 font-medium">真實評價推薦</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Product Categories -->
-    <section id="products" class="py-24 bg-warmbg">
+    <!-- Brand Features -->
+    <section id="about" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">精選商品分類</h2>
-                <p class="text-gray-600 text-lg">百款商品任您挑選，通通 300 元有找！</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">為什麼選擇我們？</h2>
+                <div class="w-20 h-1.5 bg-brand-400 mx-auto rounded-full"></div>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Category 1 -->
-                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group reveal">
-                    <div class="w-20 h-20 bg-brand-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="pen-tool" class="w-10 h-10 text-brand-400"></i>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-soft hover:shadow-hover transition-all duration-300 transform hover:-translate-y-2 border border-gray-50 reveal group">
+                    <div class="w-16 h-16 bg-brand-100 rounded-2xl flex items-center justify-center text-brand-500 mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="piggy-bank" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-3">客製化文具</h3>
-                    <p class="text-gray-500 mb-6">實用與紀念兼具，刻上專屬姓名或祝福語，讓每天的學習都有滿滿動力。</p>
-                    <div class="w-full h-48 rounded-xl overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=600&q=80" alt="客製化文具" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">學生友善平價</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        全站禮贈品皆在 <strong class="text-brand-500">300元以下</strong>，讓您用輕鬆無負擔的價格，準備最豐盛的心意。
+                    </p>
                 </div>
 
-                <!-- Category 2 -->
-                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group reveal delay-100">
-                    <div class="w-20 h-20 bg-accent-400/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="scroll" class="w-10 h-10 text-accent-400"></i>
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-soft hover:shadow-hover transition-all duration-300 transform hover:-translate-y-2 border border-gray-50 reveal group" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 bg-accent-100 rounded-2xl flex items-center justify-center text-accent-500 mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="pen-tool" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-3">畢業紀念品</h3>
-                    <p class="text-gray-500 mb-6">專為畢業季打造的獨特紀念小物，把青春的回憶打包帶走，珍藏一輩子。</p>
-                    <div class="w-full h-48 rounded-xl overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1523580494112-071d1e21c8a4?auto=format&fit=crop&w=600&q=80" alt="畢業紀念品" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">專屬客製化</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        結合專業印刷背景，提供專屬刻字與圖案客製，讓每份禮物都獨一無二，充滿紀念價值。
+                    </p>
                 </div>
 
-                <!-- Category 3 -->
-                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group reveal delay-200">
-                    <div class="w-20 h-20 bg-pink-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="package-open" class="w-10 h-10 text-pink-500"></i>
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-soft hover:shadow-hover transition-all duration-300 transform hover:-translate-y-2 border border-gray-50 reveal group" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-500 mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="heart-handshake" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-3">驚喜禮贈品</h3>
-                    <p class="text-gray-500 mb-6">各式各樣充滿創意與趣味的小禮物，適合同學間互相贈送，增添歡樂氣氛。</p>
-                    <div class="w-full h-48 rounded-xl overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=600&q=80" alt="驚喜禮贈品" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">溫暖傳遞心意</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        活潑可愛的包裝設計，無論是送給同學還是老師，都能在第一時間感受到滿滿的喜悅。
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Stats / Features Section -->
-    <section id="features" class="py-20 bg-brand-400 text-white">
+    <!-- Products Section -->
+    <section id="products" class="py-24 bg-brand-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center divide-y md:divide-y-0 md:divide-x divide-white/20">
-                <div class="p-6 reveal">
-                    <div class="flex justify-center mb-4"><i data-lucide="clock-4" class="w-12 h-12 text-accent-400"></i></div>
-                    <div class="text-5xl font-black mb-2 font-heading"><span class="counter" data-target="24">0</span> <span class="text-2xl">H</span></div>
-                    <div class="text-brand-100 text-lg font-medium">全天候線上營業，隨時挑選</div>
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">精選質感禮贈品</h2>
+                    <p class="text-gray-600 text-lg">嚴選多樣化商品，每件只要 <span class="font-bold text-brand-600 text-xl">300元</span> 以下</p>
                 </div>
-                <div class="p-6 reveal delay-100">
-                    <div class="flex justify-center mb-4"><i data-lucide="coins" class="w-12 h-12 text-accent-400"></i></div>
-                    <div class="text-5xl font-black mb-2 font-heading"><span class="text-2xl">NT$</span> <span class="counter" data-target="300">0</span></div>
-                    <div class="text-brand-100 text-lg font-medium">學生友善價格，無負擔送禮</div>
+                <div class="mt-6 md:mt-0">
+                    <span class="inline-flex items-center gap-2 text-brand-600 font-medium bg-brand-100 px-4 py-2 rounded-full">
+                        <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                        現貨供應中
+                    </span>
                 </div>
-                <div class="p-6 reveal delay-200">
-                    <div class="flex justify-center mb-4"><i data-lucide="smile" class="w-12 h-12 text-accent-400"></i></div>
-                    <div class="text-5xl font-black mb-2 font-heading"><span class="counter" data-target="100">0</span> <span class="text-2xl">%</span></div>
-                    <div class="text-brand-100 text-lg font-medium">滿滿心意，留下美好回憶</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-hover transition-all duration-300 transform hover:-translate-y-2 group reveal">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1515347619362-75fe21d4d385?q=80&w=800&auto=format&fit=crop" alt="客製化質感文具" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-sm font-bold text-brand-600 shadow-sm">
+                            熱銷推薦
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">客製化質感文具組</h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">實用與美感兼具，可雷雕姓名或專屬祝福語，陪伴下一個學習階段。</p>
+                        <div class="flex items-center justify-between mt-4">
+                            <span class="text-2xl font-black text-brand-500">NT$ 250</span>
+                            <button class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-brand-500 hover:text-white transition-colors duration-300">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Product 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-hover transition-all duration-300 transform hover:-translate-y-2 group reveal" style="transition-delay: 100ms;">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1577058932450-482a4c114cb9?q=80&w=800&auto=format&fit=crop" alt="畢業專屬紀念品" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">畢業專屬紀念小物</h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">精緻小巧的紀念徽章與鑰匙圈，將校園回憶完美濃縮，隨身攜帶。</p>
+                        <div class="flex items-center justify-between mt-4">
+                            <span class="text-2xl font-black text-brand-500">NT$ 180</span>
+                            <button class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-brand-500 hover:text-white transition-colors duration-300">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-hover transition-all duration-300 transform hover:-translate-y-2 group reveal" style="transition-delay: 200ms;">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=800&auto=format&fit=crop" alt="驚喜創意禮盒" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">驚喜創意禮盒</h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">活潑可愛的包裝設計，內含多款實用小物，打開滿滿驚喜與感動。</p>
+                        <div class="flex items-center justify-between mt-4">
+                            <span class="text-2xl font-black text-brand-500">NT$ 299</span>
+                            <button class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-brand-500 hover:text-white transition-colors duration-300">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 reveal">
+                <button class="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-brand-200 text-brand-600 font-bold hover:bg-brand-50 transition-colors duration-300">
+                    查看更多商品 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+    <footer class="bg-white pt-16 pb-8 border-t border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
                 <div class="flex items-center gap-3">
-                    <div class="bg-gray-800 p-2 rounded-lg text-brand-400">
-                        <i data-lucide="gift" class="w-5 h-5"></i>
+                    <div class="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center text-white">
+                        <i data-lucide="gift" class="w-6 h-6"></i>
                     </div>
-                    <span class="font-heading font-bold text-xl text-white">立法防偽印刷公司</span>
+                    <div>
+                        <h4 class="font-bold text-xl text-gray-900">立法防偽禮贈品</h4>
+                        <p class="text-sm text-gray-500">重要的日子只有一次，留下美好的紀念</p>
+                    </div>
                 </div>
                 
-                <div class="text-sm text-gray-500 text-center md:text-right">
-                    <p class="mb-2">※ 本平台目前採全線上 24 小時自助服務</p>
-                    <p>&copy; 2026 立法防偽印刷公司. All rights reserved.</p>
-                    <p class="mt-1 text-xs opacity-50">Made by Webomate</p>
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <p class="text-gray-600 text-sm">24小時線上營業，隨時為您準備驚喜</p>
+                    <!-- Google Maps Navigation Button -->
+                    <a href="https://www.google.com/maps/search/?api=1&query=25.0314939,121.4304234" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5 duration-300">
+                        <i data-lucide="navigation" class="w-4 h-4"></i>
+                        門市導航
+                    </a>
                 </div>
+            </div>
+            
+            <div class="w-full h-px bg-gray-100 mb-8"></div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+                <p>&copy; 2026 立法防偽系統-專業防偽標籤-彩色標籤印刷製造商. All rights reserved.</p>
+                <p class="flex items-center gap-1">
+                    Made with <i data-lucide="heart" class="w-4 h-4 text-red-400 fill-current"></i> by Webomate
+                </p>
             </div>
         </div>
     </footer>
@@ -288,86 +372,123 @@
         // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Typewriter Effect
-        const textToType = "為青春留下印記，挑選最棒的禮物！";
-        const typeWriterElement = document.getElementById('typewriter');
-        let i = 0;
-
-        function typeWriter() {
-            if (i < textToType.length) {
-                typeWriterElement.innerHTML += textToType.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100); // Typing speed
+        // Navbar Glass Effect on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.9)';
+            } else {
+                nav.classList.remove('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.85)';
             }
+        });
+
+        // Typewriter Effect
+        const phrases = [
+            "專屬客製化，打造獨一無二的回憶。",
+            "300元以下平價精選，心意不打折。",
+            "活潑設計，點亮每個畢業的笑容。"
+        ];
+        let i = 0;
+        let j = 0;
+        let currentPhrase = [];
+        let isDeleting = false;
+        let isEnd = false;
+
+        function loop() {
+            isEnd = false;
+            const typewriterElement = document.getElementById('typewriter');
+            
+            if (i < phrases.length) {
+                if (!isDeleting && j <= phrases[i].length) {
+                    currentPhrase.push(phrases[i][j]);
+                    j++;
+                    typewriterElement.innerHTML = currentPhrase.join('');
+                }
+
+                if (isDeleting && j <= phrases[i].length) {
+                    currentPhrase.pop(phrases[i][j]);
+                    j--;
+                    typewriterElement.innerHTML = currentPhrase.join('');
+                }
+
+                if (j == phrases[i].length) {
+                    isEnd = true;
+                    isDeleting = true;
+                }
+
+                if (isDeleting && j === 0) {
+                    currentPhrase = [];
+                    isDeleting = false;
+                    i++;
+                    if (i === phrases.length) {
+                        i = 0;
+                    }
+                }
+            }
+            const spedUp = Math.random() * (80 - 50) + 50;
+            const normalSpeed = Math.random() * (150 - 100) + 100;
+            const time = isEnd ? 2000 : isDeleting ? spedUp : normalSpeed;
+            setTimeout(loop, time);
         }
         
-        // Start typing after a short delay
-        setTimeout(typeWriter, 500);
+        // Start typewriter after a short delay
+        setTimeout(loop, 1000);
 
         // Scroll Reveal Animation
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        const revealCallback = (entries, observer) => {
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger once on load
+
+        // Number Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200; // The lower the slower
+
+        const startCounters = (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    
-                    // Trigger counter animation if it's in this section
-                    const counters = entry.target.querySelectorAll('.counter');
-                    counters.forEach(counter => {
-                        if (!counter.classList.contains('counted')) {
-                            animateCounter(counter);
-                            counter.classList.add('counted');
+                    const counter = entry.target;
+                    const updateCount = () => {
+                        const target = +counter.getAttribute('data-target');
+                        const isFloat = counter.getAttribute('data-target').includes('.');
+                        const count = +counter.innerText;
+                        
+                        const inc = target / speed;
+
+                        if (count < target) {
+                            if (isFloat) {
+                                counter.innerText = (count + inc).toFixed(1);
+                            } else {
+                                counter.innerText = Math.ceil(count + inc);
+                            }
+                            setTimeout(updateCount, 20);
+                        } else {
+                            counter.innerText = target;
                         }
-                    });
-                    
-                    observer.unobserve(entry.target); // Only animate once
+                    };
+                    updateCount();
+                    observer.unobserve(counter); // Only run once
                 }
             });
         };
 
-        const revealObserver = new IntersectionObserver(revealCallback, {
-            threshold: 0.15,
-            rootMargin: "0px 0px -50px 0px"
+        const counterObserver = new IntersectionObserver(startCounters, {
+            threshold: 0.5
         });
 
-        revealElements.forEach(el => revealObserver.observe(el));
-
-        // Counter Animation
-        function animateCounter(element) {
-            const target = parseInt(element.getAttribute('data-target'));
-            const duration = 2000; // 2 seconds
-            const step = target / (duration / 16); // 60fps
-            let current = 0;
-
-            const updateCounter = () => {
-                current += step;
-                if (current < target) {
-                    element.innerText = Math.ceil(current);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    element.innerText = target;
-                }
-            };
-            
-            // Only animate if target > 0
-            if(target > 0) {
-                updateCounter();
-            } else {
-                element.innerText = target;
-            }
-        }
-
-        // Navbar Scroll Effect (Shrink/Opacity)
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('py-2', 'shadow-md');
-                nav.classList.remove('py-4');
-            } else {
-                nav.classList.add('py-4');
-                nav.classList.remove('py-2', 'shadow-md');
-            }
+        counters.forEach(counter => {
+            counterObserver.observe(counter);
         });
     </script>
 </body>
